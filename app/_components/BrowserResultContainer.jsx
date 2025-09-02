@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 import ProductCard from "./ProductCard"
 
-function BrowserResultContainer() {
+function BrowserResultContainer({jwt}) {
+  console.log(jwt);
   useEffect(() => {
     async function getCookie(){
       console.log('getting cookie');
