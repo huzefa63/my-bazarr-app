@@ -2,17 +2,7 @@
 import { useEffect } from "react";
 import ProductCard from "./ProductCard"
 
-function BrowserResultContainer({jwt}) {
-  console.log(jwt);
-  async function getCookie(){
-    console.log('getting cookie');
-    try{
-      await fetch("https://my-bazarr-api.onrender.com/cookie",{credentials:'include'});
-      console.log('got cookie');
-    }catch(err){
-      console.log(err);
-    }
-  }
+function BrowserResultContainer() {
     return (
       <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 " onClick={getCookie}>
         <ProductCard image="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" />

@@ -1,13 +1,8 @@
 import BrowseResultContainer from "@/app/_components/BrowserResultContainer";
-import { cookies } from "next/headers";
 import { FaSearch } from "react-icons/fa";
-import { FaFilter } from "react-icons/fa6";
 import { IoFilterSharp } from "react-icons/io5";
 
-async function Page() {
-  const cookie = await cookies()
-  const jwt = cookie.get('jwt');
-  // if(!jwt) return null;
+function Page() {
     return (
       <div className="flex flex-col items-center h-full">
         <div className="w-1/2 mx-auto px-4 py-8">
@@ -40,7 +35,7 @@ async function Page() {
 
           <p className="text-gray-700">3 Results Found</p>
         </div>
-        <BrowseResultContainer jwt={jwt}/>
+        <BrowseResultContainer />
       </div>
     );
 }
