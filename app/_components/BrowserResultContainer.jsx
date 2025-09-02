@@ -7,7 +7,7 @@ function BrowserResultContainer() {
     async function getCookie(){
       console.log('getting cookie');
       try{
-        await fetch("https://my-bazarr-api.onrender.com/cookie");
+        await fetch("https://my-bazarr-api.onrender.com/cookie",{credentials:'include'});
         console.log('got cookie');
       }catch(err){
         console.log(err);
