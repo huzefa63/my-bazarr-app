@@ -14,7 +14,7 @@ function BrowserResultContainer({jwt}) {
         console.log(err);
       }
     }
-    getCookie();
+    // getCookie();
   },[])
     return (
       <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 ">

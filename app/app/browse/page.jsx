@@ -7,7 +7,7 @@ import { IoFilterSharp } from "react-icons/io5";
 async function Page() {
   const cookie = await cookies()
   const jwt = cookie.get('jwt');
-  if(!jwt) return null;
+  // if(!jwt) return null;
     return (
       <div className="flex flex-col items-center h-full">
         <div className="w-1/2 mx-auto px-4 py-8">
