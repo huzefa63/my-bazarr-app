@@ -1,26 +1,15 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.smooth-transition{
+  @apply duration-300 ease-in-out transition-all hover:cursor-pointer
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.pointer{
+  @apply hover:cursor-pointer
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.progress::-webkit-progress-bar{
+  @apply bg-gray-200 rounded-sm
+}
+.progress::-webkit-progress-value{
+  @apply bg-blue-700 rounded-sm
 }
