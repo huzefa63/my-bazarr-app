@@ -1,13 +1,5 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 const poppins = Poppins({
   variable: "poppins",
   subsets: ["latin"],
@@ -21,7 +13,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
       <html lang="en">
         <body
           className={`${poppins.className} antialiased`}
@@ -29,6 +20,5 @@ export default function RootLayout({ children }) {
           {children}
         </body>
       </html>
-    </ClerkProvider>
   );
 }
