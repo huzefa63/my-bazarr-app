@@ -1,8 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { CiImageOn } from "react-icons/ci";
 import { FaTrash } from "react-icons/fa6";
-import { handleAddItem } from "@/actions/formActions";
 import { LuUpload } from "react-icons/lu";
 const inputStyles =
   "shadow-sm bg border-gray-300 col-span-2 border-1 transition duration-300 ease-in-out resize-none focus:border-blue-500 focus:border-1 outline-none px-4 py-3 rounded-xl placeholder:text-sm ";
@@ -25,7 +23,6 @@ function AddItemForm() {
 
   return (
     <form
-      onSubmit={handleAddItem}
       className="p-5 w-full shadow-md rounded-sm flex flex-col  mt-5 min-h-full bg-white"
     >
       <div className="w-full  gap-5">
