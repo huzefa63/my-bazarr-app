@@ -17,14 +17,4 @@ export async function getOtp(email){
     return resJson;
 }
 
-export async function verifyOtp(email,name,otp){
-    const cookie = await cookies();
-    const res = await fetch(`${url}/user/createUser`, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email,username:name,otp}),
-    });
-    const resJson = await res.json();
-    return resJson;
-}
 
