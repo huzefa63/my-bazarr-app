@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiLoader3Fill } from "react-icons/ri";
-import OTPInput from "react-otp-input";
 import VerifyOtpForm from "./VerifyOtpForm";
 import { getOtp } from "@/actions/user";
 
@@ -23,6 +22,7 @@ export default function SignupForm() {
       if(res.emailSent) setIsOtp(true);
     }catch(err){
       alert('failed to send otp');
+      console.log(err);
     }
   };
 

@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const url = process.env.NEXT_PUBLIC_URL;
 export async function getOtp(email){
     const cookie = await cookies();
-    const res = await fetch(`http://localhost:5000/user/verifyEmail`, {
+    const res = await fetch(`${url}/user/verifyEmail`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         // headers:{'Content-Type':'application/json',Cookie:`jwt=${cookie.get('jwt').value}`},
@@ -19,7 +19,7 @@ export async function getOtp(email){
 
 export async function verifyOtp(email,name,otp){
     const cookie = await cookies();
-    const res = await fetch(`http://localhost:5000/user/createUser`, {
+    const res = await fetch(`${url}/user/createUser`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({email,username:name,otp}),
