@@ -3,6 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiLoader3Fill } from "react-icons/ri";
+import OTPInput from "react-otp-input";
+import VerifyOtpForm from "./VerifyOtpForm";
+import { getOtp } from "@/actions/user";
 
 export default function SignupForm() {
   const {
@@ -12,11 +15,18 @@ export default function SignupForm() {
     getValues
   } = useForm();
   const [isSubmitting,setIsSubmitting] = useState(false);
-
-  const handleSignup = (data) => {
-    console.log("Signup Data:", data);
-    // ✅ Send data to your API here
+  const [isOtp,setIsOtp] = useState(false);
+  const handleSignup = async (data) => {
+    try{
+      const res = await getOtp(data.email)
+      console.log(res)
+      if(res.emailSent) setIsOtp(true);
+    }catch(err){
+      alert('failed to send otp');
+    }
   };
+
+  if(isOtp) return <VerifyOtpForm email={getValues('email')} name={getValues('name')}/>
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -59,46 +69,6 @@ export default function SignupForm() {
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.email.message}
-              </p>
-            )}
-          </div>
-
-          {/* Password */}
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              {...register("confirmPassword", {
-                required: "Please confirm your password",
-                validate: (val) =>
-                  val === getValues("password") || "password didn't match",
-              })}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
-            />
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.confirmPassword.message}
               </p>
             )}
           </div>

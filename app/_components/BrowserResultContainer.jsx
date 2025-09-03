@@ -1,18 +1,9 @@
 'use client'
-import { useEffect } from "react";
 import ProductCard from "./ProductCard"
 
 function BrowserResultContainer() {
-  async function getToken() {
-    try{
-    await fetch("https://api.my-bazarr.in/", { credentials: "include" });
-
-    }catch(err){
-      console.log(err);
-    }
-  }
     return (
-      <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 " onClick={getToken}>
+      <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 ">
         <ProductCard image="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" />
         <ProductCard image="https://images.pexels.com/photos/13367286/pexels-photo-13367286.jpeg" />
         <ProductCard image="https://images.pexels.com/photos/13367286/pexels-photo-13367286.jpeg" />
