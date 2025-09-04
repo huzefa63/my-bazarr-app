@@ -26,7 +26,7 @@ export default function SignupForm() {
     }
   };
 
-  if(isOtp) return <VerifyOtpForm email={getValues('email')} name={getValues('name')}/>
+  if(isOtp) return <VerifyOtpForm email={getValues('email')} name={getValues('name')} endpoint='/user/createUser'/>
 
   return (
     <div className="min-h-screen flex items-center justify-center">

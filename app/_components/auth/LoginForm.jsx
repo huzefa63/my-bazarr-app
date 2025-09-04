@@ -3,15 +3,25 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiLoader3Fill } from "react-icons/ri";
+import VerifyOtpForm from "./VerifyOtpForm";
+import axios from "axios";
 
 export default function LoginForm() {
-  const {register,formState:{errors},handleSubmit} = useForm();
+  const {register,formState:{errors},handleSubmit,getValues} = useForm();
   const [isSubmitting,setIsSubmitting] = useState(false);
+  const [isOtp,setIsOtp] = useState(false);
 
-  const handleLogin = (data) => {
-   console.log(data);
+  const handleLogin = async (data) => {
+    try{
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/otp/sendOtp`,{email:data.email},{withCredentials:true});
+      if(res.data.emailSent) setIsOtp(true);
+    }catch(err){
+      alert('failed to send otp');
+      console.log(err);
+    }
   };
 
+  if(isOtp) return <VerifyOtpForm email={getValues('email')} type='signin' endpoint='/auth/login'/>
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="bg-white shadow-2xl rounded-2xl w-[380px] p-8">
@@ -37,7 +47,7 @@ export default function LoginForm() {
             )}
           </div>
 
-          <div>
+          {/* <div>
             <input
               {...register("password", {
                 required: "password is required",
@@ -55,7 +65,7 @@ export default function LoginForm() {
                 {errors.password.message}
               </p>
             )}
-          </div>
+          </div> */}
 
           <button
           disabled={isSubmitting}

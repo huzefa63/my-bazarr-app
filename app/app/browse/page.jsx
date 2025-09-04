@@ -1,12 +1,12 @@
 import BrowseResultContainer from "@/app/_components/BrowserResultContainer";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { FaSearch } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 
 async function Page() {
-  const cookie = await cookies()
-  if(!cookie.get('token')) redirect('/auth/home');
+  const cookie = cookies()
+  if(!cookie.get('token')) redirect('/auth/signup');
     return (
       <div className="flex flex-col items-center h-full">
         <div className="w-1/2 mx-auto px-4 py-8">
