@@ -1,31 +1,76 @@
 "use client";
+import axios from "axios";
 import { useRef, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FaSpinner } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
 import { LuUpload } from "react-icons/lu";
+import Select from "react-select";
+
 const inputStyles =
-  "shadow-sm bg border-gray-300 col-span-2 border-1 transition duration-300 ease-in-out resize-none focus:border-blue-500 focus:border-1 outline-none px-4 py-3 rounded-xl placeholder:text-sm ";
+  "shadow-sm bg border-gray-300 col-span-2 border-1 transition duration-300 ease-in-out resize-non focus:border-blue-500 focus:border-1 outline-none px-4 py-3 rounded-xl placeholder:text-sm ";
+
+const categoryOptions = [
+  { value: "electronics", label: "Electronics" },
+  { value: "mobiles-accessories", label: "Mobiles & Accessories" },
+  { value: "computers-laptops", label: "Computers & Laptops" },
+  { value: "home-appliances", label: "Home Appliances" },
+  { value: "furniture", label: "Furniture" },
+  { value: "fashion-men", label: "Men's Fashion" },
+  { value: "fashion-women", label: "Women's Fashion" },
+  { value: "kids-toys", label: "Kids & Toys" },
+  { value: "sports-outdoors", label: "Sports & Outdoors" },
+  { value: "beauty-personal-care", label: "Beauty & Personal Care" },
+  { value: "health-wellness", label: "Health & Wellness" },
+  { value: "groceries", label: "Groceries" },
+  { value: "books-stationery", label: "Books & Stationery" },
+  { value: "automotive", label: "Automotive" },
+  { value: "tools-hardware", label: "Tools & Hardware" },
+  { value: "jewelry-watches", label: "Jewelry & Watches" },
+  { value: "pet-supplies", label: "Pet Supplies" },
+  { value: "musical-instruments", label: "Musical Instruments" },
+  { value: "gaming", label: "Gaming" },
+  { value: "home-decor", label: "Home Decor" },
+];
 
 function AddItemForm() {
-  const [images, setImages] = useState({
-    imageOne: "",
-    imageTwo: "",
-    imageThree: "",
-    imageFour: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const [isSubmitting,setIsSubmitting] = useState(false);
 
-  // ✅ Simplified image handler
+  // ⬇️ Handles submission
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    try{
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/product/uploadProduct`,data,{withCredentials:true});
+      toast.success('product uploaded');
+      console.log(res);
+    }catch(err){
+      console.log(err);
+      toast.error("can't upload product right now");
+    }finally{
+      setIsSubmitting(false);
+    }
+  };
+
+  // ✅ Image handler
   async function handleChangeImages(e) {
     if (!e.target.files || e.target.files.length < 1) return;
     const file = e.target.files[0];
-    const url = URL.createObjectURL(file); // Direct browser preview URL
-    return url;
+    return URL.createObjectURL(file);
   }
 
   return (
     <form
+      onSubmit={handleSubmit(onSubmit)}
       className="p-5 w-full shadow-md rounded-sm flex flex-col  mt-5 min-h-full bg-white"
     >
-      <div className="w-full  gap-5">
+      <div className="w-full gap-5">
         {/* Product Name */}
         <div className="w-full flex gap-5">
           <div className="min-w-[38%]">
@@ -34,13 +79,17 @@ function AddItemForm() {
                 Product name
               </label>
               <input
-                name="name"
-                required
+                {...register("name", { required: "Product name is required" })}
                 type="text"
                 id="itemName"
                 placeholder="Enter product name"
                 className={inputStyles}
               />
+              {errors.name && (
+                <span className="text-red-500 text-sm">
+                  {errors.name.message}
+                </span>
+              )}
             </div>
 
             {/* Price */}
@@ -49,97 +98,137 @@ function AddItemForm() {
                 Item price
               </label>
               <input
-                name="price"
-                required
+                {...register("price", { required: "Price is required" })}
                 type="number"
-                minLength={1}
                 id="itemPrice"
                 placeholder="Enter price"
                 className={inputStyles}
               />
+              {errors.price && (
+                <span className="text-red-500 text-sm">
+                  {errors.price.message}
+                </span>
+              )}
             </div>
 
-            {/* Description */}
+            {/* Category (react-select with Controller) */}
             <div className="flex flex-col gap-2 mb-1">
               <label htmlFor="category" className="text-lg ">
                 Category
               </label>
-              <select
+              <Controller
                 name="category"
-                id="category"
-                required
-                className={inputStyles}
-              >
-                <option value="">Electronics</option>
-                <option value="">Clothes</option>
-                <option value="">Smartphone</option>
-                <option value="">home appliances</option>
-              </select>
+                control={control}
+                rules={{ required: "Category is required" }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    options={categoryOptions}
+                    isSearchable
+                    placeholder="Select category"
+                    instanceId="category-select"
+                  />
+                )}
+              />
+              {errors.category && (
+                <span className="text-red-500 text-sm">
+                  {errors.category.message}
+                </span>
+              )}
             </div>
+
+            {/* Description */}
             <div className="flex flex-col gap-2 mb-1">
               <label htmlFor="itemDesc" className="text-lg ">
                 Description
               </label>
               <textarea
-                name="description"
-                required
+                {...register("description", {
+                  required: "Description is required",
+                })}
                 id="itemDesc"
                 placeholder="Enter product details"
                 className={inputStyles}
               />
+              {errors.description && (
+                <span className="text-red-500 text-sm">
+                  {errors.description.message}
+                </span>
+              )}
             </div>
           </div>
-          {/* Cover Image */}
 
+          {/* Cover Image */}
           <div className="w-full space-y-2 h-full">
-              <label htmlFor="image" className="text-lg ">
-                Cover Image
-              </label>
-            <UploadImage
-              styles="h-90"
-              id="cover"
-              fieldName="cover"
-              handler={handleChangeImages}
-              required={true}
+            <label htmlFor="cover" className="text-lg ">
+              Cover Image
+            </label>
+            <Controller
+              name="cover"
+              control={control}
+              rules={{ required: "Cover image is required" }}
+              render={({ field }) => (
+                <UploadImage
+                  styles="h-90"
+                  id="cover"
+                  fieldName="cover"
+                  handler={handleChangeImages}
+                  required={true}
+                  onChange={(file) => field.onChange(file)}
+                />
+              )}
             />
+            {errors.cover && (
+              <span className="text-red-500 text-sm">
+                {errors.cover.message}
+              </span>
+            )}
           </div>
+        </div>
+
+        {/* About */}
+        <div className="flex flex-col gap-2 mb-1 mt-3">
+          <label htmlFor="about" className="text-lg ">
+            About product in detail
+          </label>
+          <textarea
+            {...register("about", { required: "About is required" })}
+            id="about"
+            placeholder="Enter product details"
+            className={`${inputStyles} h-26`}
+          />
+          {errors.about && (
+            <span className="text-red-500 text-sm">{errors.about.message}</span>
+          )}
         </div>
 
         {/* Reference Images */}
         <div className="flex flex-col w-full gap-3 mt-8 mb-3 h-1/4">
-            <h1>Reference Images</h1>
-            <div className="w-full grid grid-cols-4 gap-2 h-full">
-              <UploadImage
-              styles="h-64"
-                fieldName="images"
-                required={true}
-                id="one"
-                handler={handleChangeImages}
+          <h1>Reference Images</h1>
+          <div className="w-full grid grid-cols-4 gap-2 h-full">
+            {["one", "two", "three", "four"].map((id) => (
+              <Controller
+                key={id}
+                name={`images.${id}`}
+                control={control}
+                render={({ field }) => (
+                  <UploadImage
+                    styles="h-64"
+                    fieldName="images"
+                    id={id}
+                    handler={handleChangeImages}
+                    onChange={(file) => field.onChange(file)}
+                  />
+                )}
               />
-              <UploadImage
-              styles="h-64"
-                fieldName="images"
-                id="two"
-                handler={handleChangeImages}
-              />
-              <UploadImage
-              styles="h-64"
-                fieldName="images"
-                id="three"
-                handler={handleChangeImages}
-              />
-              <UploadImage
-              styles="h-64"
-                fieldName="images"
-                id="four"
-                handler={handleChangeImages}
-              />
-            </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <button className="ml-auto bg-purple-500 w-fit transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-purple-600 text-white rounded-sm px-6 py-2 flex items-center gap-2">
-        Upload Product
+      <button className="ml-auto  bg-purple-500 w-fit transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-purple-600 text-white rounded-sm px-6 py-2 flex items-center justify-center gap-2">
+        <span className={`${isSubmitting && 'opacity-0'}`}>Upload Product</span>
+        <FaSpinner className="text-lg"/>
       </button>
     </form>
   );
@@ -147,45 +236,55 @@ function AddItemForm() {
 
 export default AddItemForm;
 
-function UploadImage({ fieldName, handler, id, required, styles = "" }) {
+function UploadImage({
+  fieldName,
+  handler,
+  id,
+  required,
+  styles = "",
+  onChange,
+}) {
   const [image, setImage] = useState("");
   const ref = useRef(null);
 
   async function handleImageChange(e) {
     const url = await handler(e);
     setImage(url);
+    if (onChange) onChange(e.target.files[0]); // send file to RHF
   }
 
   return (
     <label
-      className={`w-full relative block border-dashed border-1 border-gray-500 ${styles} h-72`}
+      className={`w-full relative block border-dashed border-1 border-gray-500  ${styles} `}
     >
       {image && (
         <button
-        onClick={(e) => {
-          e.preventDefault();
-          setImage("");
-        }}
+          onClick={(e) => {
+            e.preventDefault();
+            setImage("");
+            ref.current.value = ''
+            if (onChange) onChange(null);
+          }}
           type="button"
           className="w-fit h-10 absolute right-0 -top-11 border-1 border-[var(--border)] text-[var(--text)] transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-red-600 bg-red-500 rounded-sm px-3 py-2 flex justify-center gap-2"
         >
           <FaTrash className="text-white" />
         </button>
       )}
-      <label htmlFor={id} className={`h-full w-full`}>
+      <label htmlFor={id} className={`h-full w-full relative flex justify-center items-center`}>
         <input
           ref={ref}
           onChange={handleImageChange}
           type="file"
-          hidden
           id={id}
           name={fieldName}
           required={required}
+          className="opacity-0 absolute top-1/2 left-1/2 -translate-1/2"
         />
         {image ? (
           <img
             src={image}
-            className={`w-full h-full transition-all duration-300 ease-in-out object-fill`}
+            className="w-full h-full transition-all duration-300 ease-in-out object-fill "
           />
         ) : (
           <div className="w-full absolute top-1/2 left-1/2 -translate-1/2 transition-all duration-300 ease-in-out rounded-sm px-3 py-2 flex justify-center gap-2">
