@@ -6,7 +6,7 @@ import { useCartContext } from "./CartProvider";
 function CartCheckout() {
   const [delivery,setDelivery] = useState('free');
   const {items} = useCartContext();
-  const totalPrice = items.reduce((pre,curr) => pre + curr.price * curr.quantity,0)
+  const totalPrice = items?.reduce((pre,curr) => pre + curr.price * curr.quantity,0)
   const discount = Math.floor(totalPrice * (10 / 100));
   const tax = Math.floor(totalPrice * (18 / 100))
   const deliveryCharge = delivery === 'free' ? 0 : 80;

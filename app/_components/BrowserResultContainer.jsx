@@ -2,6 +2,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import ProductCard from "./ProductCard"
 import axios from "axios";
+import { addToCart } from "@/actions/cart";
 
 function BrowserResultContainer({products}) {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ function BrowserResultContainer({products}) {
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/cart/add/${id}`,{withCredentials:true});
+            const res = await addToCart(id);
             queryClient.refetchQueries(['cart']);
             console.log(res);
           } catch (err) {

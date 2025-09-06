@@ -40,7 +40,7 @@ function CartContainer({data}) {
           }
     }
     useEffect(() => {
-        setItems(el => cartData.cartItems.map(el => {
+        setItems(el => cartData.cartItems?.map(el => {
             return { productId: el._id, price: el.price, quantity: 1 };
         }));
     },[cartData])
