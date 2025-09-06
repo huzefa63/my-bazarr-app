@@ -6,6 +6,7 @@ import { ImSpinner2 } from "react-icons/im";
 import axios from "axios";
 import { useCartContext } from "./CartProvider";
 import { useEffect } from "react";
+import { deleteCartItem } from "@/actions/cart";
 
 function CartContainer({data}) {
     const {data:cartData,refetch,isFetching} = useQuery({
@@ -31,10 +32,8 @@ function CartContainer({data}) {
         const {id} = parent.dataset;
         console.log(id)
         try { 
-            const res = await axios.delete(`${process.env.NEXT_PUBLIC_URL}/cart/deleteItem/${id}`,{withCredentials:true});
+            await deleteCartItem(id);
             refetch();
-            console.log(id)
-            console.log(res);
           } catch (err) {
             console.log(err);
           }

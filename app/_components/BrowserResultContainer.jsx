@@ -12,9 +12,9 @@ function BrowserResultContainer({products}) {
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
         try {
-            const res = await addToCart(id);
+            await addToCart({id});
+            
             queryClient.refetchQueries(['cart']);
-            console.log(res);
           } catch (err) {
             console.log(err);
           }
