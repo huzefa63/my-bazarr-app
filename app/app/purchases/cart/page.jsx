@@ -11,7 +11,7 @@ async function Page() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/cart/getCartItems`,{
             method:'GET',
             headers:{
-                Cookie:`token=${cookie.get('token')}`
+                Cookie:`token=${cookie.get('token').value}`
             },
         })
         const resJson = await res.json();
