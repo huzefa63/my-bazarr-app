@@ -5,17 +5,17 @@ import { FaSync } from "react-icons/fa";
 import { IoIosShareAlt, IoMdStar, IoMdStarOutline, IoMdSync } from "react-icons/io";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { TiArrowSync } from "react-icons/ti";
-function ProductDetailSection() {
+function ProductDetailSection({name,ratingsAvg,description,price,about,email}) {
     return (
       <div className=" w-3/4 pl-10 flex flex-col gap-3 h-full overflow-auto">
         <div className="flex justify-between items-center">
-          <p className="font-bold text-3xl">Boult Q headphones</p>
+          <p className="font-bold text-3xl">{name}</p>
           <button className="p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
             <IoIosShareAlt className="text-4xl" />
           </button>
         </div>
         <p className="flex items-center text-2xl text-yellow-400">
-          <span className="text-gray-800 text-sm mt-1">4.1</span>
+          <span className="text-gray-800 text-sm mt-1">{ratingsAvg}</span>
           <IoMdStar />
           <IoMdStar />
           <IoMdStar />
@@ -23,13 +23,11 @@ function ProductDetailSection() {
           <IoMdStarOutline />
           <span className="text-sm text-gray-700 ml-2 mt-1">(124 reviews)</span>
         </p>
-        <p className="w-3/4">
-          Made with super soft foam padding which provides limitless comfort.
-          Hight Quality 40MM drivers are used so you can use it anywhere without
-          any distraction.
+        <p className="w-3/4 line-clamp-3">
+         {description}
         </p>
         <hr className="w-3/4 text-gray-400" />
-        <p className="text-indigo-800 font-semibold text-2xl">1,649.00 ₹</p>
+        <p className="text-indigo-800 font-semibold text-2xl">{price} ₹</p>
         <p className="text-sm">inclusive all taxes</p>
         <div className="w-3/4 space-y-3">
           <button className="smooth-transition hover:bg-blue-700 pointer py-2 bg-blue-600 text-white w-full">
@@ -41,7 +39,7 @@ function ProductDetailSection() {
         </div>
         <div className="flex gap-1 items-center mt-5">
           <p className="font-semibold">Seller email:</p>
-          <p className="text-gray-600">abcd@gmail.com</p>
+          <p className="text-gray-600">{email}</p>
         </div>
         <div className="flex gap-1 items-center">
           <p className="font-semibold">Seller Contact:</p>
@@ -76,16 +74,7 @@ function ProductDetailSection() {
         <div>
           <h1 className="text-3xl font-bold mt-5">About The Product</h1>
           <p>
-            Experience sound like never before. Our headphones are crafted for
-            those who demand precision, clarity, and comfort in every beat.
-            Designed with cutting-edge audio technology, they deliver deep bass,
-            crisp highs, and a balanced soundstage that brings your music,
-            movies, and calls to life. Built for all-day wear, the ergonomic
-            design and premium materials ensure a snug yet comfortable fit.
-            Whether you’re working, traveling, or just unwinding, our headphones
-            adapt to your lifestyle with noise-canceling features, wireless
-            connectivity, and exceptional battery life. More than just
-            headphones—they’re your gateway to pure audio freedom.
+            {about}
           </p>
         </div>
       </div>

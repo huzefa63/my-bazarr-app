@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import QueryProvider from "./_components/QueryProvider";
 const poppins = Poppins({
   variable: "poppins",
   subsets: ["latin"],
@@ -14,13 +15,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="en">
-        <body
-          className={`${poppins.className} antialiased`}
-        >
-          {children}
-          <Toaster position="top-right"/>
-        </body>
-      </html>
+    <html lang="en">
+      <body className={`${poppins.className} antialiased`}>
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster position="top-right" />
+      </body>
+    </html>
   );
 }
