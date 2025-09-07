@@ -12,6 +12,7 @@ async function Page() {
     products = resJson.products;
     totalResults = resJson.totalResults;
   }catch(err){
+    products = [];
     console.log(err);
   }
     return (
