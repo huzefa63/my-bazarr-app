@@ -32,6 +32,26 @@ export async function deleteCartItem(id){
             }
          }
        );
+       return await res.json();
+     } catch (err) {
+       console.log(err);
+     }
+}
+export async function checkoutAction(data){
+    const cookie = await cookies();
+    const token = cookie.get('token')?.value;
+     try {
+       const res = await fetch(
+         `${process.env.NEXT_PUBLIC_URL}/cart/checkout`,
+         {
+            method:'POST',
+            headers:{
+                Cookie:`token=${token}`,
+                "Content-Type":"application/json"
+            },body:JSON.stringify(data),
+         }
+       );
+       return await res.json();
      } catch (err) {
        console.log(err);
      }

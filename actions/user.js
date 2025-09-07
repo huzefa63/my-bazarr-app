@@ -17,4 +17,21 @@ export async function getOtp(email){
     return resJson;
 }
 
+export async function getUser(){
+    console.log('getting user');
+    const cookie = await cookies();
+   try{
+     const res = await fetch(`${url}/user/getUser`, {
+        method:'GET',
+        headers:{
+            Cookie:`token=${cookie.get('token')?.value || ''}`
+        },
+    });
+    const resJson = await res.json();
+    return resJson.user;
+   }catch(err){
+    console.log(err);
+   }
+}
+
 

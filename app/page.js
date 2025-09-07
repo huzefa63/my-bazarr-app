@@ -3,6 +3,6 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   const cookie = await cookies();
-  if(!cookie.get('token')) redirect('/home');
+  if(!cookie.get('token')?.value) redirect('/home');
   redirect('/app/browse');
 }

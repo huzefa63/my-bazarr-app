@@ -13,7 +13,6 @@ function BrowserResultContainer({products}) {
         const {id} = parent.dataset;
         try {
             await addToCart({id});
-            
             queryClient.refetchQueries(['cart']);
           } catch (err) {
             console.log(err);

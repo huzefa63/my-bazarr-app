@@ -1,19 +1,53 @@
 import MyOrderItemCard from "@/app/_components/my_orders/MyOrderItemCard";
 import MyOrderSummary from "@/app/_components/my_orders/MyOrderSummary";
+import { IoArrowBack } from "react-icons/io5";
+import { format } from "date-fns";
+import Link from "next/link";
 
-function Page() {
-    
+async function Page({params}) {
+    const param = await params;
+    const {id} = param;
+    let order;
+    try{
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getOrder/${id}`);
+      const resJson = await res.json();
+      order = resJson.order;
+      console.log(res);
+    }catch(err){
+      order = false;
+      console.log(err);
+    }
+    if(!order) return <h1>unable to fetch Order, please try again later</h1>
+    const date = format(new Date(order.createdAt),"MMMM dd, yyyy 'at' hh:mm a");
     return (
       <div className="flex w-full h-full bg-gray-100 p-5 ">
         <div className="w-[65%]">
+          <Link href="/app/purchases/orders" >
+            <p className="p-2 hover:bg-gray-200 mb-2 smooth-transition w-fit flex items-center">
+              <IoArrowBack className="text-2xl " />cart
+            </p>
+          </Link>
           <div className="space-y-3">
-            <header className="text-2xl font-bold">Order ID: 334902445</header>
+            <header className="text-2xl font-bold">
+              Order ID: {order._id}
+            </header>
             <p className="text-sm text-gray-600 tracking-wide">
-              ordered on jan 8, 2024 at 9:50 pm
+              ordered on {date}
             </p>
           </div>
-          <MyOrderItemCard />
-          <MyOrderSummary />
+          <MyOrderItemCard
+            deliveryExpected={order.deliveryExpected}
+            productName={order.productName}
+            totalAmount={order.totalAmount}
+            coverImage={order.coverImage}
+            status={order.status}
+          />
+          <MyOrderSummary
+            subtotal={order.subTotal}
+            discount={order.discount}
+            shipping={order.deliveryCharges}
+            totalAmount={order.totalAmount}
+          />
         </div>
 
         <div className="p-3 w-[35%] space-y-4">
@@ -22,7 +56,7 @@ function Page() {
               Instructions
             </header>
             <p className="text-sm text-gray-700">
-              drop the courier at my neighbor and take money
+              {order.instructions || "no instructions provided"}
             </p>
           </div>
 
@@ -31,8 +65,8 @@ function Page() {
               Contact Information
             </header>
             <div className="space-y-1">
-              <p className="text-sm text-gray-700">abcd@gmail.com</p>
-              <p className="text-sm text-gray-700">+91 617385309458</p>
+              <p className="text-sm text-gray-700">{order.email}</p>
+              <p className="text-sm text-gray-700">{order.phoneNumber}</p>
             </div>
           </div>
 
@@ -41,9 +75,12 @@ function Page() {
               Shipping address
             </header>
             <div className="space-y-1">
-              <p className="text-sm text-gray-700">john doe</p>
-              <p className="text-sm text-gray-700">marco streets</p>
-              <p className="text-sm text-gray-700">near garden</p>
+              <p className="text-sm text-gray-700">{order.customerName}</p>
+              <p className="text-sm text-gray-700">{order.address.line1}</p>
+              <p className="text-sm text-gray-700">{order.address.line2}</p>
+              <p className="text-sm text-gray-700">
+                {order.address.state}, {order.address.pincode}
+              </p>
               <p className="text-sm text-gray-700">india</p>
             </div>
           </div>

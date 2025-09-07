@@ -6,8 +6,9 @@ const Context = createContext();
 
 function CartProvider({children}) {
     const [items,setItems] = useState([]);
+    const [isDeletingId,setIsDeletingId] = useState('');
     return (
-        <Context.Provider value={{items,setItems}}>
+        <Context.Provider value={{items,setItems,setIsDeletingId,isDeletingId}}>
             {children}
         </Context.Provider>
     )

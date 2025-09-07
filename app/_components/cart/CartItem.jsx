@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { useCartContext } from "./CartProvider";
+import Spinner from "../Spinner";
 
-function CartItem({image,price,name,inStock,id}) {
+function CartItem({image,price,name,inStock,id,isDeletingId}) {
   const [isHover,setIsHover] = useState(true);
   const [quantity,setQuantity] = useState(1);
   const {setItems} = useCartContext();
@@ -28,7 +29,7 @@ function CartItem({image,price,name,inStock,id}) {
 
     return (
       <div
-      data-id={id}
+        data-id={id}
         className={`${
           isHover && "hover:bg-gray-100 "
         } parent smooth-transition px-5 border-b-1 border-b-gray-200 h-[25%] py-4 flex items-center`}
@@ -73,13 +74,20 @@ function CartItem({image,price,name,inStock,id}) {
                 +
               </button>
             </div>
-              <button
-                onMouseEnter={() => setIsHover(false)}
-                onMouseLeave={() => setIsHover(true)}
-                className="delete smooth-transition hover:scale-105 bg-red-500 text-white rounded-sm hover:bg-red-600 px-2 py-1 flex items-center gap-1 text-xs"
+            <button
+              onMouseEnter={() => setIsHover(false)}
+              onMouseLeave={() => setIsHover(true)}
+              className="delete relative smooth-transition hover:scale-105 bg-red-500 text-white rounded-sm hover:bg-red-600 px-2 py-1 text-xs"
+            >
+              <span
+                className={`${
+                  isDeletingId === id ? "opacity-0" : ""
+                } flex items-center gap-1 delete`}
               >
-                <FaTrash className="delete"/> Delete
-              </button>
+                <FaTrash className="delete" /> Delete
+              </span>
+              {isDeletingId === id && <Spinner />}
+            </button>
           </div>
         </div>
       </div>

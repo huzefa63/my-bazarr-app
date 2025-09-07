@@ -17,30 +17,30 @@ function CartContainer({data}) {
         },
         initialData:data
     })
-    const {setItems,items} = useCartContext();
+    const {setItems,setIsDeletingId,isDeletingId} = useCartContext();
     useEffect(() => {
         setItems(cartData.cartItems);
         console.log(cartData)
     } , [cartData])
-    // useEffect(() => {
-    //     console.log(items)
-    // } , [items])
     async function handleDeleteCartItem(e){
         if(!e.target.classList.contains('delete')) return;
         console.log('hello')
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
-        console.log(id)
+        setIsDeletingId(id);
         try { 
-            await deleteCartItem(id);
+            const res = await deleteCartItem(id);
+            console.log(res)
             refetch();
           } catch (err) {
             console.log(err);
+          }finally{
+            setIsDeletingId('');
           }
     }
     useEffect(() => {
         setItems(el => cartData.cartItems?.map(el => {
-            return { productId: el._id, price: el.price, quantity: 1 };
+            return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage };
         }));
     },[cartData])
     return (
@@ -48,7 +48,7 @@ function CartContainer({data}) {
             <header className="text-4xl pl-5 flex items-center gap-3"><FaCartShopping /> Cart {cartData?.totalCartItems}</header>
             {isFetching && cartData.cartItems?.length < 1 &&  <ImSpinner2 className="animate-spin text-2xl absolute top-1/2 left-1/2 -translate-1/2"/>}
             <hr className="my-3 text-gray-300"/>
-            {cartData.cartItems?.map(el => <CartItem key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
+            {cartData.cartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
         </div>
     )
 }
