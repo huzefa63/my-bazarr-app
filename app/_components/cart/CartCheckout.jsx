@@ -32,6 +32,7 @@ function CartCheckout() {
     };
     try {
       const res = await checkoutAction(checkout);
+      console.log(res);
       const stripe = await stripePromise;
       await stripe.redirectToCheckout({ sessionId: res.id });
     } catch (err) {

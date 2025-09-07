@@ -3,13 +3,20 @@ import MyOrderSummary from "@/app/_components/my_orders/MyOrderSummary";
 import { IoArrowBack } from "react-icons/io5";
 import { format } from "date-fns";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 async function Page({params}) {
     const param = await params;
+    const cookie = await cookies();
     const {id} = param;
     let order;
     try{
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getOrder/${id}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getOrder/${id}`,{
+        method:'GET',
+        headers:{
+          Cookie:`token=${cookie.get('token')?.value}`
+        }
+      });
       const resJson = await res.json();
       order = resJson.order;
       console.log(res);
