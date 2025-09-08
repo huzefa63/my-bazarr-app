@@ -10,7 +10,7 @@ import { BsBox2 } from "react-icons/bs";
 import axios from "axios";
 
 function SellerOrdersContainer() {
-     const { data: orders, isFetching } = useQuery({
+     const { data: orders, isFetching,isLoading } = useQuery({
        queryKey: ["sellerOrders"],
        queryFn:async () => {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`,{withCredentials:true})
