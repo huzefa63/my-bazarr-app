@@ -1,5 +1,7 @@
 "use client";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -42,7 +44,8 @@ export default function AddItemForm() {
   } = useForm();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const onSubmit = async (data) => {
     // console.log(data);
     // Example payload:
@@ -66,7 +69,9 @@ export default function AddItemForm() {
         formData,
         { withCredentials: true }
       );
+      queryClient.refetchQueries(['myProducts']);
       toast.success("Product uploaded!");
+      router.replace('/app/my-store/items')
     } catch (err) {
       console.log(err);
       toast.error("Can't upload product now.");

@@ -5,7 +5,7 @@ import { PiPackageFill } from "react-icons/pi";
 function Page() {
     return (
       <div className="h-full w-full p-5 rounded-md shadow-sm bg-white flex flex-col">
-        <div className="w-full h-full overflow-auto">
+        <div className="w-full h-full overflow-auto relative">
           <header className="text-3xl flex items-center gap-3">
             <PiPackageFill />
             Your Orders

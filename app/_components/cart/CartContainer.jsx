@@ -1,13 +1,12 @@
 'use client';
 import { FaCartShopping } from "react-icons/fa6"
 import CartItem from "./CartItem"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { ImSpinner2 } from "react-icons/im";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query"
 import { useCartContext } from "./CartProvider";
-import { useEffect } from "react";
+import { useEffect, useOptimistic, useTransition } from "react";
 import { deleteCartItem, getCartItems } from "@/actions/cart";
 import Spinner from "../Spinner";
+import Link from "next/link";
 
 function CartContainer() {
     const {data:cartData,refetch,isFetching} = useQuery({
@@ -16,8 +15,12 @@ function CartContainer() {
         refetchOnMount:false,
         staleTime:1000 * 60,
     })
+    const [optimisticCartItems,setOptimisticCartItems] = useOptimistic(cartData?.cartItems,(items,id) => items.filter(el=>el._id !== id));
     const {setItems,setIsDeletingId,isDeletingId} = useCartContext();
+     const [isPending, startTransition] = useTransition();
     async function handleDeleteCartItem(e){
+        console.log(e.target.classList.contains('delete'))
+        console.log(e.target)
         if(!e.target.classList.contains('delete')) return;
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
@@ -25,6 +28,9 @@ function CartContainer() {
         try { 
             const res = await deleteCartItem(id);
             console.log(res)
+            startTransition(() => {
+                setOptimisticCartItems(id);
+            })
             refetch();
           } catch (err) {
             console.log(err);
@@ -40,9 +46,10 @@ function CartContainer() {
     return (
         <div className="w-[65%] relative overflow-auto rounded-md shadow-sm py-5 bg-white" onClick={handleDeleteCartItem}>
             <header className="text-4xl pl-5 flex items-center gap-3"><FaCartShopping /> Cart {cartData?.totalCartItems}</header>
-            {isFetching && cartData?.length < 1 && <Spinner />}
+            {!cartData?.cartItems.length && isFetching  && <Spinner />}
             <hr className="my-3 text-gray-300"/>
-            {cartData?.cartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
+            {optimisticCartItems?.length < 1 && !isFetching && <h1 className="text-2xl absolute top-1/2 left-1/2 -translate-1/2 text-center">Your cart is empty! <Link href='/app/browse' className=" text-blue-500 ">shop now</Link></h1>}
+            {optimisticCartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
         </div>
     )
 }

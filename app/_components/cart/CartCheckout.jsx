@@ -7,6 +7,9 @@ import { checkoutAction } from "@/actions/cart";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import Spinner from "../Spinner";
+import formatCurrency from "@/helpers/formatCurrency";
+import toast from "react-hot-toast";
+import Link from "next/link";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function CartCheckout() {
   const [delivery, setDelivery] = useState("free");
@@ -21,7 +24,7 @@ function CartCheckout() {
   const discount = Math.ceil((totalPrice + deliveryCharge)  * 0.1); // in paise
   const finalPrice = totalPrice + deliveryCharge - discount;
   async function handleCheckout() {
-    // return console.log(items);
+    if(items?.length < 1) return toast.error("you don't have any items in cart to checkout!");
     const today = new Date();
     today.setDate(today.getDate() + 3);
     const checkout = {
@@ -76,11 +79,11 @@ function CartCheckout() {
           <p>
             discount <span className="text-[11px] text-gray-600">(10%)</span>
           </p>
-          <p className="text-green-500">-{discount} rs</p>
+          <p className="text-green-500">-{formatCurrency(discount)} rs</p>
         </div>
         <div className="flex justify-between text-gray-500">
           <p>Delivery</p>
-          <p>{deliveryCharge} rs</p>
+          <p>{formatCurrency(deliveryCharge)} rs</p>
         </div>
         {/* <div className="flex justify-between text-gray-500">
           <p>
@@ -94,7 +97,7 @@ function CartCheckout() {
       <div className="text-lg flex flex-col gap-5">
         <div className="flex justify-between">
           <h1>Total</h1>
-          <p>{finalPrice} rs</p>
+          <p>{formatCurrency(finalPrice)} rs</p>
         </div>
         <div className="flex flex-col gap-2 w-full text-white">
           <button
@@ -105,9 +108,9 @@ function CartCheckout() {
             {isCheckouting && <Spinner />}
             <span className={`${isCheckouting && 'opacity-0'}`}>Proceed to checkout</span>
           </button>
-          <button className="text-black border border-gray-300 shadow-sm py-2 rounded-md smooth-transition hover:bg-gray-200">
+          <Link href="/app/browse" className="text-black border text-center border-gray-300 shadow-sm py-2 rounded-md smooth-transition hover:bg-gray-200">
             Continue shopping
-          </button>
+          </Link>
 
           {/* Address section */}
           {/* <h1 className="text-xl text-black text-bold mt-3">Address</h1>

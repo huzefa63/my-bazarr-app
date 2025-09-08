@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function shipeOrderAction(orderId){
     const cookie = await cookies();
@@ -80,6 +81,7 @@ export async function getSellerOrdersAction(){
       }
     );
     const resJson = await res.json();
+    console.log('seller',resJson)
     return resJson.orders;
   } catch (err) {
     console.log(err);

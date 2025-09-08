@@ -84,7 +84,7 @@ function CartItem({image,price,name,inStock,id,isDeletingId}) {
                   isDeletingId === id ? "opacity-0" : ""
                 } flex items-center gap-1 delete`}
               >
-                <FaTrash className="delete" /> Delete
+                <FaTrash className="delete hidden" /> remove
               </span>
               {isDeletingId === id && <Spinner />}
             </button>

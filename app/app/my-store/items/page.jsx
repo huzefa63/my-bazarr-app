@@ -13,7 +13,7 @@ function page() {
         </header>
         <hr className="text-gray-200 my-5" />
         <div className="px-4 mb-4">
-          <FilterOptions />
+          <FilterOptions allFilters={false}/>
         </div>
           <MyProductContainer />
       </div>

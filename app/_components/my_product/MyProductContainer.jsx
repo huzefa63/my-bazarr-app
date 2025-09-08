@@ -3,17 +3,25 @@ import { useQuery } from "@tanstack/react-query";
 import MyProductItem from "./MyProductItem";
 import { getMyProducts } from "@/actions/product";
 import Spinner from "../Spinner";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 function MyProductContainer() {
+  const searchParams = useSearchParams();
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
   const {data:products,isFetching} = useQuery({
     queryKey:['myProducts'],
     queryFn:getMyProducts,
     refetchOnWindowFocus:false,
     refetchOnMount:false
   })
-  if(!products) return <Spinner />
-  if(isFetching) return <Spinner />
+  useEffect(() => {
+    console.log(products)
+  },[startDate,endDate,products])
+  if(!products && isFetching) return <Spinner />
+  // if(isFetching) return <Spinner />
     return (
-      <div className="h-ful w-full overflow-auto rounded-md">
+      <div className="space-y-2 w-full overflow-auto rounded-md">
         {products?.map((el) => (
             <MyProductItem
               key={el._id}
