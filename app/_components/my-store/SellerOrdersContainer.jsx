@@ -14,7 +14,7 @@ function SellerOrdersContainer() {
      });
      if (!orders || isFetching) return <Spinner />;
     return (
-      <div className="w-full h-full px-3 space-y-3 overflow-auto">
+      <div className="w-full px-3 space-y-3">
         {orders.map((el) => (
           <SellerOrdersCard
             key={el._id}

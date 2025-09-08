@@ -13,17 +13,17 @@ function MyProductContainer() {
   if(!products) return <Spinner />
   if(isFetching) return <Spinner />
     return (
-      <div className="h-full w-full overflow-auto rounded-md">
-            {products?.map((el) => (
-              <MyProductItem
-                key={el._id}
-                name={el.name}
-                price={el.price}
-                description={el.description}
-                id={el._id}
-                image={el.coverImage}
-              />
-            ))}
+      <div className="h-ful w-full overflow-auto rounded-md">
+        {products?.map((el) => (
+            <MyProductItem
+              key={el._id}
+              name={el.name}
+              price={el.price}
+              description={el.description}
+              id={el._id}
+              image={el.coverImage}
+            />
+        ))}
       </div>
     );
 }
