@@ -31,8 +31,8 @@ function SellerOrdersContainer() {
              const filtered = orders.filter(el => el.status === searchParams.get('filter'))
              setFilteredOrders(filtered);
          },[searchParams.get('filter')])
-    if (isFetching) return <Spinner />;
-    if (!filteredOrders?.length) {
+    if (isFetching && !filteredOrders.length) return <Spinner />;
+    if (!filteredOrders?.length && !isFetching) {
       return (
         <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
           <BsBox2 /> no orders found!

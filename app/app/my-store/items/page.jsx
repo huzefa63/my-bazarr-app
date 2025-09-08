@@ -17,7 +17,7 @@ function page() {
             <FilterOptions allFilters={false} />
           </Suspense>
         </div>
-        <Suspense fallback={"loading"}>
+        <Suspense>
           <MyProductContainer />
         </Suspense>
       </div>
