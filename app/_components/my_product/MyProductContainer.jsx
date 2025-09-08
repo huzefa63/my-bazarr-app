@@ -6,9 +6,9 @@ async function MyProductContainer() {
     try{
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getMyProducts`,{
         headers:{
-          Cookie:`token=${cookie.get('token')}`
+          Cookie:`token=${cookie.get('token')?.value}`
         },
-        next:{revalidate:10}
+        next:{revalidate:30}
       })
       const resJson = await res.json();
       products = resJson?.products;
