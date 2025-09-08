@@ -1,31 +1,17 @@
 import FilterOptions from "@/app/_components/FilterOptions";
+import OrdersContainer from "@/app/_components/my-store/SellerOrdersContainer";
 import SellerOrdersCard from "@/app/_components/my-store/SellerOrdersCard";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
 import { BiSolidPackage } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
+import SellerOrdersContainer from "@/app/_components/my-store/SellerOrdersContainer";
 
 async function Page() {
-    const cookie = await cookies();
-    const token = cookie.get('token')?.value;
-     let orders;
-     try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`,{
-          method:'GET',
-          headers:{
-            Cookie:`token=${token}`,
-          }
-        })
-        const resJson = await res.json();
-        orders = resJson.orders;
-     }catch(err){
-        console.log(err);
-        orders = [];
-     }
     return (
-      <div className="w-full h-full p-5">
-        <div className="h-full w-[95%] bg-white shadow-sm  py-3 overflow-auto rounded-md">
+      <div className=" h-full p-5">
+        <div className="h-full w-full bg-white shadow-sm  py-3 overflow-hidden rounded-md">
           <header className="text-3xl flex items-center gap-5 pl-5">
             <BiSolidPackage className="text-yellow-950" /> Recieved Orders
           </header>
@@ -33,22 +19,7 @@ async function Page() {
           <div className="px-4 mb-4">
             <FilterOptions />
           </div>
-            <div className="w-full h-full px-3 space-y-3">
-              {orders.map((el) => (
-                <SellerOrdersCard
-                  key={el._id}
-                  productName={el.productName}
-                  totalAmount={el.totalAmount}
-                  status={el.status}
-                  id={el._id}
-                  coverImage={el.coverImage}
-                  createdAt={el.createdAt}
-                  customerName={el.customerName}
-                  address={el.address}
-                />
-              ))}
-             
-            </div>
+            <SellerOrdersContainer />
         </div>
       </div>
     );

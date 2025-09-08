@@ -65,3 +65,39 @@ export async function deliveredOrderAction(orderId){
        console.log(err);
      }
 }
+
+export async function getSellerOrdersAction(){
+  const cookie = await cookies();
+  const token = cookie.get("token")?.value;
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`,
+      {
+        method: "GET",
+        headers: {
+          Cookie: `token=${token}`,
+        },
+      }
+    );
+    const resJson = await res.json();
+    return resJson.orders;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+}
+export async function getCustomerOrdersAction(){
+  const cookie = await cookies();
+  const token = cookie.get("token")?.value || "";
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/order/getAllOrders`,
+      { headers: { Cookie: `token=${token}` } }
+    );
+    const resJson = await res.json();
+     return resJson.orders;
+  } catch (err) {
+    console.log(err);
+    orders = [];
+  }
+}

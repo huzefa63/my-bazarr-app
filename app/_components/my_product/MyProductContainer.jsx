@@ -8,11 +8,12 @@ function MyProductContainer() {
     queryKey:['myProducts'],
     queryFn:getMyProducts,
     refetchOnWindowFocus:false,
+    refetchOnMount:false
   })
   if(!products) return <Spinner />
   if(isFetching) return <Spinner />
     return (
-      <div className="h-full overflow-auto rounded-md">
+      <div className="h-full w-full overflow-auto rounded-md">
             {products?.map((el) => (
               <MyProductItem
                 key={el._id}

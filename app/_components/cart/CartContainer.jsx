@@ -6,16 +6,15 @@ import { ImSpinner2 } from "react-icons/im";
 import axios from "axios";
 import { useCartContext } from "./CartProvider";
 import { useEffect } from "react";
-import { deleteCartItem } from "@/actions/cart";
+import { deleteCartItem, getCartItems } from "@/actions/cart";
+import Spinner from "../Spinner";
 
-function CartContainer({data}) {
+function CartContainer() {
     const {data:cartData,refetch,isFetching} = useQuery({
         queryKey:['cart'],
-        queryFn:async () => {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/cart/getCartItems`,{withCredentials:true})
-            return res.data;
-        },
-        initialData:data
+        queryFn:getCartItems,
+        refetchOnMount:false,
+        staleTime:1000 * 60,
     })
     const {setItems,setIsDeletingId,isDeletingId} = useCartContext();
     async function handleDeleteCartItem(e){
@@ -34,16 +33,16 @@ function CartContainer({data}) {
           }
     }
     useEffect(() => {
-        setItems(el => cartData.cartItems?.map(el => {
+        setItems(el => cartData?.cartItems?.map(el => {
             return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage,sellerEmail:el.seller.email, sellerId:el.seller._id };
         }));
     },[cartData])
     return (
         <div className="w-[65%] relative overflow-auto rounded-md shadow-sm py-5 bg-white" onClick={handleDeleteCartItem}>
             <header className="text-4xl pl-5 flex items-center gap-3"><FaCartShopping /> Cart {cartData?.totalCartItems}</header>
-            {isFetching && cartData.cartItems?.length < 1 &&  <ImSpinner2 className="animate-spin text-2xl absolute top-1/2 left-1/2 -translate-1/2"/>}
+            {isFetching && <Spinner />}
             <hr className="my-3 text-gray-300"/>
-            {cartData.cartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
+            {cartData?.cartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}
         </div>
     )
 }
