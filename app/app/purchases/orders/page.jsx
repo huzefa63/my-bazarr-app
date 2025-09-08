@@ -1,5 +1,6 @@
 import FilterOptions from "@/app/_components/FilterOptions"
 import OrderContainer from "@/app/_components/orders/OrderContainer";
+import OrderContainerWrapper from "@/app/_components/orders/OrderContainerWrapper";
 import Spinner from "@/app/_components/Spinner";
 import { Suspense } from "react";
 import { PiPackageFill } from "react-icons/pi";
@@ -15,7 +16,9 @@ function Page() {
         <hr className="text-gray-200 my-5" />
         <FilterOptions />
         <Suspense fallback={<Spinner />}>
-          <OrderContainer />
+          <OrderContainerWrapper>
+            <OrderContainer />
+          </OrderContainerWrapper>
         </Suspense>
       </div>
     );
