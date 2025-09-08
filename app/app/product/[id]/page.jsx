@@ -21,7 +21,7 @@ async function Page({params}) {
       <div className="h-full w-full p-5">
         <div className="flex h-full w-full  p-3 ">
           <ProductImageSection coverImage={product.coverImage} images={product.images}/>
-          <ProductDetailSection name={product?.name} email={product.seller?.email} ratingsAvg={product?.ratingsAvg} description={product?.description}price={product?.price}
+          <ProductDetailSection product={product} id={searchParams.id} name={product?.name} email={product.seller?.email} ratingsAvg={product?.ratingsAvg} description={product?.description}price={product?.price}
           about={product.about} seller={product.seller}/>
         </div>
         <hr className="text-gray-300 my-5"/>

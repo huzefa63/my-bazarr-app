@@ -18,13 +18,8 @@ function CartContainer({data}) {
         initialData:data
     })
     const {setItems,setIsDeletingId,isDeletingId} = useCartContext();
-    useEffect(() => {
-        setItems(cartData.cartItems);
-        console.log(cartData)
-    } , [cartData])
     async function handleDeleteCartItem(e){
         if(!e.target.classList.contains('delete')) return;
-        console.log('hello')
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
         setIsDeletingId(id);
@@ -40,7 +35,7 @@ function CartContainer({data}) {
     }
     useEffect(() => {
         setItems(el => cartData.cartItems?.map(el => {
-            return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage };
+            return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage,sellerEmail:el.seller.email };
         }));
     },[cartData])
     return (

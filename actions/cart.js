@@ -56,3 +56,23 @@ export async function checkoutAction(data){
        console.log(err);
      }
 }
+export async function orderCheckoutAction(data){
+    const cookie = await cookies();
+    const token = cookie.get('token')?.value;
+    console.log(token)
+     try {
+       const res = await fetch(
+         `${process.env.NEXT_PUBLIC_URL}/order/orderCheckout`,
+         {
+            method:'POST',
+            headers:{
+                Cookie:`token=${token}`,
+                "Content-Type":"application/json"
+            },body:JSON.stringify({item:data}),
+         }
+       );
+       return await res.json();
+     } catch (err) {
+       console.log(err);
+     }
+}

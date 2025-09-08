@@ -19,6 +19,7 @@ function CartCheckout() {
   const discount = Math.ceil((totalPrice + deliveryCharge)  * 0.1); // in paise
   const finalPrice = totalPrice + deliveryCharge - discount;
   async function handleCheckout() {
+    // return console.log(items);
     const today = new Date();
     today.setDate(today.getDate() + 3);
     const checkout = {
