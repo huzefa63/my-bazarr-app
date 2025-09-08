@@ -44,7 +44,7 @@ function SellerOrdersContainer() {
 
     return (
       <div className="w-full px-3 space-y-3">
-        {orders?.map((el) => (
+        {filteredOrders?.map((el) => (
           <SellerOrdersCard
             key={el._id}
             productName={el.productName}
