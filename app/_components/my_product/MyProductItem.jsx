@@ -9,7 +9,7 @@ function MyProductItem({image,name,price,description,id}) {
       "https://images.pexels.com/photos/10250614/pexels-photo-10250614.jpeg";
   return (
     <Link href={`/app/product/${id}`} className={`${isHover && 'hover:bg-gray-100'} py-3 smooth-transition px-5 border-b border-gray-200 w-full h-[25%] pb-5 flex items-center gap-5 pr-3`}>
-      <div className="min-w-1/12 h-full overflow-hidden rounded-md">
+      <div className="h-30 w-40 overflow-hidden rounded-md">
         <img src={image} alt="" className="w-full h-full object-fit"/>
       </div>
       <div className="space-y-2">
