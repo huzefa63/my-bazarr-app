@@ -19,7 +19,9 @@ async function Page() {
           <div className="px-4 mb-4">
             <FilterOptions />
           </div>
+          <Suspense>
             <SellerOrdersContainer />
+          </Suspense>
         </div>
       </div>
     );

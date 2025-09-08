@@ -1,5 +1,6 @@
 import FilterOptions from "@/app/_components/FilterOptions"
 import OrderContainer from "@/app/_components/orders/OrderContainer";
+import { Suspense } from "react";
 import { PiPackageFill } from "react-icons/pi";
 
 function Page() {
@@ -12,7 +13,9 @@ function Page() {
           </header>
           <hr className="text-gray-200 my-5" />
           <FilterOptions />
-        <OrderContainer />
+          <Suspense>
+            <OrderContainer />
+          </Suspense>
         </div>
       </div>
     );

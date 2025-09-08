@@ -13,9 +13,11 @@ function page() {
         </header>
         <hr className="text-gray-200 my-5" />
         <div className="px-4 mb-4">
-          <FilterOptions allFilters={false}/>
+          <FilterOptions allFilters={false} />
         </div>
+        <Suspense fallback={'loading'}>
           <MyProductContainer />
+        </Suspense>
       </div>
     </div>
   );
