@@ -7,7 +7,7 @@ import { FaGlobe } from "react-icons/fa";
 function AppNav() {
     return (
       <div className="border-b border-gray-100 w-full shadow-sm h-16 text-[var(--text)] bg-[var(--surface)] flex items-center overflow-hidden pl-5 pr-10 justify-between">
-          <img src="/logo.png" alt="logo" className="w-36 " />
+        <img src="/logo.png" alt="logo" className="w-36 " />
         <ul className="flex items-center gap-10 text-lg">
           <CustomLink
             styles="px-4 py-2"
@@ -19,6 +19,7 @@ function AppNav() {
             styles="px-4 py-2"
             href="/app/my-store/items"
             nestedHref="/app/my-store/add-item"
+            secondNested="/app/my-store/received-orders"
             text="My store"
             icon={<IoStorefrontSharp />}
           />

@@ -4,6 +4,9 @@ import { IoArrowBack } from "react-icons/io5";
 import { format } from "date-fns";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import SellerOrderController from "@/app/_components/my-store/SellerOrderController";
+import BackButton from "@/app/_components/BackButton";
+import CustomerController from "@/app/_components/orders/CustomerController";
 
 async function Page({params}) {
     const param = await params;
@@ -19,7 +22,7 @@ async function Page({params}) {
       });
       const resJson = await res.json();
       order = resJson.order;
-      console.log(res);
+      console.log(order);
     }catch(err){
       order = false;
       console.log(err);
@@ -29,11 +32,9 @@ async function Page({params}) {
     return (
       <div className="flex w-full h-full bg-gray-100 p-5 ">
         <div className="w-[65%]">
-          <Link href="/app/purchases/orders" >
-            <p className="p-2 hover:bg-gray-200 mb-2 smooth-transition w-fit flex items-center">
-              <IoArrowBack className="text-2xl " />cart
-            </p>
-          </Link>
+          <div className="mb-2">
+            <BackButton />
+          </div>
           <div className="space-y-3">
             <header className="text-2xl font-bold">
               Order ID: {order._id}
@@ -91,6 +92,8 @@ async function Page({params}) {
               <p className="text-sm text-gray-700">india</p>
             </div>
           </div>
+          <SellerOrderController status={order.status} seller={order.seller} orderId={order._id} customer={order.customer}/>
+          <CustomerController status={order.status} customer={order.customer} orderId={order._id}/>
         </div>
       </div>
     );

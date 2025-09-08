@@ -1,0 +1,24 @@
+"use client";
+
+import { cancelOrderAction } from "@/actions/order";
+import { useUserContext } from "../user/UserProvider";
+
+function CustomerController({ status, seller, customer,orderId }) {
+  const { user } = useUserContext();
+  if(status === 'delivered') return null;
+  if(status === 'cancelled') return null;
+  if (user?._id !== customer) return null;
+  async function handleCancelOrder() {
+    await cancelOrderAction(orderId);
+  }
+  return (
+    <div className="w-full text-white grid grid-cols-3 gap-5">
+      {status !== 'cancelled' && status !== 'delivered' && <button onClick={handleCancelOrder} className="smooth-transition shadow-sm hover:bg-red-600 px-3 py-2 rounded-md bg-red-500">
+        cancel order
+      </button>}
+
+    </div>
+  );
+}
+
+export default CustomerController;

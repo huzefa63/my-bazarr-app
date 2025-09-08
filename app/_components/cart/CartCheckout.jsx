@@ -6,9 +6,11 @@ import { useUserContext } from "../user/UserProvider";
 import { checkoutAction } from "@/actions/cart";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
+import Spinner from "../Spinner";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function CartCheckout() {
   const [delivery, setDelivery] = useState("free");
+  const [isCheckouting,setIsCheckouting] = useState(false);
   const { items } = useCartContext();
   const { user } = useUserContext();
   const totalPrice = items?.reduce(
@@ -31,6 +33,7 @@ function CartCheckout() {
       email: user.email,
       deliveryExpected: today,
     };
+    setIsCheckouting(true);
     try {
       const res = await checkoutAction(checkout);
       console.log(res);
@@ -38,6 +41,8 @@ function CartCheckout() {
       await stripe.redirectToCheckout({ sessionId: res.id });
     } catch (err) {
       console.log(err);
+    }finally{
+      setIsCheckouting(false);
     }
   }
   return (
@@ -93,10 +98,12 @@ function CartCheckout() {
         </div>
         <div className="flex flex-col gap-2 w-full text-white">
           <button
-            className="bg-blue-500 py-2 rounded-md smooth-transition hover:bg-blue-600"
+          disabled={isCheckouting}
+            className="bg-blue-500 relative py-2 rounded-md smooth-transition hover:bg-blue-600"
             onClick={handleCheckout}
           >
-            Proceed to checkout
+            {isCheckouting && <Spinner />}
+            <span className={`${isCheckouting && 'opacity-0'}`}>Proceed to checkout</span>
           </button>
           <button className="text-black border border-gray-300 shadow-sm py-2 rounded-md smooth-transition hover:bg-gray-200">
             Continue shopping

@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 import { IoIosArrowForward, IoMdArrowDropright } from "react-icons/io";
+import OrderStatus from "./OrderStatus";
 
 function OrderItem({status,coverImage,productName,totalAmount,deliveryExpected,id}) {
     const deliveryData = format(new Date(deliveryExpected),'dd MMMM, yyyy')
@@ -12,10 +13,7 @@ function OrderItem({status,coverImage,productName,totalAmount,deliveryExpected,i
     return (
       <Link href={`/app/order/${id}`}  className="smooth-transition hover:bg-gray-100 w-full relative  border border-gray-200 rounded-md p-4 flex flex-col gap-5 overflow-hidde">
         <div className="flex gap-4 items-center">
-          <div className="flex items-center gap-2 bg-orange-100 w-fit px-3 rounded-full text-orange-400 text-sm">
-            <div className="h-2 w-2 rounded-full bg-orange-400"></div>
-            <p>{status}</p>
-          </div>
+          {<OrderStatus status={status}/>}
           <span className="text-gray-400">|</span>
           <p className="text-sm text-gray-600">{deliveryData}</p>
         </div>

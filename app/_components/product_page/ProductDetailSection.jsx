@@ -14,6 +14,7 @@ import {
   IoMdSync,
 } from "react-icons/io";
 import { IoReturnUpBackOutline } from "react-icons/io5";
+import Spinner from "../Spinner";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function ProductDetailSection({
   id,
@@ -26,6 +27,7 @@ function ProductDetailSection({
   product
 }) {
   const queryClient = useQueryClient();
+  const [isCheckouting, setIsCheckouting] = useState(false);
   const [value,setValue] = useState(1); 
   const [delivery,setDelivery] = useState(0); 
   const discountedAmount = price - (price * 0.1);
@@ -41,7 +43,7 @@ function ProductDetailSection({
     const item = {coverImage:product.coverImage,description,
       name,price,productId:id,quantity:value,sellerEmail:email,sellerId:product.seller._id ,deliveryCharges:0
     }
-    console.log(item);
+    setIsCheckouting(true);
     try {
       const res = await orderCheckoutAction(item);
       const stripe = await stripePromise;
@@ -50,6 +52,8 @@ function ProductDetailSection({
       
     } catch (err) {
       console.log(err);
+    }finally{
+      setIsCheckouting(false);
     }
   }
   return (
@@ -71,8 +75,13 @@ function ProductDetailSection({
       </p>
       <p className="w-3/4 line-clamp-3">{description}</p>
       <hr className="w-3/4 text-gray-400" />
-      <p className="text-indigo-800 font-semibold text-2xl">{formatCurrency(discountedAmount * value)} <span className="text-xs line-through text-gray-600">
-        {formatCurrency(price * value)}</span> <span className="text-xs text-gray-600">10% off</span></p>
+      <p className="text-indigo-800 font-semibold text-2xl">
+        {formatCurrency(discountedAmount * value)}{" "}
+        <span className="text-xs line-through text-gray-600">
+          {formatCurrency(price * value)}
+        </span>{" "}
+        <span className="text-xs text-gray-600">10% off</span>
+      </p>
       <p className="text-sm">inclusive all taxes</p>
       <div className="w-3/4 space-y-3">
         <button
@@ -81,13 +90,23 @@ function ProductDetailSection({
         >
           Add to Cart
         </button>
-        <button onClick={handlePurchase} className="smooth-transition hover:bg-gray-300 pointer py-2 border-gray-400 border w-full">
-          Buy Now
+        <button
+        disabled={isCheckouting}
+          onClick={handlePurchase}
+          className="relative disabled:cursor-not-allowed smooth-transition hover:bg-gray-300 pointer py-2 border-gray-400 border w-full"
+        >
+          {isCheckouting && <Spinner />}
+          <span className={`${isCheckouting && 'opacity-0'}`}>Buy Now</span>
         </button>
       </div>
       <div className="flex items-center gap-2">
         <p>Quantity: </p>
-        <select id="numbers" className="px-3 bg-gray-200 rounded-md" value={value} onChange={e=>setValue(Number(e.target.value))}>
+        <select
+          id="numbers"
+          className="px-3 bg-gray-200 rounded-md"
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+        >
           {Array.from({ length: 10 }, (_, i) => (
             <option key={i + 1} value={i + 1} className="text-black">
               {i + 1}
