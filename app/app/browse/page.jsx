@@ -8,7 +8,9 @@ async function Page() {
   let totalResults;
   try{
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProducts`);
+    console.log('res: ',res)
     const resJson = await res.json();
+    console.log('resjson: ',resJson)
     products = resJson.products;
     totalResults = resJson.totalResults;
   }catch(err){
