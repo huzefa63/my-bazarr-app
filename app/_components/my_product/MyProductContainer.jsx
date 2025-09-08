@@ -1,10 +1,10 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
 import MyProductItem from "./MyProductItem";
-import { getMyProducts } from "@/actions/product";
 import Spinner from "../Spinner";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import axios from "axios";
 function MyProductContainer() {
   const searchParams = useSearchParams();
   const startDate = searchParams.get('startDate');
@@ -12,8 +12,12 @@ function MyProductContainer() {
   const {data:products,isFetching} = useQuery({
     queryKey:['myProducts'],
     queryFn:async () => {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/product/getMyProducts`,{withCredentials:true})
+            try{
+              const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/product/getMyProducts`,{withCredentials:true})
             return res.data.products;
+            }catch(err){
+              console.log(err)
+            }
         },
     refetchOnWindowFocus:false,
     refetchOnMount:false
