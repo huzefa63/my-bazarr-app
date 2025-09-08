@@ -1,22 +1,22 @@
 import FilterOptions from "@/app/_components/FilterOptions";
 import SellerOrdersCard from "@/app/_components/my-store/SellerOrdersCard";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
 import { BiSolidPackage } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 
 async function Page() {
-     const id = "ORD123456";
-     const status = "pending";
-     const orderDate = "Sep 7, 2025";
-     const productName = "Men’s Casual Shirt";
-     const formattedPrice = "₹1,499";
-     const customerName = "Rahul Sharma";
-     const address = { line1: "123 MG Road", state: "Maharashtra" };
-     const coverImage = "https://res.cloudinary.com/dkqsfm61z/image/upload/v1757145166/my-bazarr/products/rcjzz2cbzgtxvvhf2po8.jpg";
+    const cookie = await cookies();
+    const token = cookie.get('token')?.value;
      let orders;
      try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`,{
+          method:'GET',
+          headers:{
+            Cookie:`token=${token}`,
+          }
+        })
         const resJson = await res.json();
         orders = resJson.orders;
      }catch(err){
