@@ -11,7 +11,10 @@ function MyProductContainer() {
   const endDate = searchParams.get('endDate');
   const {data:products,isFetching} = useQuery({
     queryKey:['myProducts'],
-    queryFn:getMyProducts,
+    queryFn:async () => {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/product/getMyProducts`,{withCredentials:true})
+            return res.data.products;
+        },
     refetchOnWindowFocus:false,
     refetchOnMount:false
   })

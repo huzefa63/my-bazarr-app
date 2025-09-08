@@ -12,7 +12,10 @@ import axios from "axios";
 function SellerOrdersContainer() {
      const { data: orders, isFetching } = useQuery({
        queryKey: ["sellerOrders"],
-       queryFn: getSellerOrdersAction,
+       queryFn:async () => {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/order/getAllSellerOrders`,{withCredentials:true})
+            return res.data.orders;
+        },
        refetchOnMount: false,
        refetchOnWindowFocus: true,
      });
