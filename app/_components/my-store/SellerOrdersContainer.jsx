@@ -33,7 +33,7 @@ function SellerOrdersContainer() {
          },[searchParams.get('filter')])
    if (isLoading) return <Spinner />;
 
-   if (!filteredOrders?.length) {
+   if (!orders?.length && !isLoading && !isFetching) {
      return (
        <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
          <BsBox2 /> no orders found!
