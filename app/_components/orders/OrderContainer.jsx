@@ -31,7 +31,18 @@ function OrderContainer() {
     },[searchParams.get('filter')])
 
     if(!filteredOrders?.length && isFetching) return <Spinner />
-    if(!orders?.length && !isFetching && !isLoading) return <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center"><BsBox2 /> no orders found!</h1>
+     if (
+       !filteredOrders?.length &&
+       searchParams.get("filter") !== "all" &&
+       !isLoading &&
+       !isFetching
+     ) {
+       return (
+         <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
+           <BsBox2 /> no orders found!
+         </h1>
+       );
+     }
     return (
         <div className="space-y-4 w-full mt-5 relative">
             {filteredOrders?.map(order => <OrderItem key={order._id} id={order._id} productName={order.productName} totalAmount={order.totalAmount} status={order.status} deliveryExpected={order.deliveryExpected} coverImage={order.coverImage}/>)}
