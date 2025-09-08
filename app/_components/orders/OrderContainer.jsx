@@ -13,7 +13,7 @@ function OrderContainer() {
     })
     if(!orders || isFetching) return <Spinner />
     return (
-        <div className="space-y-4 w-full mt-5 overflow-auto">
+        <div className="space-y-4 h-full w-full mt-5 overflow-auto">
             {orders.map(order => <OrderItem key={order._id} id={order._id} productName={order.productName} totalAmount={order.totalAmount} status={order.status} deliveryExpected={order.deliveryExpected} coverImage={order.coverImage}/>)}
         </div>
     )
