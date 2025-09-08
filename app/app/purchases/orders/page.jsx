@@ -12,8 +12,8 @@ function Page() {
             Your Orders
           </header>
           <hr className="text-gray-200 my-5" />
-          <FilterOptions />
           <Suspense>
+          <FilterOptions />
             <OrderContainer />
           </Suspense>
         </div>

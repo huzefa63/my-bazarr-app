@@ -17,7 +17,9 @@ async function Page() {
           </header>
           <hr className="text-gray-200 my-5" />
           <div className="px-4 mb-4">
-            <FilterOptions />
+            <Suspense>
+              <FilterOptions />
+            </Suspense>
           </div>
           <Suspense>
             <SellerOrdersContainer />
