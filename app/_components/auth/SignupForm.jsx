@@ -16,6 +16,7 @@ export default function SignupForm() {
   const [isSubmitting,setIsSubmitting] = useState(false);
   const [isOtp,setIsOtp] = useState(false);
   const handleSignup = async (data) => {
+    setIsSubmitting(true);
     try{
       const res = await getOtp(data.email)
       console.log(res)
@@ -23,10 +24,20 @@ export default function SignupForm() {
     }catch(err){
       alert('failed to send otp');
       console.log(err);
+    }finally{
+      setIsSubmitting(false);
+    }
+  };
+  const resendOtp = async (data) => {
+    try{
+      const res = await getOtp(getValues('email'));
+    }catch(err){
+      alert('failed to resend otp');
+      console.log(err);
     }
   };
 
-  if(isOtp) return <VerifyOtpForm email={getValues('email')} name={getValues('name')} endpoint='/user/createUser'/>
+  if(isOtp) return <VerifyOtpForm resendOtp={resendOtp} email={getValues('email')} name={getValues('name')} endpoint='/user/createUser'/>
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -71,7 +82,7 @@ export default function SignupForm() {
                 {errors.email.message}
               </p>
             )}
-          </div>
+          </div> 
 
           {/* Submit Button */}
           <button

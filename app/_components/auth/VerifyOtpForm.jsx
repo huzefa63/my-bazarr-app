@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OTPInput from "react-otp-input";
 
-function VerifyOtpForm({email,name,type='signup',endpoint,redirectEndpoint = '/app/browse'}) {
+function VerifyOtpForm({resendOtp,email,name,type='signup',endpoint,redirectEndpoint = '/app/browse'}) {
   const [otp, setOtp] = useState("");
   const [isInvalid,setIsInvalid] = useState('');
   const {timer} = useStopwatch({timerEndsText:'OTP expired, please enter email again'});
@@ -71,15 +71,19 @@ function VerifyOtpForm({email,name,type='signup',endpoint,redirectEndpoint = '/a
             <p className="text-center mt-5 text-red-500">OTP expired</p>
           )}
           <p className="text-center mt-3">
-            <span className="text-sm text-gray-700">OTP expires in:</span> {timer}
+            <span className="text-sm text-gray-700">OTP expires in:</span>{" "}
+            {timer}
           </p>
           <button
             onClick={() => console.log(otp, email)}
             disabled={isVerifying}
             className="mt-3 w-full relative bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition-all shadow-md"
           >
-            {!isVerifying ? 'verify OTP' : 'verifying OTP...'}
+            {!isVerifying ? "verify OTP" : "verifying OTP..."}
           </button>
+          <p className="text-center mt-4">
+            didn't received OTP ? <span onClick={resendOtp} className="text-blue-500 smooth-transition hover:text-blue-700">resend</span>
+          </p>
         </div>
       </form>
     );

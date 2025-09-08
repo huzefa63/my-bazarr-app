@@ -39,7 +39,7 @@ function ProductDetailSection({
   }
   async function handlePurchase() {
     const item = {coverImage:product.coverImage,description,
-      name,price,productId:id,quantity:value,sellerEmail:email ,deliveryCharges:0
+      name,price,productId:id,quantity:value,sellerEmail:email,sellerId:product.seller._id ,deliveryCharges:0
     }
     console.log(item);
     try {

@@ -35,7 +35,7 @@ function CartContainer({data}) {
     }
     useEffect(() => {
         setItems(el => cartData.cartItems?.map(el => {
-            return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage,sellerEmail:el.seller.email };
+            return { productId: el._id, price: el.price, quantity: 1,name:el.name,description:el.description,coverImage:el.coverImage,sellerEmail:el.seller.email, sellerId:el.seller._id };
         }));
     },[cartData])
     return (

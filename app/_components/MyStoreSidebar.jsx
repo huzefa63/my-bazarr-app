@@ -5,13 +5,29 @@ import { IoMdAdd } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { FaCartShopping } from "react-icons/fa6";
 import { PiPackageFill } from "react-icons/pi";
+import { BiSolidPackage } from "react-icons/bi";
 function MyStoreSidebar() {
   const pathname = usePathname();
     if(pathname.includes('my-store'))return (
       <div className="w-54 bg-[var(--surface)] py-5 border-r-1 border-r-gray-200">
         <ul className="flex flex-col w-full items-center px-5 gap-2">
-          <CustomLink href="/app/my-store/items" text="my items" icon={<HiOutlineClipboardDocumentList />}/>
-          <CustomLink href="/app/my-store/add-item" text="add items" icon={<IoMdAdd />}>add items</CustomLink>
+          <CustomLink
+            href="/app/my-store/items"
+            text="my items"
+            icon={<HiOutlineClipboardDocumentList />}
+          />
+          <CustomLink
+            href="/app/my-store/add-item"
+            text="add items"
+            icon={<IoMdAdd />}
+          >
+            add items
+          </CustomLink>
+          <CustomLink
+            href="/app/my-store/received-orders"
+            text="my orders"
+            icon={<BiSolidPackage />}
+          />
         </ul>
       </div>
     );

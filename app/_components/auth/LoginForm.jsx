@@ -12,16 +12,33 @@ export default function LoginForm() {
   const [isOtp,setIsOtp] = useState(false);
 
   const handleLogin = async (data) => {
+    setIsSubmitting(true);
     try{
       const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/otp/sendOtp`,{email:data.email},{withCredentials:true});
       if(res.data.emailSent) setIsOtp(true);
     }catch(err){
       alert('failed to send otp');
       console.log(err);
+    }finally{
+      setIsSubmitting(false);
     }
   };
 
-  if(isOtp) return <VerifyOtpForm email={getValues('email')} type='signin' endpoint='/auth/login'/>
+  const resendOtp = async () => {
+      try{
+              const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_URL}/otp/sendOtp`,
+                { email: getValues('email') },
+                { withCredentials: true }
+              );
+
+      }catch(err){
+        alert('failed to resend otp');
+        console.log(err);
+      }
+    };
+
+  if(isOtp) return <VerifyOtpForm resendOtp={resendOtp} email={getValues('email')} type='signin' endpoint='/auth/login'/>
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="bg-white shadow-2xl rounded-2xl w-[380px] p-8">
