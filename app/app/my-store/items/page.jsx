@@ -15,9 +15,9 @@ function page() {
         <div className="px-4 mb-4">
           <FilterOptions />
         </div>
-        <Suspense fallback={<Spinner size="text-3xl"/>}>
+        
           <MyProductContainer />
-        </Suspense>
+     
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ async function Page() {
      }
     return (
       <div className="w-full h-full p-5">
-        <div className="h-full w-[90%] bg-white shadow-sm  py-3 overflow-auto rounded-md">
+        <div className="h-full w-[95%] bg-white shadow-sm  py-3 overflow-auto rounded-md">
           <header className="text-3xl flex items-center gap-5 pl-5">
             <BiSolidPackage className="text-yellow-950" /> Recieved Orders
           </header>
@@ -33,8 +33,7 @@ async function Page() {
           <div className="px-4 mb-4">
             <FilterOptions />
           </div>
-          <Suspense fallback={<h1>loading</h1>}>
-            <div className="w-full h-full">
+            <div className="w-full h-full px-3 space-y-3">
               {orders.map((el) => (
                 <SellerOrdersCard
                   key={el._id}
@@ -50,7 +49,6 @@ async function Page() {
               ))}
              
             </div>
-          </Suspense>
         </div>
       </div>
     );
