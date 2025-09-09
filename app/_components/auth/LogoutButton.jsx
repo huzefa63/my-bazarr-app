@@ -9,7 +9,7 @@ function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+      await axios.get(`${process.env.NEXT_PUBLIC_URL}/auth/logout`, {
         withCredentials: true, // important for cookies
       });
       router.push("/login"); // redirect after logout
