@@ -6,9 +6,11 @@ import { useState } from "react";
 import OTPInput from "react-otp-input";
 import { RxCross1 } from "react-icons/rx";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 function VerifyOtpForm({resendOtp,email,name,type='signup',endpoint,redirectEndpoint = '/app/browse',close,closeFn,successHandler}) {
   const [otp, setOtp] = useState("");
   const [isInvalid,setIsInvalid] = useState('');
+  const queryClient = useQueryClient();
   const {timer} = useStopwatch({timerEndsText:'OTP expired, please enter email again'});
   const router = useRouter();
   const [isVerifying,setIsVerifying] = useState();
@@ -39,14 +41,20 @@ function VerifyOtpForm({resendOtp,email,name,type='signup',endpoint,redirectEndp
           { email, username: name, otp },
           { withCredentials: true }
         );
-        if (res.data.signedUp) return router.replace(redirectEndpoint);
+        if (res.data.signedUp) {
+          queryClient.refetchQueries(['user']);
+          return router.replace(redirectEndpoint);
+        }
       }
        const res = await axios.post(
          `${process.env.NEXT_PUBLIC_URL}${endpoint}`,
          { email,otp },
          { withCredentials: true }
        );
-       if (res.data.signedIn) return router.replace(redirectEndpoint);
+       if (res.data.signedIn) {
+        queryClient.refetchQueries(['user']);
+        return router.replace(redirectEndpoint);
+       }
     }catch(err){
       console.log(err); 
       if(err.response.data.message === 'invalid') return setIsInvalid('invalid');
