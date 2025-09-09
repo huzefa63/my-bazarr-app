@@ -23,17 +23,36 @@ function OrderContainer() {
         setFilteredOrders(orders);
     },[orders])
 
-    useEffect(() => {
-        if(!orders) return;
-        if(searchParams.get('filter') === 'all') return setFilteredOrders(orders);
-        const filtered = orders.filter(el => el.status === searchParams.get('filter'))
-        setFilteredOrders(filtered);
-    },[searchParams.get('filter')])
+     useEffect(() => {
+       if (!orders) return;
+       if (
+         searchParams.get("filter") === "all" &&
+         !searchParams.get("startDate") &&
+         !searchParams.get("endDate")
+       )
+         return setFilteredOrders(orders);
+       let filtered = orders;
+       if (searchParams.get("filter") !== "all")
+         filtered = orders.filter(
+           (el) => el.status === searchParams.get("filter")
+         );
+       if(searchParams.get('startDate')) filtered = filtered.filter(
+         (el) =>
+           new Date(el.deliveryExpected).setHours(0, 0, 0, 0) >=
+             new Date(searchParams.get("startDate")).setHours(0, 0, 0, 0) &&
+           new Date(el.deliveryExpected).setHours(0, 0, 0, 0) <=
+             new Date(searchParams.get("endDate")).setHours(0, 0, 0, 0)
+       );
+       setFilteredOrders(filtered);
+     }, [
+       searchParams.get("filter"),
+       searchParams.get("startDate"),
+       searchParams.get("endDate"),
+     ]);
 
     if(!filteredOrders?.length && isFetching) return <Spinner />
      if (
        !filteredOrders?.length &&
-       searchParams.get("filter") !== "all" &&
        !isLoading &&
        !isFetching
      ) {

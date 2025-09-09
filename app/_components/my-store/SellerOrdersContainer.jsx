@@ -20,20 +20,30 @@ function SellerOrdersContainer() {
        refetchOnWindowFocus: false,
      });
      const searchParams = useSearchParams();
-     const [filteredOrders,setFilteredOrders] = useState();
+     const [filteredOrders,setFilteredOrders] = useState(null);
          useEffect(() => {
              setFilteredOrders(orders);
+             
          },[orders])
      
          useEffect(() => {
              if(!orders) return;
-             if(searchParams.get('filter') === 'all') return setFilteredOrders(orders);
-             const filtered = orders.filter(el => el.status === searchParams.get('filter'))
-             setFilteredOrders(filtered);
-         },[searchParams.get('filter')])
+             if(searchParams.get('filter') === 'all' && !searchParams.get('startDate') && !searchParams.get('endDate')) return setFilteredOrders(orders);
+             let filtered = orders
+            if(searchParams.get('filter') !== 'all') filtered = orders.filter(el => el.status === searchParams.get('filter'));
+            if (searchParams.get("startDate"))
+              filtered = filtered.filter(
+                (el) =>
+                  new Date(el.createdAt).setHours(0,0,0,0) >=
+                    new Date(searchParams.get("startDate")).setHours(0,0,0,0) &&
+                  new Date(el.createdAt).setHours(0,0,0,0) <=
+                    new Date(searchParams.get("endDate")).setHours(0,0,0,0)
+              );
+            setFilteredOrders(filtered);
+         },[searchParams.get('filter'),searchParams.get('startDate'),searchParams.get('endDate')])
    if (isLoading) return <Spinner />;
 
-   if (!filteredOrders?.length && searchParams.get('filter') !=='all' && !isLoading && !isFetching) {
+   if (filteredOrders !== null && !filteredOrders?.length && !isLoading && !isFetching) {
      return (
        <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
          <BsBox2 /> no orders found!
@@ -43,7 +53,7 @@ function SellerOrdersContainer() {
 
 
     return (
-      <div className="w-full px-3 space-y-3">
+       <div className="w-full px-3 space-y-3">
         {filteredOrders?.map((el) => (
           <SellerOrdersCard
             key={el._id}

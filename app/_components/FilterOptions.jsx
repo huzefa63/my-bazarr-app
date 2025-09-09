@@ -25,8 +25,10 @@ function FilterOptions({allFilters=true}) {
       const urlParams = new URLSearchParams(searchParams);
       urlParams.set("startDate", dateRange[0].startDate);
       urlParams.set("endDate", dateRange[0].endDate);
+      urlParams.set('date','filter');
       router.replace(`${pathname}?${urlParams}`);
     },[dateRange[0].startDate,dateRange[0].endDate])
+    
     function handleChangeQuery(query){
       const urlParams = new URLSearchParams(searchParams);
       urlParams.set('filter',query);
@@ -42,9 +44,10 @@ function FilterOptions({allFilters=true}) {
       router.replace(`${pathname}?${urlParams}`);
     },[])
     function handleResetDate(){
-      const url = new URLSearchParams();
+      const url = new URLSearchParams(searchParams);
       url.delete('startDate')
       url.delete('endDate');
+      url.delete('date');
       router.replace(`${pathname}?${url}`);
     }
     return (
@@ -110,9 +113,9 @@ function FilterOptions({allFilters=true}) {
               dateRange={dateRange}
             />
           )}
-          <button onClick={handleResetDate} className="bg-gray-100 px-4 py-1 rounded-full flex items-center gap-1 smooth-transition hover:bg-gray-200">
+          {searchParams.get('startDate') && <button onClick={handleResetDate} className="bg-gray-100 px-4 py-1 rounded-full flex items-center gap-1 smooth-transition hover:bg-gray-200">
             reset date
-          </button>
+          </button>}
         </div>
       </div>
     );

@@ -1,11 +1,6 @@
 import FilterOptions from "@/app/_components/FilterOptions";
-import OrdersContainer from "@/app/_components/my-store/SellerOrdersContainer";
-import SellerOrdersCard from "@/app/_components/my-store/SellerOrdersCard";
-import { cookies } from "next/headers";
-import Link from "next/link";
 import { Suspense } from "react";
 import { BiSolidPackage } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io";
 import SellerOrdersContainer from "@/app/_components/my-store/SellerOrdersContainer";
 
 async function Page() {

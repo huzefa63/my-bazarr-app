@@ -24,7 +24,10 @@ function ProductDetailSection({
   price,
   about,
   email,
-  product
+  product,
+  coverImage,
+  avgRating,
+  commentsCount
 }) {
   const queryClient = useQueryClient();
   const [isCheckouting, setIsCheckouting] = useState(false);
@@ -56,22 +59,36 @@ function ProductDetailSection({
       setIsCheckouting(false);
     }
   }
+
+  async function share(){
+          try {
+            await navigator.share({
+              title: name,
+              text: `Check out this amazing product on www.my-bazarr.in`,
+              url: `https://www.my-bazarr.in/app/product/${id}`,
+            });
+            console.log("Content shared successfully");
+          } catch (error) {
+            console.error("Error sharing content:", error);
+          }
+
+  }
   return (
     <div className=" w-3/4 pl-10 flex flex-col gap-3 h-full overflow-auto">
       <div className="flex justify-between items-center">
         <p className="font-bold text-3xl">{name}</p>
-        <button className="p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
+        <button onClick={share} className="p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
           <IoIosShareAlt className="text-4xl" />
         </button>
       </div>
       <p className="flex items-center text-2xl text-yellow-400">
-        <span className="text-gray-800 text-sm mt-1">{ratingsAvg}</span>
+        <span className="text-gray-800 text-sm mt-1">{avgRating[0].ratingsAvg.toFixed(1)}</span>
         <IoMdStar />
         <IoMdStar />
         <IoMdStar />
         <IoMdStar />
         <IoMdStarOutline />
-        <span className="text-sm text-gray-700 ml-2 mt-1">(124 reviews)</span>
+        <span className="text-sm text-gray-700 ml-2 mt-1">({commentsCount} reviews)</span>
       </p>
       <p className="w-3/4 line-clamp-3">{description}</p>
       <hr className="w-3/4 text-gray-400" />

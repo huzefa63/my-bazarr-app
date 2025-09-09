@@ -3,12 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import MyProductItem from "./MyProductItem";
 import Spinner from "../Spinner";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 function MyProductContainer() {
   const searchParams = useSearchParams();
-  const startDate = searchParams.get('startDate');
-  const endDate = searchParams.get('endDate');
+  const [filteredProducts,setFilteredProducts] = useState([]);
   const {data:products,isFetching} = useQuery({
     queryKey:['myProducts'],
     queryFn:async () => {
@@ -23,13 +22,32 @@ function MyProductContainer() {
     refetchOnMount:false
   })
   useEffect(() => {
-    console.log(products)
-  },[startDate,endDate,products])
+    // if (!products) return;
+    if (
+      !searchParams.get("startDate") &&
+      !searchParams.get("endDate")
+    )
+      return setFilteredProducts(products);
+    let filtered = products;
+    if (searchParams.get("startDate"))
+      filtered = filtered.filter(
+        (el) =>
+          new Date(el.createdAt).setHours(0, 0, 0, 0) >=
+            new Date(searchParams.get("startDate")).setHours(0, 0, 0, 0) &&
+          new Date(el.createdAt).setHours(0, 0, 0, 0) <=
+            new Date(searchParams.get("endDate")).setHours(0, 0, 0, 0)
+      );
+    setFilteredProducts(filtered);
+  }, [
+    searchParams.get("startDate"),
+    searchParams.get("endDate"),
+    products
+  ]);
   if(!products && isFetching) return <Spinner />
   // if(isFetching) return <Spinner />
     return (
       <div className="space-y-2 w-full overflow-auto rounded-md">
-        {products?.map((el) => (
+        {filteredProducts?.map((el) => (
             <MyProductItem
               key={el._id}
               name={el.name}
