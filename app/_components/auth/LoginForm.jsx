@@ -40,7 +40,7 @@ export default function LoginForm() {
 
   if(isOtp) return <VerifyOtpForm resendOtp={resendOtp} email={getValues('email')} type='signin' endpoint='/auth/login'/>
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="h-full flex items-center justify-center ">
       <div className="bg-white shadow-2xl rounded-2xl w-[380px] p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Welcome Back

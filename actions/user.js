@@ -30,6 +30,7 @@ export async function getUser(){
     const resJson = await res.json();
     return resJson.user;
    }catch(err){
+    return {};
     console.log(err);
    }
 }
