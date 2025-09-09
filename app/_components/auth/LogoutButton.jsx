@@ -12,7 +12,7 @@ function LogoutButton() {
       await axios.get(`${process.env.NEXT_PUBLIC_URL}/auth/logout`, {
         withCredentials: true, // important for cookies
       });
-      router.push("/login"); // redirect after logout
+      router.push("/home"); // redirect after logout
     } catch (error) {
       console.error("Logout failed:", error);
     }
