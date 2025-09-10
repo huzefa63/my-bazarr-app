@@ -20,11 +20,21 @@ function SellerOrdersContainer() {
        refetchOnWindowFocus: false,
      });
      const searchParams = useSearchParams();
-     const [filteredOrders,setFilteredOrders] = useState(null);
+     const [display,setDisplay] = useState(false);
+     const [filteredOrders,setFilteredOrders] = useState();
          useEffect(() => {
              setFilteredOrders(orders);
              
          },[orders])
+         useEffect(() => {
+          const timeout = setTimeout(() => {
+            setDisplay(true);
+          }, 100);
+          return () => {
+            clearTimeout(timeout);
+            setDisplay(false);
+          }
+         },[])
      
          useEffect(() => {
              if(!orders) return;
@@ -41,32 +51,48 @@ function SellerOrdersContainer() {
               );
             setFilteredOrders(filtered);
          },[searchParams.get('filter'),searchParams.get('startDate'),searchParams.get('endDate')])
-   if (isLoading) return <Spinner />;
+   if (isFetching && !orders?.length) return <Spinner />;
+         
+   
+    if (!filteredOrders?.length && display &&  !isLoading && !isFetching) {
+      return (
+        <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
+          <BsBox2 /> no orders found!
+        </h1>
+      );
+    }
 
-   if (filteredOrders !== null && !filteredOrders?.length && !isLoading && !isFetching) {
-     return (
-       <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
-         <BsBox2 /> no orders found!
-       </h1>
-     );
-   }
 
 
     return (
-       <div className="w-full px-3 space-y-3">
-        {filteredOrders?.map((el) => (
-          <SellerOrdersCard
-            key={el._id}
-            productName={el.productName}
-            totalAmount={el.totalAmount}
-            status={el.status}
-            id={el._id}
-            coverImage={el.coverImage}
-            createdAt={el.createdAt}
-            customerName={el.customerName}
-            address={el.address}
-          />
-        ))}
+      <div className="w-full px-3 space-y-3">
+        {filteredOrders?.length
+          ? filteredOrders?.map((el) => (
+              <SellerOrdersCard
+                key={el._id}
+                productName={el.productName}
+                totalAmount={el.totalAmount}
+                status={el.status}
+                id={el._id}
+                coverImage={el.coverImage}
+                createdAt={el.createdAt}
+                customerName={el.customerName}
+                address={el.address}
+              />
+            ))
+          : orders?.map((el) => (
+              <SellerOrdersCard
+                key={el._id}
+                productName={el.productName}
+                totalAmount={el.totalAmount}
+                status={el.status}
+                id={el._id}
+                coverImage={el.coverImage}
+                createdAt={el.createdAt}
+                customerName={el.customerName}
+                address={el.address}
+              />
+            ))}
       </div>
     );
 }

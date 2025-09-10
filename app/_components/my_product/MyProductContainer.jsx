@@ -5,6 +5,7 @@ import Spinner from "../Spinner";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BsBox2 } from "react-icons/bs";
 function MyProductContainer() {
   const searchParams = useSearchParams();
   const [filteredProducts,setFilteredProducts] = useState([]);
@@ -44,7 +45,16 @@ function MyProductContainer() {
     products
   ]);
   if(!products && isFetching) return <Spinner />
-  // if(isFetching) return <Spinner />
+   if (
+         !filteredProducts?.length &&
+         !isFetching
+       ) {
+         return (
+           <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
+             <BsBox2 /> no products found!
+           </h1>
+         );
+       }
     return (
       <div className="space-y-2 w-full overflow-auto rounded-md">
         {filteredProducts?.map((el) => (
