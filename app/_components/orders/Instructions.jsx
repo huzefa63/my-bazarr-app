@@ -16,6 +16,7 @@ function Instructions({instructions,orderId,customerId,status}) {
     async function update(){
       if(!instruction) return toast.error('please type instructions to update it');
         await axios.post(`${process.env.NEXT_PUBLIC_URL}/order/update/${orderId}`,{instruction},{withCredentials:true});
+        toast.success('instructions updated');
         router.refresh();
     }
     if(user?._id === customerId && status !== 'cancelled' && status !== 'delivered') return (
@@ -23,7 +24,7 @@ function Instructions({instructions,orderId,customerId,status}) {
         <header className="text-xl font-bold text-gray-700 pl-3">
           Instructions
         </header>
-        <textarea value={instruction} onChange={(e)=>setInstruction(e.target.value)} placeholder="provide instructions here" className="w-full resize-none p-3 focus:mt-4 smooth-transition hover:cursor-default focus:outline-none focus:border border-gray-300 text-sm text-gray-700">
+        <textarea spellCheck={false} value={instruction} onChange={(e)=>setInstruction(e.target.value)} placeholder="provide instructions here" className="w-full resize-none p-3 focus:mt-4 smooth-transition hover:cursor-default focus:outline-none focus:border border-gray-300 text-sm text-gray-700">
           
         </textarea>
         {instructions !== instruction && <LoadingButton onClick={update} className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white">save</LoadingButton>}
