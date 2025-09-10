@@ -9,6 +9,7 @@ import BackButton from "@/app/_components/BackButton";
 import CustomerController from "@/app/_components/orders/CustomerController";
 import RatingComponent from "@/app/_components/RatingComponent";
 import { Review } from "@/app/_components/product_page/CommentSection";
+import Instructions from "@/app/_components/orders/Instructions";
 
 async function Page({params}) {
     const param = await params;
@@ -64,14 +65,7 @@ async function Page({params}) {
           </div>
 
           <div className="p-3 w-[35%] space-y-4">
-            <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
-              <header className="text-xl font-bold text-gray-700">
-                Instructions
-              </header>
-              <p className="text-sm text-gray-700">
-                {order.instructions || "no instructions provided"}
-              </p>
-            </div>
+           <Instructions instructions={order.instructions} orderId={order._id} customerId={order.customer}/>
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
               <header className="text-xl font-bold text-gray-700">
@@ -152,7 +146,7 @@ async function Page({params}) {
         )}
 
         {!order?.rated && order.customer === currentUser && order.status === 'delivered' && (
-          <h1 className="text-center font-bold text-3xl">
+          <h1 className="text-center font-bold text-3xl mt-5">
             Make sure to drop a Review here
           </h1>
         )}

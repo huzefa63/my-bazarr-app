@@ -50,6 +50,7 @@ function MyProductContainer() {
         {filteredProducts?.map((el) => (
             <MyProductItem
               key={el._id}
+              createdAt={el.createdAt}
               name={el.name}
               price={el.price}
               description={el.description}

@@ -88,7 +88,7 @@ export default function AddItemForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="p-5 w-full shadow-md rounded-sm flex flex-col mt-5 min-h-full bg-white"
+      className=" w-full flex flex-col mt-5 min-h-full bg-white"
     >
       <div className="w-full gap-5">
         {/* Product Name & Price */}
@@ -269,8 +269,8 @@ function UploadImage({ value, onChange, id, styles = "" }) {
           className="w-full h-full transition-all duration-300 ease-in-out object-fill"
         />
       ) : (
-        <div className="absolute inset-0 flex justify-center items-center flex-col">
-          <LuUpload className="text-gray-600 text-5xl" />
+        <div className="absolute inset-0 space-y-3 flex justify-center items-center flex-col">
+          <LuUpload className="text-gray-600 text-4xl" />
           <span className="text-sm">Upload image here</span>
         </div>
       )}

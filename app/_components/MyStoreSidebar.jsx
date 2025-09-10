@@ -16,6 +16,11 @@ function MyStoreSidebar() {
             text="my items"
             icon={<HiOutlineClipboardDocumentList />}
           />
+            <CustomLink
+              href="/app/my-store/received-orders"
+              text="my orders"
+              icon={<BiSolidPackage />}
+            />
           <CustomLink
             href="/app/my-store/add-item"
             text="add items"
@@ -23,11 +28,6 @@ function MyStoreSidebar() {
           >
             add items
           </CustomLink>
-          <CustomLink
-            href="/app/my-store/received-orders"
-            text="my orders"
-            icon={<BiSolidPackage />}
-          />
         </ul>
       </div>
     );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { useCartContext } from "./CartProvider";
 import Spinner from "../Spinner";
+import formatCurrency from "@/helpers/formatCurrency";
 
 function CartItem({image,price,name,inStock,id,isDeletingId}) {
   const [isHover,setIsHover] = useState(true);
@@ -34,7 +35,7 @@ function CartItem({image,price,name,inStock,id,isDeletingId}) {
           isHover && "hover:bg-gray-100 "
         } parent smooth-transition px-5 border-b-1 border-b-gray-200 h-[25%] py-4 flex items-center`}
       >
-        <div className="w-1/8 h-full rounded-md">
+        <div className="w-32 h-full rounded-md">
           <img
             src={image}
             alt=""
@@ -44,10 +45,10 @@ function CartItem({image,price,name,inStock,id,isDeletingId}) {
         <div className="flex-1 ml-5 flex flex-col gap-3">
           <div className="flex justify-between w-full">
             <h1 className="text-gray-600 text-lg">{name}</h1>
-            <p className="font-semibold">{price} rs</p>
+            <p className="font-semibold">{formatCurrency(price)}</p>
           </div>
           <div className="flex gap-1 items-center text-sm">
-            <p className="text-gray-500">{price} rs</p>
+            <p className="text-gray-500">{formatCurrency(price)}</p>
             <span className="text-gray-200">|</span>
             <p className={`${inStock ? "text-green-500" : "text-red-500"}`}>
               {inStock ? "in stock" : "out of stock"}

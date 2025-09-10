@@ -16,7 +16,7 @@ function ProductImageSection({coverImage,images}) {
       <div className="h-[20%] overflow-hidden max-w-full grid grid-cols-5 gap-2 mt-5 ">
         <img
         onClick={() => setPreviewImage(coverImage)}
-          className="h-full object-fit rounded-md hover:opacity-90 hover:cursor-pointer duration-300 transition-all ease-in-out"
+          className={`h-full object-fit ${previewImage !== coverImage && 'scale-90'} rounded-md hover:opacity-90 hover:cursor-pointer duration-300 transition-all ease-in-out`}
           src={coverImage}
           alt=""
         />
@@ -25,7 +25,7 @@ function ProductImageSection({coverImage,images}) {
           <img
           onClick={() => setPreviewImage(el)}
             key={el}
-            className="h-full object-fit rounded-md hover:opacity-90 hover:cursor-pointer duration-300 transition-all ease-in-out"
+            className={`h-full object-fit ${previewImage !== el && 'scale-90'} rounded-md hover:opacity-90 hover:cursor-pointer duration-300 transition-all ease-in-out`}
             src={el}
             alt="images"
           />
