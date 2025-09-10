@@ -19,7 +19,7 @@ function ProductCard({ image,description,name,id,rating,price }) {
         <h1 className="truncate w-[70%] font-bold tracking-wide">{name}</h1>
         <div className="space-x-2">
           <p className="inline-block">{formatCurrency(price - (price * 0.1))}</p>
-          <p className="text-gray-800 inline-block text-xs self-end line-through">{formatCurrency(price * 0.1)}</p>
+          <p className="text-gray-800 inline-block text-xs self-end line-through">{formatCurrency(price)}</p>
           <p className="text-xs text-green-500 inline-block">10% off</p>
         </div>
         <p className="text-xs text-gray-800">⭐{rating}</p>

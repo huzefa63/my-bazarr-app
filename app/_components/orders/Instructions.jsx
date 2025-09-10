@@ -5,12 +5,16 @@ import LoadingButton from "../UI/LoadingButton";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "../user/UserProvider";
+import toast from "react-hot-toast";
 
 function Instructions({instructions,orderId,customerId}) {
-    const [instruction,setInstruction] = useState(instructions);
-    const {user} = useUserContext();
+  const [instruction,setInstruction] = useState(instructions);
+  const {user} = useUserContext();
+  console.log('customerId: ',customerId);
+  console.log('userId: ',user?._id);
     const router = useRouter();
     async function update(){
+      if(!instruction) return toast.error('please type instructions to update it');
         await axios.post(`${process.env.NEXT_PUBLIC_URL}/order/update/${orderId}`,{instruction},{withCredentials:true});
         router.refresh();
     }

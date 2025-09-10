@@ -11,9 +11,7 @@ async function Page({params}) {
     let commentCounts;
     let avgRating;
       try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductDetails/${searchParams.id}`,{
-          cache:'no-store'
-        })
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductDetails/${searchParams.id}`)
         const resJson = await res.json();
         product = resJson?.product;
         commentCounts = resJson?.commentsCount;
@@ -47,7 +45,7 @@ async function Page({params}) {
           />
         </div>
         <hr className="text-gray-300 my-5" />
-        <div className="flex flex-col gap-5 p-3 h-full pl-10">
+       {commentCounts > 0 && <div className="flex flex-col gap-5 p-3 h-full pl-10">
           <div className="shadow-sm rounded-md p-5">
             <header className="text-4xl font-bold ">Ratings</header>
             <RatingStats id={searchParams.id} avgRating={avgRating} commentCounts={commentCounts}/>
@@ -56,7 +54,8 @@ async function Page({params}) {
             <h1 className="text-4xl p-5 font-bold">Reviews</h1>
             <CommentSection id={searchParams.id}/>
           </div>
-        </div>
+        </div>}
+        {commentCounts === 0 && <h1 className="w-full text-center text-3xl">no Ratings & Comments</h1>}
       </div>
     );
 }

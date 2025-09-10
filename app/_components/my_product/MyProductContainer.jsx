@@ -17,6 +17,7 @@ function MyProductContainer() {
             return res.data.products;
             }catch(err){
               console.log(err)
+              return [];
             }
         },
     refetchOnWindowFocus:false,

@@ -15,6 +15,8 @@ import {
 } from "react-icons/io";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import Spinner from "../Spinner";
+import RatingComponent from "../RatingComponent";
+import RatingStars from "../UI/RatingStars";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function ProductDetailSection({
   id,
@@ -29,6 +31,7 @@ function ProductDetailSection({
   avgRating,
   commentsCount
 }) {
+  console.log('a',avgRating)
   const queryClient = useQueryClient();
   const [isCheckouting, setIsCheckouting] = useState(false);
   const [value,setValue] = useState(1); 
@@ -81,23 +84,21 @@ function ProductDetailSection({
           <IoIosShareAlt className="text-4xl" />
         </button>
       </div>
-      <p className="flex items-center text-2xl text-yellow-400">
-        <span className="text-gray-800 text-sm mt-1">{avgRating[0].ratingsAvg.toFixed(1)}</span>
-        <IoMdStar />
-        <IoMdStar />
-        <IoMdStar />
-        <IoMdStar />
-        <IoMdStarOutline />
+      <div className="flex items-center text-2xl text-yellow-400">
+        <span className="text-gray-800 text-lg mt-1 mr-1">{avgRating[0]?.ratingsAvg?.toFixed(1)}</span>
+        {!avgRating[0]?.ratingsAvg && <span className="text-gray-700 text-sm mr-1">0</span>}
+        {!avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="text-2xl" length={0}/>}
+        {avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="text-2xl" length={Math.floor(avgRating[0].ratingsAvg)}/>}
         <span className="text-sm text-gray-700 ml-2 mt-1">({commentsCount} reviews)</span>
-      </p>
-      <p className="w-3/4 line-clamp-3">{description}</p>
+      </div>
+      <p className="w-3/4">{description}</p>
       <hr className="w-3/4 text-gray-400" />
-      <p className="text-indigo-800 font-semibold text-2xl">
+      <p className="text-gray-800 font-semibold text-2xl">
         {formatCurrency(discountedAmount * value)}{" "}
-        <span className="text-xs line-through text-gray-600">
+        <span className="text-xs line-through text-green-500">
           {formatCurrency(price * value)}
         </span>{" "}
-        <span className="text-xs text-gray-600">10% off</span>
+        <span className="text-xs text-green-500">10% off</span>
       </p>
       <p className="text-sm">inclusive all taxes</p>
       <div className="w-3/4 space-y-3">
@@ -125,7 +126,7 @@ function ProductDetailSection({
           onChange={(e) => setValue(Number(e.target.value))}
         >
           {Array.from({ length: 10 }, (_, i) => (
-            <option key={i + 1} value={i + 1} className="text-black">
+            <option key={i + 1} value={i + 1} className="text-black bg-white">
               {i + 1}
             </option>
           ))}

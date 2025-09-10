@@ -25,8 +25,8 @@ async function RatingStats({id,avgRating,commentCounts}) {
     return (
       <div className="mt-10 flex items-center justify-cente gap-30 w-full">
         <div className="flex-col flex gap-1 items-center w-fit">
-          <p className="text-7xl">{avgRating[0].ratingsAvg.toFixed(1)}</p>
-          <RatingStars length={avgRating[0].ratingsAvg}/>
+          <p className="text-7xl">{avgRating[0]?.ratingsAvg?.toFixed(1)}</p>
+          <RatingStars length={avgRating[0]?.ratingsAvg}/>
           <p className="text-2xl">{format(new Date(),'d MMM, yyyy')}</p>
         </div>
         <div className="flex flex-col gap-3 w-3/4">
