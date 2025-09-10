@@ -29,7 +29,7 @@ function Instructions({instructions,orderId,customerId,status}) {
         {instructions !== instruction && <LoadingButton onClick={update} className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white">save</LoadingButton>}
       </div>
     );
-    if(user?._id !== customerId) return (
+    if(user?._id !== customerId || status === 'delivered') return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="text-xl font-bold text-gray-700 pl-3">
           Instructions
