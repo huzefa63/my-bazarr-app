@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "../user/UserProvider";
 
-function Instructions({instructions,orderId,customer}) {
+function Instructions({instructions,orderId,customerId}) {
     const [instruction,setInstruction] = useState(instructions);
     const {user} = useUserContext();
     const router = useRouter();
@@ -14,7 +14,7 @@ function Instructions({instructions,orderId,customer}) {
         await axios.post(`${process.env.NEXT_PUBLIC_URL}/order/update/${orderId}`,{instruction},{withCredentials:true});
         router.refresh();
     }
-    if(user?._id === customer) return (
+    if(user?._id === customerId) return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="text-xl font-bold text-gray-700 pl-3">
           Instructions
@@ -25,7 +25,7 @@ function Instructions({instructions,orderId,customer}) {
         {instructions !== instruction && <LoadingButton onClick={update} className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white">save</LoadingButton>}
       </div>
     );
-    if(user?._id !== customer) return (
+    if(user?._id !== customerId) return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="text-xl font-bold text-gray-700 pl-3">
           Instructions
