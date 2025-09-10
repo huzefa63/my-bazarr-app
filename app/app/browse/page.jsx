@@ -2,6 +2,7 @@ import BrowseCategory from "@/app/_components/BrowseCategory";
 import BrowseResultContainer from "@/app/_components/BrowserResultContainer";
 import ProductCard from "@/app/_components/ProductCard";
 import SearchBar from "@/app/_components/SearchBar";
+import { Suspense } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 
@@ -23,7 +24,9 @@ async function Page() {
       <div className="flex flex-col items-center h-full">
         <div className="w-3/4 mx-auto px-4 py-8">
           <SearchBar />
-         <BrowseCategory />
+          <Suspense>
+            <BrowseCategory />
+          </Suspense>
         </div>
         <div className="w-[95%] px-3 space-y-1">
           <div className="w-full flex justify-between">
