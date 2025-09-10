@@ -65,7 +65,7 @@ async function Page({params}) {
           </div>
 
           <div className="p-3 w-[35%] space-y-4">
-           <Instructions instructions={order.instructions} orderId={order._id} customerId={order.customer}/>
+           <Instructions instructions={order.instructions} status={order.status} orderId={order._id} customerId={order.customer}/>
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
               <header className="text-xl font-bold text-gray-700">

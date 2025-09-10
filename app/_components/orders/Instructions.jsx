@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useUserContext } from "../user/UserProvider";
 import toast from "react-hot-toast";
 
-function Instructions({instructions,orderId,customerId}) {
+function Instructions({instructions,orderId,customerId,status}) {
   const [instruction,setInstruction] = useState(instructions);
   const {user} = useUserContext();
   console.log('customerId: ',customerId);
@@ -18,7 +18,7 @@ function Instructions({instructions,orderId,customerId}) {
         await axios.post(`${process.env.NEXT_PUBLIC_URL}/order/update/${orderId}`,{instruction},{withCredentials:true});
         router.refresh();
     }
-    if(user?._id === customerId) return (
+    if(user?._id === customerId && status !== 'cancelled' && status !== 'delivered') return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="text-xl font-bold text-gray-700 pl-3">
           Instructions
