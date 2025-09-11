@@ -46,7 +46,7 @@ function CartContainer() {
     return (
         <div className="w-[65%] relative overflow-auto rounded-md shadow-sm py-5 bg-white" onClick={handleDeleteCartItem}>
             <header className="text-4xl pl-5 flex items-center gap-3"><FaCartShopping /> Cart {cartData?.totalCartItems}</header>
-            {!cartData?.cartItems.length && isFetching  && <Spinner />}
+            {!cartData?.cartItems?.length && isFetching  && <Spinner />}
             <hr className="my-3 text-gray-300"/>
             {optimisticCartItems?.length < 1 && !isFetching && <h1 className="text-2xl absolute top-1/2 left-1/2 -translate-1/2 text-center">Your cart is empty! <Link href='/app/browse' className=" text-blue-500 ">shop now</Link></h1>}
             {optimisticCartItems?.map(el => <CartItem isDeletingId={isDeletingId} key={el._id} id={el._id} image={el.coverImage} price={el.price} name={el.name} inStock={el.inStock}/>)}

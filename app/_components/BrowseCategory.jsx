@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const categoryOptions = [
+  { value: "all", label: "all" },
   { value: "electronics", label: "Electronics" },
   { value: "mobiles-accessories", label: "Mobiles & Accessories" },
   { value: "computers-laptops", label: "Computers & Laptops" },
@@ -26,24 +28,40 @@ const categoryOptions = [
   { value: "home-decor", label: "Home Decor" },
 ];
 function BrowseCategory() {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    function handleChangeCategory(e){
-        const target = e.target;
-        if(target.classList.contains('category')){
-            const {category} = target.dataset;
-            const params = new URLSearchParams(searchParams);
-            params.set('category',category);
-            router.replace(`${pathname}?${params}`);
-        }
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
+  const router = useRouter();
+  function handleChangeCategory(e) {
+    const target = e.target;
+    if (target.classList.contains("category")) {
+      const { category } = target.dataset;
+      const params = new URLSearchParams(searchParams);
+      if (searchParams.get("category") === category) {
+        params.delete("category");
+      } else params.set("category", category);
+      router.replace(`${pathname}?${params}`, { scroll: false });
     }
+  }
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", "all");
+    router.replace(`${pathname}?${params}`, { scroll: false });
+  }, []);
   return (
-    <div className="border- w-full mt-4 flex justify-center gap-2 text-gray-800 flex-wrap" onClick={handleChangeCategory}>
+    <div
+      className="border- w-full mt-4 flex justify-center gap-2 text-gray-800 flex-wrap"
+      onClick={handleChangeCategory}
+    >
       {categoryOptions.map((el) => (
-        <p data-category = {el.value}
+        <p
+          data-category={el.value}
           key={el.value}
-          className="category px-2 py-1 bg-gray-200 rounded-sm shadow-sm hover:cursor-pointer hover:bg-gray-300 duration-300 transition-all ease-in-out"
+          className={`category px-2 py-1 ${
+            category === el.value
+              ? "bg-blue-500 hover:bg-blue-600 text-white"
+              : "bg-gray-200 hover:bg-gray-300"
+          } rounded-sm shadow-sm smooth-transition`}
         >
           {el.label}
         </p>

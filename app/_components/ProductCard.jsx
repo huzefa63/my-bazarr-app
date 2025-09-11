@@ -26,7 +26,7 @@ function ProductCard({ image,description,name,id,rating,price }) {
         <p className="text-sm text-gray-500 line-clamp-2">{description}</p>
       </Link>
       <button
-        type="submit"
+      type="button"
         className="add mt-7 flex w-full items-center justify-center gap-1 hover:bg-yellow-500 hover:cursor-pointer transition-all duration-300 ease-in-out bg-yellow-400 text-[var(--text)] px-3 py-2 rounded-full"
       >
         <BsCart2 className="add" /> add to cart

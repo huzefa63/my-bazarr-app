@@ -17,6 +17,7 @@ import { IoReturnUpBackOutline } from "react-icons/io5";
 import Spinner from "../Spinner";
 import RatingComponent from "../RatingComponent";
 import RatingStars from "../UI/RatingStars";
+import toast from "react-hot-toast";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function ProductDetailSection({
   id,
@@ -41,6 +42,7 @@ function ProductDetailSection({
     try {
       await addToCart({ id });
       queryClient.refetchQueries(["cart"]);
+      toast.success('added to cart')
     } catch (err) {
       console.log(err);
     }

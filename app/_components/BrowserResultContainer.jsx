@@ -1,11 +1,48 @@
 'use client'
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ProductCard from "./ProductCard"
 import axios from "axios";
 import { addToCart } from "@/actions/cart";
+import { useSearchParams } from "next/navigation";
+import Spinner from "./Spinner";
+import toast from "react-hot-toast";
 
 function BrowserResultContainer({products}) {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
+  const category = searchParams.get('category');
+  const {data,isFetching} = useQuery({
+    queryKey:['browse',search,category],
+    queryFn:handleBrowse,
+    refetchOnWindowFocus:false,
+    refetchOnMount:false,
+    placeholderData:(pre) => {
+      return pre;
+    }
+    // initialData:products,
+  })
+  async function handleBrowse(){
+    let res;
+    try{
+      // if(!search && category) {
+      //   res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/search/getSearch`,{withCredentials:true})
+      // }
+      if(search && !category){
+      res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/search/getSearch?search=${search}`,{withCredentials:true})
+    }
+    if(!search && category){
+      res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/search/getSearch?category=${category}`,{withCredentials:true})
+    }
+    if(search && category){
+      res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/search/getSearch?search=${search}&category=${category}`,{withCredentials:true})
+    }
+    return res.data.products || [];
+    }catch(err){
+      console.log(err);
+      return [];
+    }
+  }
   async function handleAddToCart(e){
      if(!e.target.classList.contains('add')) return;
         console.log('hello')
@@ -13,27 +50,33 @@ function BrowserResultContainer({products}) {
         const {id} = parent.dataset;
         try {
             await addToCart({id});
-            queryClient.refetchQueries(['cart']);
+            queryClient.refetchQueries({queryKey:['cart'],exact:true});
+            toast.success('added to cart!',{duration:1000,position:'top-center'});
           } catch (err) {
             console.log(err);
           }
   }
-  if(products.length < 1) return <h1>no products available</h1>;
-    return (
-      <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 " onClick={handleAddToCart}>
-        {products.map((el) => (
-          <ProductCard
-            key={el._id}
-            price={el.price}
-            rating={el.ratingsAvg}
-            id={el._id}
-            image={el.coverImage}
-            name={el.name}
-            description={el.description}
-          />
-        ))}
+  return (
+    <div className="max-w-[95%] min-w-[95%] relative h-full " onClick={handleAddToCart}>
+      {isFetching && <Spinner />}
+      <p className="text-gray-700">{data?.length} Results Found</p>
+      <div className="p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 ">
+        {!isFetching &&
+          data?.length > 0 &&
+          data?.map((el) => (
+            <ProductCard
+              key={el._id}
+              price={el.price}
+              rating={el.ratingsAvg}
+              id={el._id}
+              image={el.coverImage}
+              name={el.name}
+              description={el.description}
+            />
+          ))}
       </div>
-    );
+    </div>
+  );
 }
 
 export default BrowserResultContainer

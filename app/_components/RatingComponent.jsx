@@ -35,6 +35,7 @@ export default function RatingComponent({id,orderId,customerId}) {
   return (
     <Box
       sx={{
+        marginTop:'10px',
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

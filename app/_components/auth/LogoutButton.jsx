@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FiLogOut } from "react-icons/fi";
+import LoadingButton from "../UI/LoadingButton";
 
 function LogoutButton() {
   const router = useRouter();
@@ -19,13 +20,15 @@ function LogoutButton() {
   };
 
   return (
-    <button
-      onClick={handleLogout}
+    <LoadingButton
       className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors"
+      onClick={handleLogout}
     >
-      <FiLogOut size={20} />
-      Logout
-    </button>
+      <span className="flex items-center gap-2">
+        <FiLogOut size={20} />
+        Logout
+      </span>
+    </LoadingButton>
   );
 }
 
