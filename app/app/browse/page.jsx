@@ -24,7 +24,7 @@ async function Page() {
       <div className="flex flex-col items-center h-full overflow-y-scroll">
         <div className="w-3/4 mx-auto px-4 py-8">
           <Suspense>
-          <SearchBar />
+            <SearchBar />
             <BrowseCategory />
           </Suspense>
         </div>
@@ -36,7 +36,9 @@ async function Page() {
             </button>
           </div>
 
-        <BrowseResultContainer products={products} />
+          <Suspense>
+            <BrowseResultContainer />
+          </Suspense>
         </div>
         {/* <div className="w-[95%] h-full p-3 grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 gap-y-8 ">
           {products.map(el => <ProductCard key={el._id} price={el.price} rating={el.ratingsAvg} id={el._id} image={el.coverImage} name={el.name} description={el.description}/>)}
