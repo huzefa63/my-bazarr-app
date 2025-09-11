@@ -3,7 +3,6 @@ import BrowseResultContainer from "@/app/_components/BrowserResultContainer";
 import ProductCard from "@/app/_components/ProductCard";
 import SearchBar from "@/app/_components/SearchBar";
 import { Suspense } from "react";
-import { FaSearch } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 
 async function Page() {
