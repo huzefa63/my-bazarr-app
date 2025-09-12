@@ -18,11 +18,11 @@ export default function SearchBar() {
     <form onSubmit={handleSearch} className="flex items-center w-full bg-white rounded-full border border-gray-200 shadow-sm focus-within:shadow-md transition overflow-hidden">
       <input
         onChange={e => {
-          // if(e.target.value < 1) {
-          //   const params = new URLSearchParams(searchParams);
-          //   params.delete('search');
-          //   router.replace(`${pathname}?${params}`);
-          // }
+          if(e.target.value < 1) {
+            const params = new URLSearchParams(searchParams);
+            params.delete('search');
+            router.replace(`${pathname}?${params}`);
+          }
           setValue(e.target.value);
         }}
         value={value}
