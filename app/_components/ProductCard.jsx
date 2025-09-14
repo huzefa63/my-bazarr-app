@@ -5,7 +5,7 @@ function ProductCard({ image,description,name,id,rating,price }) {
   return (
     <div
       data-id={id}
-      className="parent h-[500px] shadow-[0_0_20px_rgba(0,0,0,0.2)] p-3 rounded-md hover:cursor-pointer hover:bg-white hover:-translate-y-1 duration-300 transition-all"
+      className="parent h-[530px] shadow-[0_0_20px_rgba(0,0,0,0.2)] p-3 rounded-md hover:cursor-pointer hover:bg-white lg:hover:-translate-y-1 duration-300 transition-all"
     >
       <Link href={`/app/product/${id}`}>
         <div className="h-[60%] ">

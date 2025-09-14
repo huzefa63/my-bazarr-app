@@ -50,7 +50,7 @@ function BrowseCategory() {
   }, []);
   return (
     <div
-      className="border- w-full mt-4 flex justify-center gap-2 text-gray-800 flex-wrap"
+      className="text-xs lg:text-sm w-full mt-4 flex justify-center gap-2 text-gray-800 flex-wrap"
       onClick={handleChangeCategory}
     >
       {categoryOptions.map((el) => (
