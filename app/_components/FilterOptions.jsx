@@ -51,9 +51,9 @@ function FilterOptions({allFilters=true}) {
       router.replace(`${pathname}?${url}`);
     }
     return (
-      <div className="flex justify-between">
+      <div className="flex justify-between max-w-full overflow-x-auto">
         {allFilters && (
-          <ul className="flex items-center gap-4">
+          <ul className="flex items-center gap-4 lg:text-lg text-sm">
             <button
               onClick={() => handleChangeQuery("all")}
               className={`smooth-transition border ${

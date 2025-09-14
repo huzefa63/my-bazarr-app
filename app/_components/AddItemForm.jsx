@@ -92,7 +92,7 @@ export default function AddItemForm() {
     >
       <div className="w-full gap-5">
         {/* Product Name & Price */}
-        <div className="w-full flex gap-5">
+        <div className="w-full lg:flex gap-5">
           <div className="min-w-[38%]">
             {/* Name */}
             <div className="flex flex-col gap-2 mb-1">
@@ -168,6 +168,20 @@ export default function AddItemForm() {
             </div>
           </div>
 
+          <div className="flex flex-col gap-2 mb-1 mt-3 lg:hidden">
+            <label className="text-lg">About product in detail</label>
+            <textarea
+              {...register("about", { required: "About is required" })}
+              placeholder="Enter product details"
+              className={`${inputStyles} h-26`}
+            />
+            {errors.about && (
+              <span className="text-red-500 text-sm">
+                {errors.about.message}
+              </span>
+            )}
+          </div>
+
           {/* Cover Image */}
           <div className="w-full space-y-2 h-full">
             <label className="text-lg">Cover Image</label>
@@ -188,7 +202,7 @@ export default function AddItemForm() {
         </div>
 
         {/* About */}
-        <div className="flex flex-col gap-2 mb-1 mt-3">
+        <div className="lg:flex flex-col gap-2 mb-1 mt-3 hidden">
           <label className="text-lg">About product in detail</label>
           <textarea
             {...register("about", { required: "About is required" })}
@@ -203,7 +217,7 @@ export default function AddItemForm() {
         {/* Reference Images */}
         <div className="flex flex-col w-full gap-3 mt-8 mb-3 h-1/4">
           <h1>Reference Images</h1>
-          <div className="w-full grid grid-cols-4 gap-2 h-full">
+          <div className="w-full space-y-5 lg:space-y-0 lg:grid grid-cols-4 gap-2 h-full">
             {["one", "two", "three", "four"].map((id) => (
               <Controller
                 key={id}
@@ -218,9 +232,14 @@ export default function AddItemForm() {
         </div>
       </div>
 
-      <button disabled={isSubmitting} className="disabled:cursor-not-allowed relative ml-auto bg-purple-500 w-fit transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-purple-600 text-white rounded-sm px-6 py-2 flex items-center justify-center gap-2">
+      <button
+        disabled={isSubmitting}
+        className="disabled:cursor-not-allowed relative ml-auto bg-purple-500 w-fit transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-purple-600 text-white rounded-sm px-6 py-2 flex items-center justify-center gap-2"
+      >
         <span className={`${isSubmitting && "opacity-0"}`}>Upload Product</span>
-        {isSubmitting && <FaSpinner className="text-lg absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />}
+        {isSubmitting && (
+          <FaSpinner className="text-lg absolute top-1/2 left-1/2 -translate-1/2 animate-spin" />
+        )}
       </button>
     </form>
   );
