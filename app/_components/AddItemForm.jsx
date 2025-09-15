@@ -168,7 +168,7 @@ export default function AddItemForm() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 mb-1 mt-3 lg:hidden">
+         {window.innerWidth < 1024 && <div className="flex flex-col gap-2 mb-1 mt-3 lg:hidden">
             <label className="text-lg">About product in detail</label>
             <textarea
               {...register("about", { required: "About is required" })}
@@ -180,7 +180,7 @@ export default function AddItemForm() {
                 {errors.about.message}
               </span>
             )}
-          </div>
+          </div>}
 
           {/* Cover Image */}
           <div className="w-full space-y-2 h-full">
@@ -202,7 +202,7 @@ export default function AddItemForm() {
         </div>
 
         {/* About */}
-        <div className="lg:flex flex-col gap-2 mb-1 mt-3 hidden">
+        {window.innerWidth >= 1024 && <div className="lg:flex flex-col gap-2 mb-1 mt-3 hidden">
           <label className="text-lg">About product in detail</label>
           <textarea
             {...register("about", { required: "About is required" })}
@@ -212,7 +212,7 @@ export default function AddItemForm() {
           {errors.about && (
             <span className="text-red-500 text-sm">{errors.about.message}</span>
           )}
-        </div>
+        </div>}
 
         {/* Reference Images */}
         <div className="flex flex-col w-full gap-3 mt-8 mb-3 h-1/4">

@@ -51,7 +51,7 @@ function MyProductContainer() {
          !isFetching
        ) {
          return (
-           <h1 className="flex gap-3 text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
+           <h1 className="flex gap-3 whitespace-nowrap lg:text-2xl text-gray-700 absolute top-1/2 left-1/2 -translate-1/2 items-center">
              <BsBox2 /> no products found!
            </h1>
          );
