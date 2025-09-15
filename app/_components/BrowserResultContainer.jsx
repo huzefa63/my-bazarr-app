@@ -57,10 +57,10 @@ function BrowserResultContainer({products}) {
           }
   }
   return (
-    <div className="lg:max-w-full lg:block flex flex-col gap-3 lg:gap-0  lg:min-w-[95%] relative h-full " onClick={handleAddToCart}>
+    <div className="lg:max-w-full w-full overflow-x-hidden lg:block flex flex-col gap-3 lg:gap-0  lg:min-w-[95%] relative h-full " onClick={handleAddToCart}>
       {isFetching && <Spinner />}
       <p className="text-gray-700 px-2 lg:px-0">{data?.length} Results Found</p>
-      <div className="lg:p-3 px-1 space-y-3 lg:space-y-0 lg:grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 lg:gap-y-8 ">
+      <div className="lg:p-3 max-w-full px-1 space-y-3 lg:space-y-0 lg:grid grid-cols-[repeat(auto-fill,_minmax(300px,1fr))] gap-4 lg:gap-y-8 ">
         {!isFetching &&
           data?.length > 0 &&
           data?.map((el) => (
