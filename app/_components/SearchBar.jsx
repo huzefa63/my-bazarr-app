@@ -28,7 +28,7 @@ export default function SearchBar() {
         value={value}
         type="text"
         placeholder="Search for products..."
-        className="flex-grow px-5 py-3 bg-transparent text-gray-700 placeholder-gray-400 outline-none"
+        className="w-full px-5 py-3 bg-transparent text-gray-700 placeholder-gray-400 outline-none"
       />
       <button className="m-1 p-3 rounded-full bg-blue-500 hover:bg-blue-600 transition flex items-center justify-center">
         <FaSearch size={18} className="text-white" />
