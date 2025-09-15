@@ -12,25 +12,25 @@ function MyOrderSummary({ subtotal, discount, shipping, totalAmount }) {
   return (
     <div className="w-full p-3 text-lg bg-white border border-gray-300 shadow-sm rounded-md h-54 mt-5 ">
       <header className="flex items-center gap-2 font-bold w-full border-b border-gray-300 pb-4">
-        <RiFileList2Fill /> Order Summary
+        <RiFileList2Fill className="text-blue-500"/> Order Summary
       </header>
       <div className="flex justify-between">
         <div className="mt-3 w-full text-sm tet-gray-600 space-y-3 ">
           <div className="flex items-center justify-between">
             <h1 className="flex items-center gap-2">
-              <FaMoneyBillWaveAlt /> subtotal
+              <FaMoneyBillWaveAlt className="text-green-500"/> subtotal
             </h1>
             <p>{formatINR(subtotal)}</p>
           </div>
           <div className="flex items-center justify-between">
             <h1 className="flex items-center gap-2">
-              <MdDiscount /> discount
+              <MdDiscount className="text-orange-500"/> discount
             </h1>
             <p>{formatINR(discount)}</p>
           </div>
           <div className="flex items-center justify-between">
             <h1 className="flex items-center gap-2">
-              <MdLocalShipping /> shipping
+              <MdLocalShipping className="text-blue-500"/> shipping
             </h1>
             <p> {formatINR(shipping)}</p>
           </div>

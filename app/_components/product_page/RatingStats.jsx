@@ -15,21 +15,23 @@ async function RatingStats({id,avgRating,commentCounts}) {
       }
     })
     const resjson = await res.json();
-    console.log(resjson)
+    // console.log(resjson)
     data = resjson;
     // totalRatings = resjson.avgRating[0].totalRatings;
     progress = resjson.eachAvgRating;
+    console.log(progress);
   }catch(err){
     console.log(err)
   }if(!data) return null;
+
     return (
-      <div className="mt-10 flex items-center justify-cente gap-30 w-full">
+      <div className="mt-10 flex items-center justify-around lg:justify-normal lg:gap-30 gap-5 w-full">
         <div className="flex-col flex gap-1 items-center w-fit">
-          <p className="text-7xl">{avgRating[0]?.ratingsAvg?.toFixed(1)}</p>
-          <RatingStars length={avgRating[0]?.ratingsAvg}/>
-          <p className="text-2xl">{format(new Date(),'d MMM, yyyy')}</p>
+          <p className="lg:text-7xl text-3xl">{avgRating[0]?.ratingsAvg?.toFixed(1)}</p>
+          <RatingStars size="text-sm" length={avgRating[0]?.ratingsAvg}/>
+          <p className="lg:text-2xl text-sm">{format(new Date(),'d MMM, yyyy')}</p>
         </div>
-        <div className="flex flex-col gap-3 w-3/4">
+        <div className="flex flex-col gap-3 lg:w-3/4 w-[60%]">
           {progress.map(el => <ProgressBar key={el.rating} rating={el.rating} value={el.value / commentCounts * 100}/>)}
         </div>
       </div>

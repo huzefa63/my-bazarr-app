@@ -16,15 +16,16 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { createPortal } from "react-dom";
 
 function AppNav() {
   const [menuOpen,setMenuOpen] = useState(false);
   const pathname = usePathname();
     return (
       <>
-        <div className="lg:hidden border-b z-50 relative border-gray-100 w-full shadow-sm h-16 text-[var(--text)] bg-[var(--surface)] flex items-center pl-5 pr-10 justify-between">
+        <div className="lg:hidden overflow-hidden border-b z-50 relative border-gray-100 w-full shadow-sm h-16 text-[var(--text)] bg-[var(--surface)] flex items-center pl-5 pr-10 justify-between">
           {/* Logo */}
-          <img src="/logo.png" alt="logo" className="w-36" />
+            <img src="/logo.png" alt="logo" className="w-36" />
 
           {/* Hamburger Button */}
           <button
@@ -39,8 +40,8 @@ function AppNav() {
           </button>
 
           {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden absolute h-fit top-16 bg-white flex flex-col left-0 w-full gap-6 text-lg p-5 shadow-md animate-slide-down">
+          {menuOpen && 
+            createPortal(<div className="lg:hidden absolute h-fit top-16 bg-white flex flex-col left-0 w-full gap-6 text-lg p-5 shadow-md animate-slide-down">
               {/* Browse */}
               <Link
                 href="/app/browse"
@@ -119,7 +120,7 @@ function AppNav() {
                   </Link>
                 </ul>
               </div>
-            </div>
+            </div>,document.getElementById('navRoot')
           )}
         </div>
         <div className="hidden border-b border-gray-100 w-full shadow-sm h-16 text-[var(--text)] bg-[var(--surface)] lg:flex items-center overflow-hidden pl-5 pr-10 justify-between">

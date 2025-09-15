@@ -34,7 +34,7 @@ export function Review({ name, image, date, comment, rating, bg }) {
   const formattedDate = format(new Date(date), "d MMM, yyyy");
   return (
     <div>
-      <div className={`flex bg-gray-100 ${bg} rounded-md flex-col gap-5 w-full shadow-sm py-5 px-3`}>
+      <div className={`flex bg-gray-10 ${bg} rounded-md flex-col gap-5 w-full shadow-s border-b border-gray-200 py-5 px-3`}>
         <div className="flex items-center gap-3">
           <FaCircleUser className="text-4xl" />
           <div className="">

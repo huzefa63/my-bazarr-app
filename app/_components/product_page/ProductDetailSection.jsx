@@ -18,6 +18,7 @@ import Spinner from "../Spinner";
 import RatingComponent from "../RatingComponent";
 import RatingStars from "../UI/RatingStars";
 import toast from "react-hot-toast";
+import TextExpander from "../TextExpander";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function ProductDetailSection({
   id,
@@ -79,22 +80,22 @@ function ProductDetailSection({
 
   }
   return (
-    <div className=" w-3/4 pl-10 flex flex-col gap-3 h-full overflow-auto">
+    <div className=" lg:w-3/4 lg:pl-10 flex flex-col gap-3 lg:h-full lg:overflow-auto mt-5 lg:mt-0">
       <div className="flex justify-between items-center">
-        <p className="font-bold text-3xl">{name}</p>
-        <button onClick={share} className="p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
+        <p className="font-bold lg:text-3xl text-xl">{name}</p>
+        <button onClick={share} className="hidden lg:block p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
           <IoIosShareAlt className="text-4xl" />
         </button>
       </div>
-      <div className="flex items-center text-2xl text-yellow-400">
-        <span className="text-gray-800 text-lg mt-1 mr-1">{avgRating[0]?.ratingsAvg?.toFixed(1)}</span>
+      <div className="flex items-center lg:text-2xl text-yellow-400">
+        <span className="text-gray-800 lg:text-lg mt-1 mr-1">{avgRating[0]?.ratingsAvg?.toFixed(1)}</span>
         {!avgRating[0]?.ratingsAvg && <span className="text-gray-700 text-sm mr-1">0</span>}
-        {!avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="text-2xl" length={0}/>}
-        {avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="text-2xl" length={Math.floor(avgRating[0].ratingsAvg)}/>}
+        {!avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="lg:text-2xl" length={0}/>}
+        {avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="lg:text-2xl" length={Math.floor(avgRating[0].ratingsAvg)}/>}
         <span className="text-sm text-gray-700 ml-2 mt-1">({commentsCount} reviews)</span>
       </div>
-      <p className="w-3/4">{description}</p>
-      <hr className="w-3/4 text-gray-400" />
+      <p className="lg:w-3/4">{description}</p>
+      <hr className="lg:w-3/4 text-gray-400" />
       <p className="text-gray-800 font-semibold text-2xl">
         {formatCurrency(discountedAmount * value)}{" "}
         <span className="text-xs line-through text-green-500">
@@ -103,7 +104,7 @@ function ProductDetailSection({
         <span className="text-xs text-green-500">10% off</span>
       </p>
       <p className="text-sm">inclusive all taxes</p>
-      <div className="w-3/4 space-y-3">
+      <div className="lg:w-3/4 space-y-3">
         <button
           onClick={handleAddToCart}
           className="smooth-transition hover:bg-blue-700 pointer py-2 bg-blue-600 text-white w-full"
@@ -167,7 +168,9 @@ function ProductDetailSection({
       </div>
       <div>
         <h1 className="text-3xl font-bold mt-5">About The Product</h1>
-        <p>{about}</p>
+        {/* <p>{about}</p> */}
+        <TextExpander text={about}/>
+        <hr className="text-gray-200 my-3 lg:hidden"/>
       </div>
     </div>
   );

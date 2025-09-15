@@ -10,11 +10,11 @@ function MyOrderItemCard({status,productName,totalAmount,deliveryExpected,coverI
     return (
       <div className="mt-5 p-3 w-full border border-gray-300 shadow-sm rounded-md bg-white">
         <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-          <header className="flex items-center gap-2 font-bold text-lg"><BsBoxSeamFill /> Order Item</header>
+          <header className="flex items-center gap-2 font-bold text-lg"><BsBoxSeamFill className="text-amber-950"/> Order Item</header>
          {<OrderStatus status={status}/>}
         </div>
         <div className="flex items-center gap-5">
-          <div className="w-24 h-24 rounded-md overflow-hidden mt-3 ">
+          <div className="w-28 h-24 rounded-md overflow-hidden mt-3 ">
             <img src={coverImage} alt="" className="h-full w-full" />
           </div>
           <div className="">

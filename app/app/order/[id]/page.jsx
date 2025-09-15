@@ -70,7 +70,7 @@ async function Page({params}) {
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
               <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
-                <BiSolidContact /> Contact Information
+                <BiSolidContact className="text-amber-950"/> Contact Information
               </header>
               <div className="space-y-1">
                 <p className="text-sm text-gray-700">{order.email}</p>

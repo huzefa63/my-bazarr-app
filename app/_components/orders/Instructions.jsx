@@ -24,7 +24,7 @@ function Instructions({instructions,orderId,customerId,status}) {
     if(user?._id === customerId && status !== 'cancelled' && status !== 'delivered') return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
-          <MdIntegrationInstructions /> Instructions
+          <MdIntegrationInstructions className="text-blue-500"/> Instructions
         </header>
         <textarea spellCheck={false} value={instruction} onChange={(e)=>setInstruction(e.target.value)} placeholder="provide instructions here" className="w-full resize-none p-3 focus:mt-4 smooth-transition hover:cursor-default focus:outline-none focus:border border-gray-300 text-sm text-gray-700">
           
@@ -35,7 +35,7 @@ function Instructions({instructions,orderId,customerId,status}) {
     if(user?._id !== customerId || status === 'delivered') return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
         <header className="flex items-center gap-2 text-xl font-bold text-gray-700 ">
-          <MdIntegrationInstructions /> Instructions
+          <MdIntegrationInstructions className="text-blue-500"/> Instructions
         </header>
         <p className=" mt-2 text-gray-700">
             {instructions || 'no instructions provided'}

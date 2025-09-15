@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
         <QueryProvider>
           <UserProvider>{children}</UserProvider>
           <div id="root"></div>
+          <div id="navRoot"></div>
         </QueryProvider>
         <Toaster position="top-right" />
       </body>
