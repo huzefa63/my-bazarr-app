@@ -27,7 +27,7 @@ function OrderItem({status,coverImage,productName,totalAmount,deliveryExpected,i
             <p>{productName}</p>
             <p>{formattedPrice}</p>
           </div>
-          <button className="absolute right-10 top-1/2 -translate-y-1/2 text-2xl">
+          <button className="absolute hidden lg:block right-10 top-1/2 -translate-y-1/2 text-2xl">
             <IoIosArrowForward />
           </button>
         </div>
