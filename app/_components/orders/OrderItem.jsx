@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa6";
-import { IoIosArrowForward, IoMdArrowDropright } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import OrderStatus from "./OrderStatus";
 
 function OrderItem({status,coverImage,productName,totalAmount,deliveryExpected,id}) {

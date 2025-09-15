@@ -13,7 +13,7 @@ function CustomerController({ status, seller, customer,orderId }) {
   if (user?._id !== customer) return null;
   
   return (
-    <div className="w-full text-white grid grid-cols-3 gap-5">
+    <div className="w-full text-white">
       {status !== 'cancelled' && status !== 'delivered' && <LoadingButton onClick={async ()=>{
         await cancelOrderAction(orderId);
         queryCLient.refetchQueries(['customerOrders']);

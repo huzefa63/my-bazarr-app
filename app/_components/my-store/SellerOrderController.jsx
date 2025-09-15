@@ -50,7 +50,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
             await cancelOrderAction(orderId);
             queryClient.refetchQueries(["sellerOrders"]);
           }}
-          className="shadow-sm hover:bg-red-600 px-3 py-2 rounded-md bg-red-500"
+          className="shadow-sm text-sm lg:text-lg hover:bg-red-600 px-3 py-2 rounded-md bg-red-500"
         >
           <span className="flex items-center gap-2 w-full justify-center">
             Cancel order 
@@ -65,7 +65,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
             await shipeOrderAction(orderId);
             queryClient.refetchQueries(["sellerOrders"]);
           }}
-          className="shadow-sm  text-white-700 hover:bg-blue-600 px-3 py-2 rounded-md bg-blue-500"
+          className="shadow-sm text-sm lg:text-lg  text-white-700 hover:bg-blue-600 px-3 py-2 rounded-md bg-blue-500"
         >
           <span className="flex items-center gap-2 w-full justify-center">
             Ship order <CiDeliveryTruck />
@@ -84,7 +84,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
               { withCredentials: true }
             );
           }}
-          className="shadow-sm hover:bg-green-600 px-3 py-2 rounded-md bg-green-500"
+          className="shadow-sm text-sm lg:text-lg hover:bg-green-600 px-3 py-2 rounded-md bg-green-500"
         >
           <span className="flex items-center gap-2 w-full justify-center">
             delivered <IoIosCheckmark className="text-2xl" />

@@ -51,7 +51,7 @@ function FilterOptions({allFilters=true}) {
       router.replace(`${pathname}?${url}`);
     }
     return (
-      <div className="flex lg:justify-between overflow-x-auto pb-1">
+      <div className="flex lg:justify-between overflow-x-auto pb-3">
         {allFilters && (
           <ul className="flex items-center gap-4 lg:text-lg text-sm">
             <button
