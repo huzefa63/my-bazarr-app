@@ -10,7 +10,8 @@ import CustomerController from "@/app/_components/orders/CustomerController";
 import RatingComponent from "@/app/_components/RatingComponent";
 import { Review } from "@/app/_components/product_page/CommentSection";
 import Instructions from "@/app/_components/orders/Instructions";
-
+import { BiSolidContact } from "react-icons/bi";
+import { ImLocation2 } from "react-icons/im";
 async function Page({params}) {
     const param = await params;
     const cookie = await cookies();
@@ -36,13 +37,13 @@ async function Page({params}) {
     const date = format(new Date(order.createdAt),"MMMM dd, yyyy 'at' hh:mm a");
     return (
       <div className=" w-full h-full bg-gray-100 p-5 relative overflow-auto">
-        <div className="w-full h-fit flex ">
-          <div className="w-[65%]">
+        <div className="w-full h-fit lg:flex space-y-5 lg:space-y-0">
+          <div className="lg:w-[65%]">
             <div className="mb-2">
               <BackButton />
             </div>
             <div className="space-y-3">
-              <header className="text-2xl font-bold">
+              <header className="lg:text-2xl text-xl font-bold">
                 Order ID: {order._id}
               </header>
               <p className="text-sm text-gray-600 tracking-wide">
@@ -64,12 +65,12 @@ async function Page({params}) {
             />
           </div>
 
-          <div className="p-3 w-[35%] space-y-4">
+          <div className="lg:p-3 lg:w-[35%] space-y-4">
            <Instructions instructions={order.instructions} status={order.status} orderId={order._id} customerId={order.customer}/>
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
-              <header className="text-xl font-bold text-gray-700">
-                Contact Information
+              <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
+                <BiSolidContact /> Contact Information
               </header>
               <div className="space-y-1">
                 <p className="text-sm text-gray-700">{order.email}</p>
@@ -78,8 +79,8 @@ async function Page({params}) {
             </div>
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
-              <header className="text-xl font-bold text-gray-700">
-                Shipping address
+              <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
+                <ImLocation2 /> Shipping address
               </header>
               <div className="space-y-1">
                 <p className="text-sm text-gray-700">{order.customerName}</p>

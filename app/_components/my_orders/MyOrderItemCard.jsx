@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import OrderStatus from "../orders/OrderStatus";
-
+import { BsBoxSeamFill } from "react-icons/bs";
 function MyOrderItemCard({status,productName,totalAmount,deliveryExpected,coverImage}) {
     const amount = new Intl.NumberFormat('en-IN',{
       style:'currency',
@@ -10,7 +10,7 @@ function MyOrderItemCard({status,productName,totalAmount,deliveryExpected,coverI
     return (
       <div className="mt-5 p-3 w-full border border-gray-300 shadow-sm rounded-md bg-white">
         <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-          <header className="font-bold text-lg">Order Item</header>
+          <header className="flex items-center gap-2 font-bold text-lg"><BsBoxSeamFill /> Order Item</header>
          {<OrderStatus status={status}/>}
         </div>
         <div className="flex items-center gap-5">
