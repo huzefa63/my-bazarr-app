@@ -4,7 +4,7 @@ import CartProvider from "@/app/_components/cart/CartProvider"
 function Page() {
     
     return (
-      <div className="flex gap-3 h-full w-full">
+      <div className="lg:flex gap-3 h-full w-full space-y-5 lg:space-y-0">
         <CartProvider>
           <CartContainer/>
           <CartCheckout />

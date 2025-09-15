@@ -15,7 +15,7 @@ function ReadOnlyForm() {
             <FiUser className="text-gray-500 mr-2" />
             <input
               type="text"
-              value={user?.username || 'unable to get name'}
+              value={user?.username || 'getting username...'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
             />
@@ -31,7 +31,7 @@ function ReadOnlyForm() {
             <FiMail className="text-gray-500 mr-2" />
             <input
               type="email"
-              value={user?.email || 'unable to get email'}
+              value={user?.email || 'get email...'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
             />

@@ -44,8 +44,8 @@ function CartItem({image,price,name,inStock,id,isDeletingId}) {
         </div>
         <div className="flex-1 ml-5 flex flex-col gap-3">
           <div className="flex justify-between w-full">
-            <h1 className="text-gray-600 text-lg">{name}</h1>
-            <p className="font-semibold">{formatCurrency(price)}</p>
+            <h1 className="text-gray-600 text-lg line-clamp-1">{name}</h1>
+            <p className="font-semibold text-xs lg:text-lg">{formatCurrency(price)}</p>
           </div>
           <div className="flex gap-1 items-center text-sm">
             <p className="text-gray-500">{formatCurrency(price)}</p>
