@@ -84,6 +84,8 @@ export default function AddItemForm() {
     if (!e.target.files || e.target.files.length < 1) return null;
     return e.target.files[0];
   }
+  const isClient = typeof window !== "undefined";
+  const isLargeScreen = isClient && window.innerWidth >= 1024;
 
   return (
     <form
@@ -168,7 +170,7 @@ export default function AddItemForm() {
             </div>
           </div>
 
-         {window.innerWidth < 1024 && <div className="flex flex-col gap-2 mb-1 mt-3 lg:hidden">
+         {!isLargeScreen && <div className="flex flex-col gap-2 mb-1 mt-3 lg:hidden">
             <label className="text-lg">About product in detail</label>
             <textarea
               {...register("about", { required: "About is required" })}
@@ -202,7 +204,7 @@ export default function AddItemForm() {
         </div>
 
         {/* About */}
-        {window.innerWidth >= 1024 && <div className="lg:flex flex-col gap-2 mb-1 mt-3 hidden">
+        {isLargeScreen && <div className="lg:flex flex-col gap-2 mb-1 mt-3 hidden">
           <label className="text-lg">About product in detail</label>
           <textarea
             {...register("about", { required: "About is required" })}
