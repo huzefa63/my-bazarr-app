@@ -51,7 +51,7 @@ function FilterOptions({allFilters=true}) {
       router.replace(`${pathname}?${url}`);
     }
     return (
-      <div className="flex justify-between max-w-full overflow-x-aut">
+      <div className="flex lg:justify-between overflow-x-auto">
         {allFilters && (
           <ul className="flex items-center gap-4 lg:text-lg text-sm">
             <button
@@ -96,7 +96,7 @@ function FilterOptions({allFilters=true}) {
             </button>
           </ul>
         )}
-        <div className={`relative ${!allFilters && "ml-auto"} flex items-center gap-2`}>
+        <div className={`relative ${!allFilters && "ml-auto"} ml-3 lg:ml-0 min-w-fit flex items-center gap-2`}>
           <button
             onClick={() => setShowDateRange(!showDateRange)}
             className="bg-gray-100 px-4 py-1 rounded-full flex items-center gap-1 smooth-transition hover:bg-gray-200"

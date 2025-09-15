@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className} antialiased`}>
         <QueryProvider>
           <UserProvider>{children}</UserProvider>
+          <div id="root"></div>
         </QueryProvider>
         <Toaster position="top-right" />
       </body>

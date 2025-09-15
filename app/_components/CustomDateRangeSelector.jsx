@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from "react";
 import { DateRangePicker } from "react-date-range";
+import { createPortal } from "react-dom";
 
 function CustomDateRangeSelector({setDateRange,dateRange,setShow}) {
     const ref = useRef(null);
@@ -10,18 +11,17 @@ function CustomDateRangeSelector({setDateRange,dateRange,setShow}) {
         }
         document.addEventListener('click',handleClick);
     },[])
-    return (
+    return createPortal(
       <div ref={ref} >
         <DateRangePicker
-          className="absolute lg:w-fit  z-50 right-0 top-10 border border-gray-300 rounded-md overflow-hidden"
+          className="absolute lg:w-fit  z-50 right-10 top-55 border border-gray-300 rounded-md overflow-hidden"
           onChange={(item) => setDateRange([item.selection])}
           showSelectionPreview={true}
           moveRangeOnFirstSelection={false}
           ranges={dateRange}
-          staticRanges={[]}
-          inputRanges={[]}
+          
         />
-      </div>
+      </div>,document.getElementById('root')
     );
 }
 
