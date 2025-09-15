@@ -13,3 +13,6 @@
 .progress::-webkit-progress-value{
   @apply bg-blue-700 rounded-sm
 }
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}

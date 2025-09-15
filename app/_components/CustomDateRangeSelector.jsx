@@ -11,13 +11,15 @@ function CustomDateRangeSelector({setDateRange,dateRange,setShow}) {
         document.addEventListener('click',handleClick);
     },[])
     return (
-      <div ref={ref}>
+      <div ref={ref} >
         <DateRangePicker
-          className="absolute z-50 right-0 top-10 border border-gray-300 rounded-md overflow-hidden"
+          className="absolute lg:w-fit  z-50 right-0 top-10 border border-gray-300 rounded-md overflow-hidden"
           onChange={(item) => setDateRange([item.selection])}
           showSelectionPreview={true}
           moveRangeOnFirstSelection={false}
           ranges={dateRange}
+          staticRanges={[]}
+          inputRanges={[]}
         />
       </div>
     );
