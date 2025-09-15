@@ -83,8 +83,8 @@ function ProductDetailSection({
     <div className=" lg:w-3/4 lg:pl-10 flex flex-col gap-3 lg:h-full lg:overflow-auto mt-5 lg:mt-0">
       <div className="flex justify-between items-center">
         <p className="font-bold lg:text-3xl text-xl">{name}</p>
-        <button onClick={share} className="hidden lg:block p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
-          <IoIosShareAlt className="text-4xl" />
+        <button onClick={share} className="bg-gray-200 lg:bg-transparent p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
+          <IoIosShareAlt className="lg:text-4xl text-2xl" />
         </button>
       </div>
       <div className="flex items-center lg:text-2xl text-yellow-400">
@@ -136,11 +136,11 @@ function ProductDetailSection({
         </select>
       </div>
 
-      <div className="flex gap-1 items-center mt-5">
+      <div className="lg:flex gap-1 items-center mt-5">
         <p className="font-semibold">Seller email:</p>
         <p className="text-gray-600">{email}</p>
       </div>
-      <div className="flex gap-12 mt-6 ">
+      <div className="lg:flex grid grid-cols-2 grid-rows-2 lg:gap-12 gap-5 mt-6 ">
         <div className="flex flex-col  items-center gap-1 ">
           <span className="p-2 rounded-full bg-gray-300">
             <IoReturnUpBackOutline />

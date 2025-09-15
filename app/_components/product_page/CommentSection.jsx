@@ -39,8 +39,8 @@ export function Review({ name, image, date, comment, rating, bg }) {
           <FaCircleUser className="text-4xl" />
           <div className="">
             <div className="flex items-center gap-5">
-              <p className="text-xl">{name}</p>
-              <p className="text-gray-600 ml-auto text-sm">{formattedDate}</p>
+              <p className="lg:text-xl text-xs">{name}</p>
+              <p className="text-gray-600 ml-auto lg:text-sm text-xs">{formattedDate}</p>
             </div>
             <div className="flex items-center gap-2 text-sm">
               {rating.toFixed(1)}{" "}
