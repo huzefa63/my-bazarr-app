@@ -47,9 +47,10 @@ function CartCheckout() {
     }finally{
       setIsCheckouting(false);
     }
-  }
+  } 
+  if(!items?.length) return null;
   return (
-    <div className="flex flex-col gap-5 bg-white flex-1 rounded-md shadow-md p-3 text-xl ">
+    <div className="flex flex-col mx-5 lg:mx-0 lg:border-none border border-gray-200 gap-5 bg-white flex-1 rounded-md shadow-md p-3 text-xl ">
       <div className="flex flex-col gap-2 border-b border-b-gray-200 pb-3">
         <p>Delivery</p>
         <div className="flex gap-5 bg-gray-100 w-fit p-1 rounded-md text-sm">
@@ -79,25 +80,18 @@ function CartCheckout() {
           <p>
             discount <span className="text-[11px] text-gray-600">(10%)</span>
           </p>
-          <p className="text-green-500">-{formatCurrency(discount)} rs</p>
+          <p className="text-green-500">-{formatCurrency(discount)}</p>
         </div>
         <div className="flex justify-between text-gray-500">
           <p>Delivery</p>
-          <p>{formatCurrency(deliveryCharge)} rs</p>
+          <p>{formatCurrency(deliveryCharge)} </p>
         </div>
-        {/* <div className="flex justify-between text-gray-500">
-          <p>
-            Tax
-            <span className="text-[11px] ml-1 text-gray-600">(18%)</span>
-          </p>
-          <p className="text-red-500">+{tax} rs</p>
-        </div> */}
       </div>
 
       <div className="text-lg flex flex-col gap-5">
         <div className="flex justify-between">
           <h1>Total</h1>
-          <p>{formatCurrency(finalPrice)} rs</p>
+          <p>{formatCurrency(finalPrice)} </p>
         </div>
         <div className="flex flex-col gap-2 w-full text-white">
           <button
@@ -111,26 +105,6 @@ function CartCheckout() {
           <Link href="/app/browse" className="text-black border text-center border-gray-300 shadow-sm py-2 rounded-md smooth-transition hover:bg-gray-200">
             Continue shopping
           </Link>
-
-          {/* Address section */}
-          {/* <h1 className="text-xl text-black text-bold mt-3">Address</h1>
-          {user?.address && (
-            <div className="text-sm text-gray-600 flex flex-col gap-1">
-              <hr className="text-gray-200" />
-              <p>{user.address.street}</p>
-              <p>
-                {user.address.city + ", " + user.address.state + ", "}
-                {user.address.pincode}
-              </p>
-              <p>{user.email}</p>
-              <p>+91 {user.phoneNumber}</p>
-            </div>
-          )}
-          {!user?.address && (
-            <button className="px-5 mx-auto w-fit text-sm py-2 rounded-md bg-purple-500 mt-5 smooth-transition hover:bg-purple-600">
-              Add address
-            </button>
-          )} */}
         </div>
       </div>
     </div>

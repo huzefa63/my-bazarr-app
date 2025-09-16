@@ -35,7 +35,7 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
         <img src={image} alt="" className="w-full h-full object-fit" />
       </Link>
       <Link href={`/app/product/${id}`} className="space-y-2 w-full">
-        <h1 className="text-xl">{name}</h1>
+        <h1 className="text-xl line-clamp-1">{name}</h1>
         <p className="text-sm text-gray-900">{formatCurrency(price)} rs</p>
         <p className="line-clamp-1 text-gray-600 text-sm">
           {format(createdAt, "d   MMM, yyyy")}

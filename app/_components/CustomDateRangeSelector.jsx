@@ -14,7 +14,7 @@ function CustomDateRangeSelector({setDateRange,dateRange,setShow}) {
     return createPortal(
       <div ref={ref} >
         <DateRangePicker
-          className="absolute lg:w-fit  z-50 right-10 top-55 border border-gray-300 rounded-md overflow-hidden"
+          className="absolute lg:w-fit z-50 right-10 top-55 border border-gray-300 rounded-md overflow-hidden"
           onChange={(item) => setDateRange([item.selection])}
           showSelectionPreview={true}
           moveRangeOnFirstSelection={false}

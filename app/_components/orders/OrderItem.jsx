@@ -17,13 +17,13 @@ function OrderItem({status,coverImage,productName,totalAmount,deliveryExpected,i
           <p className="text-sm text-gray-600">{deliveryData}</p>
         </div>
         <div className="flex gap-5 ">
-          <div className="w-20  rounded-md  overflow-hidden">
+          <div className="min-w-20 max-w-20  rounded-md  overflow-hidden">
             <img src={coverImage} alt="" className="w-full h-full object-cover" />
           </div>
 
           <div className="space-y-1 text-sm h-fit">
             <p className="font-bold text-red-800">Order ID: {id}</p>
-            <p>{productName}</p>
+            <p className="line-clamp-1">{productName}</p>
             <p>{formattedPrice}</p>
           </div>
           <button className="absolute hidden lg:block right-10 top-1/2 -translate-y-1/2 text-2xl">

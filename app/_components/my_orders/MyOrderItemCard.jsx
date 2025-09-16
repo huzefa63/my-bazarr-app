@@ -14,11 +14,11 @@ function MyOrderItemCard({status,productName,totalAmount,deliveryExpected,coverI
          {<OrderStatus status={status}/>}
         </div>
         <div className="flex items-center gap-5">
-          <div className="w-28 h-24 rounded-md overflow-hidden mt-3 ">
+          <div className="min-w-28 max-w-28 h-24 rounded-md overflow-hidden mt-3 ">
             <img src={coverImage} alt="" className="h-full w-full" />
           </div>
           <div className="">
-            <h1 className="font-semibold">{productName}</h1>
+            <h1 className="font-semibold line-clamp-1">{productName}</h1>
             <p>{amount}</p>
             <p className="text-gray-600 text-sm">
               delivery expected on {deliveryDate}

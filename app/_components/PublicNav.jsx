@@ -14,9 +14,9 @@ function PublicNav() {
 
   return (
     <header className="flex items-center justify-between px-6 py-4 shadow bg-white sticky top-0 z-50">
-      <img src="/logo.png" alt="logo" className="w-32 mt-2 absolute" />
+      <img src="/logo.png" alt="logo" className="lg:w-32 w-24 mt-2 absolute" />
       <div></div>
-      <nav className="flex gap-6 text-gray-700 font-medium">
+      <nav className="flex text-xs lg:text-lg lg:gap-6 gap-3 text-gray-700 font-medium">
         {links.map(({ href, label }) => (
           <Link
             key={href}

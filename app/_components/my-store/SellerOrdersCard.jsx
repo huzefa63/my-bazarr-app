@@ -22,7 +22,7 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
         {/* Product + Customer Info */}
         <div className="flex gap-5">
           {/* Product Image */}
-          <div className="w-30  rounded-md overflow-hidden">
+          <div className="min-w-30 max-w-30 rounded-md overflow-hidden">
             <img
               src={coverImage}
               alt={productName}

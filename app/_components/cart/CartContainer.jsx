@@ -44,7 +44,7 @@ function CartContainer() {
         }));
     },[cartData])
     return (
-        <div className="lg:w-[65%] relative overflow-auto rounded-md shadow-sm py-5 bg-white" onClick={handleDeleteCartItem}>
+        <div className="lg:w-[65%] min-h-1/2 max-h-full lg:h-full relative overflow-auto rounded-md shadow-sm py-5 bg-white" onClick={handleDeleteCartItem}>
             <header className="lg:text-4xl text-2xl pl-5 flex items-center gap-3"><FaCartShopping /> Cart {cartData?.totalCartItems}</header>
             {!cartData?.cartItems?.length && isFetching  && <Spinner />}
             <hr className="my-3 text-gray-300"/>

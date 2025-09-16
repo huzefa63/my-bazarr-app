@@ -35,7 +35,7 @@ function CartItem({image,price,name,inStock,id,isDeletingId}) {
           isHover && "hover:bg-gray-100 "
         } parent smooth-transition px-5 border-b-1 border-b-gray-200 h-[25%] py-4 flex items-center`}
       >
-        <div className="w-32 h-full rounded-md">
+        <div className="lg:min-w-32 lg:max-w-32 min-w-24 max-w-24 h-24 lg:h-full rounded-md">
           <img
             src={image}
             alt=""
