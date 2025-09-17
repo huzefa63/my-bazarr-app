@@ -24,7 +24,7 @@ async function Page({params}) {
     return (
       <div className="relative h-full w-full lg:p-5">
         <div className="ml-3 mt-3 lg:mt-0 lg:ml-0">
-          <BackButton />
+          <BackButton route='/app/browse'/>
         </div>
         <div className="lg:flex h-full w-full  p-3">
           <ProductImageSection
