@@ -49,7 +49,7 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
       >
         <LoadingButton
           onClick={deleteProduct}
-          className="lg:px-5 px-2 text-xs lg:text-lg ml-auto py-1 shadow-sm border border-gray-200 rounded-sm min-w-fit smooth-transition text-white hover:bg-red-600 bg-red-500"
+          className="lg:px-3 px-2 text-xs lg:text-sm ml-auto py-1 shadow-sm border border-gray-200 rounded-sm min-w-fit smooth-transition text-white hover:bg-red-600 bg-red-500"
         >
           <span className=" flex items-center gap-2">
             <FaTrash /> delete
