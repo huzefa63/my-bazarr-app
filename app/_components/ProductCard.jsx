@@ -22,7 +22,7 @@ function ProductCard({ image,description,name,id,rating,price }) {
           <p className="text-gray-800 inline-block text-xs self-end line-through">{formatCurrency(price)}</p>
           <p className="text-xs text-green-500 inline-block">10% off</p>
         </div>
-        <p className="text-xs text-gray-800">⭐{rating}</p>
+        <p className="text-xs text-gray-800">⭐{rating.toFixed(1)}</p>
         <p className="text-sm text-gray-500 line-clamp-2">{description}</p>
       </Link>
       <button
