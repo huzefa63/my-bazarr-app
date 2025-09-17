@@ -29,7 +29,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
     queryClient.refetchQueries(["sellerOrders"]);
   }
   return (
-    <div className="w-full text-white grid grid-cols-3 gap-5">
+    <div className="w-full text-white flex gap-2 lg:grid grid-cols-3 lg:gap-5">
       {/* Cancel Order */}
       {showForm && (
         <div className="z-50 absolute top-1/2 left-1/2 -translate-1/2  border">
