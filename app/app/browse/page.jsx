@@ -2,6 +2,7 @@ import BrowseCategory from "@/app/_components/BrowseCategory";
 import BrowseResultContainer from "@/app/_components/BrowserResultContainer";
 import ProductCard from "@/app/_components/ProductCard";
 import SearchBar from "@/app/_components/SearchBar";
+import SelectCategory from "@/app/_components/SelectCategory";
 import { Suspense } from "react";
 import { IoFilterSharp } from "react-icons/io5";
 
@@ -28,11 +29,9 @@ async function Page() {
           </Suspense>
         </div>
         <div className="lg:w-[95%] w-full lg:px-3 space-y-1 px-1">
-          <div className="w-full flex justify-between px-2 lg:px-0">
-            <h1 className="text-3xl font-bold">Search Results</h1>
-            <button className="hover:bg-gray-300 p-2 rounded-sm duration-300 transition-all ease-in-out hover:cursor-pointer">
-              <IoFilterSharp className="text-3xl" />
-            </button>
+          <div className="w-full flex justify-between items-center px-2 lg:px-0">
+            <h1 className="lg:text-3xl text-2xl font-bold">Search Results</h1>
+            <SelectCategory />
           </div>
 
           <Suspense>
