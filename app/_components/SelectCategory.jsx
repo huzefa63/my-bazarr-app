@@ -44,6 +44,7 @@ function SelectCategory() {
         value={selectedCategory}
       onChange={handleChangeCategory}
         options={categoryOptions}
+        isSearchable={false}
         placeholder="Select category"
         instanceId="category-select"
       />
