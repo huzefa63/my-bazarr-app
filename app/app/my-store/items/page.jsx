@@ -6,7 +6,7 @@ import { BiSolidPackage } from "react-icons/bi";
 
 function page() {
   return (
-    <div className="h-full overflow-auto p-5 flex">
+    <div className="h-full overflow-auto lg:p-5 flex">
       <div className="relative w-full bg-white p-3 overflow-auto rounded-sm">
         <header className="text-3xl flex items-center gap-5 pl-5">
           <BiSolidPackage className="text-yellow-950" /> My Products
