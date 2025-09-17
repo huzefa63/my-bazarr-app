@@ -17,7 +17,7 @@ function CustomerController({ status, seller, customer,orderId }) {
       {status !== 'cancelled' && status !== 'delivered' && <LoadingButton onClick={async ()=>{
         await cancelOrderAction(orderId);
         queryCLient.refetchQueries(['customerOrders']);
-      }} className="smooth-transition shadow-sm hover:bg-red-600 px-3 py-2 rounded-md bg-red-500">
+      }} className="smooth-transition shadow-sm whitespace-nowrap hover:bg-red-600 px-3 py-2 rounded-md bg-red-500">
         cancel order
       </LoadingButton>}
 
