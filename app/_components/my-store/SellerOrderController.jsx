@@ -13,6 +13,7 @@ import { useState } from "react";
 import axios from "axios";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IoIosCheckmark } from "react-icons/io";
+import toast from "react-hot-toast";
 
 function SellerOrderController({ status, seller, orderId, customer, customerEmail }) {
   const { user } = useUserContext();
@@ -26,6 +27,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
 
   async function successHandler(){
     await deliveredOrderAction(orderId);
+    toast.success('congrats! order has been marked as delivered');
     queryClient.refetchQueries(["sellerOrders"]);
   }
   return (
@@ -48,6 +50,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
         <LoadingButton
           onClick={async () => {
             await cancelOrderAction(orderId);
+            toast.success('order has been cancelled');
             queryClient.refetchQueries(["sellerOrders"]);
           }}
           className="shadow-sm text-sm lg:text-lg hover:bg-red-600 px-3 py-2 rounded-md bg-red-500"
@@ -63,6 +66,7 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
         <LoadingButton
           onClick={async () => {
             await shipeOrderAction(orderId);
+            toast.success("order has been marked as shipped");
             queryClient.refetchQueries(["sellerOrders"]);
           }}
           className="shadow-sm text-sm lg:text-lg  text-white-700 hover:bg-blue-600 px-3 py-2 rounded-md bg-blue-500"
