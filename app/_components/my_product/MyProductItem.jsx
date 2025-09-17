@@ -32,7 +32,7 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
         href={`/app/product/${id}`}
         className="lg:h-30 h-25 min-w-25 max-w-25 lg:min-w-40 lg:max-w-40 overflow-hidden rounded-md"
       >
-        <img src={image} alt="" className="w-full h-full object-fit" />
+        <img src={image} alt="" className="w-full h-full object-cover" />
       </Link>
       <Link href={`/app/product/${id}`} className="space-y-2 w-full">
         <h1 className="lg:text-xl font-bold text-gray-800 text-sm line-clamp-1">{name}</h1>
