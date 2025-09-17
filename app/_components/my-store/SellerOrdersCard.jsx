@@ -14,11 +14,9 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
       >
         {/* Status + Date */}
         <div className="flex gap-4 items-center">
-          {<OrderStatus status={status} />}
+         {<OrderStatus status={status}/>}
           <span className="text-gray-400">|</span>
-          <p className="lg:text-sm text-xs text-gray-600">
-            Placed on {orderDate}
-          </p>
+          <p className="lg:text-sm text-xs text-gray-600">Placed on {orderDate}</p>
         </div>
 
         {/* Product + Customer Info */}
@@ -34,24 +32,15 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
 
           {/* Order Details */}
           <div className="space-y-1 text-sm h-fi flex-1 flex flex-col justify-center ">
-            <p className="font-bold text-xs lg:text-l text-red-700 lg:block hidden">
-              order ID: {id}
-            </p>
-            <p className="font-bold text-xs lg:text-l text-red-700 lg:hidden line-clamp-1">
-              orderID:<span className="ml-1">{id}</span>
-            </p>
-            <p className="text-gray-700 line-clamp-1">
-              TAPUJI Dancing Cactus Repeats What You Say,Electronic Plush Toy
-              with Lighting,Singing Cactus Recording and Repeat Your Words for
-              Education Toys (Green)
-            </p>
+            <p className="font-bold text-xs lg:text-l text-red-700 lg:block hidden">order ID: {id}</p>
+            <p className="font-bold text-xs lg:text-l text-red-700 lg:hidden line-clamp-1">orderID:<span className="ml-1">{id}</span></p>
+            <p className="text-gray-700 line-clamp-1">{productName}</p>
             <p className="text-gray-900 font-medium">{formattedPrice}</p>
             <p className="text-gray-600 text-xs line-clamp-1">
-              Customer:
-              <span className="font-semibold ml-1">{customerName}</span>
+              Customer:<span className="font-semibold ml-1">{customerName}</span>
             </p>
             <p className="text-gray-600 text-xs line-clamp-1 lg:block hidden">
-              address: {address.line1} {address.line2}, {address.state}
+              address:  {address.line1} {address.line2}, {address.state}
             </p>
           </div>
 
