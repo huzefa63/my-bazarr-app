@@ -27,6 +27,7 @@ export default function RatingComponent({id,orderId,customerId}) {
         router.refresh();
     }catch(err){
         console.log(err);
+        toast.error('oops! something went wrong');
     }
   };
 

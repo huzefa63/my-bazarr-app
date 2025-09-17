@@ -16,13 +16,13 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
         <div className="flex gap-4 items-center">
          {<OrderStatus status={status}/>}
           <span className="text-gray-400">|</span>
-          <p className="text-sm text-gray-600">Placed on {orderDate}</p>
+          <p className="lg:text-sm text-xs text-gray-600">Placed on {orderDate}</p>
         </div>
 
         {/* Product + Customer Info */}
         <div className="flex gap-5">
           {/* Product Image */}
-          <div className="min-w-30 max-w-30 rounded-md overflow-hidden">
+          <div className="lg:min-w-30 lg:min-h-30 lg:max-h-30 min-w-20 max-w-20 lg:max-w-30 min-h-20 max-h-20 rounded-md overflow-hidden">
             <img
               src={coverImage}
               alt={productName}
@@ -31,20 +31,21 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
           </div>
 
           {/* Order Details */}
-          <div className="space-y-1 text-sm h-fit flex-1">
-            <p className="font-bold text-gray-800">Order ID: {id}</p>
+          <div className="space-y-1 text-sm h-fi flex-1 flex flex-col justify-center ">
+            <p className="font-bold text-xs lg:text-l text-red-700 lg:block hidden">order ID: {id}</p>
+            <p className="font-bold text-xs lg:text-l text-red-700 lg:hidden line-clamp-1">orderID:<span className="ml-1">{id}</span></p>
             <p className="text-gray-700">{productName}</p>
             <p className="text-gray-900 font-medium">{formattedPrice}</p>
-            <p className="text-gray-600 text-xs">
-              Customer: <span className="font-semibold">{customerName}</span>
+            <p className="text-gray-600 text-xs line-clamp-1">
+              Customer:<span className="font-semibold ml-1">{customerName}</span>
             </p>
-            <p className="text-gray-600 text-xs">
-              {address.line1} {address.line2}, {address.state}
+            <p className="text-gray-600 text-xs line-clamp-1 lg:block hidden">
+              address:  {address.line1} {address.line2}, {address.state}
             </p>
           </div>
 
           {/* Arrow Button */}
-          <button className="absolute right-10 top-1/2 -translate-y-1/2 text-2xl text-gray-400">
+          <button className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 text-2xl text-gray-400">
             <IoIosArrowForward />
           </button>
         </div>

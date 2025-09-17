@@ -147,7 +147,7 @@ async function Page({params}) {
         )}
 
         {!order?.rated && order.customer === currentUser && order.status === 'delivered' && (
-          <h1 className="text-center font-bold text-3xl mt-5">
+          <h1 className="text-center font-bold lg:text-3xl mt-8 border-t border-gray-300 pt-5">
             Make sure to drop a Review here
           </h1>
         )}

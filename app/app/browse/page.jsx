@@ -27,7 +27,7 @@ async function Page() {
             <BrowseCategory />
           </Suspense>
         </div>
-        <div className="lg:w-[95%] w-full lg:px-3 space-y-1 ">
+        <div className="lg:w-[95%] w-full lg:px-3 space-y-1 px-1">
           <div className="w-full flex justify-between px-2 lg:px-0">
             <h1 className="text-3xl font-bold">Search Results</h1>
             <button className="hover:bg-gray-300 p-2 rounded-sm duration-300 transition-all ease-in-out hover:cursor-pointer">
