@@ -31,7 +31,9 @@ async function Page() {
         <div className="lg:w-[95%] w-full lg:px-3 space-y-1 px-1">
           <div className="w-full flex justify-between items-center px-2 lg:px-0">
             <h1 className="lg:text-3xl text-2xl font-bold">Search Results</h1>
-            <SelectCategory />
+            <Suspense>
+              <SelectCategory />
+            </Suspense>
           </div>
 
           <Suspense>
