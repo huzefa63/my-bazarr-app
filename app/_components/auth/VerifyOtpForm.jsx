@@ -65,12 +65,12 @@ function VerifyOtpForm({resendOtp,email,name,type='signup',endpoint,redirectEndp
   }
     return (
       <form
-        className={`${!close && 'min-h-screen'} flex items-center justify-center relative`}
+        className={`${!close && 'min-h-screen'} lg:w-full flex items-center justify-center relative`}
         onSubmit={handleSubmit}
       >
         {close && <button onClick={closeFn} className="smooth-transition hover:bg-gray-100 rounded-md p-2 text-gray-800 text-xl absolute right-3 top-3"><RxCross1 /></button>}
-        <div className="bg-white shadow-2xl rounded-2xl w-fit p-8">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        <div className="bg-white shadow-2xl rounded-2xl w-fit lg:p-8 p-4">
+          <h2 className="lg:text-3xl text-2xl font-bold text-center text-gray-800 mb-6">
             Enter OTP
           </h2>
           <OTPInput
@@ -82,7 +82,7 @@ function VerifyOtpForm({resendOtp,email,name,type='signup',endpoint,redirectEndp
             renderInput={(props) => <input {...props} />}
             inputStyle={{
               color:'black',
-              width: "3rem",
+              width: "2.5rem",
               height: "3rem",
               margin: "0 0.5rem",
               fontSize: "1.5rem",

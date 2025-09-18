@@ -19,7 +19,7 @@ import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 
 function AppNav() {
-  const [menuOpen,setMenuOpen] = useState(false);
+  const [menuOpen,setMenuOpen] = useState(true);
   const pathname = usePathname();
     return (
       <>
@@ -46,7 +46,7 @@ function AppNav() {
                 {/* Browse */}
                 <Link
                   href="/app/browse"
-                  className={`flex items-center gap-3 hover:bg-gray-200 p-2 rounded-md ${
+                  className={`flex items-center gap-3 hover:bg-gray-200 p-2 rounded-md border-b border-gray-200 pb-3 ${
                     pathname === "/app/browse" && "bg-gray-200"
                   }`}
                   onClick={() => setMenuOpen(false)}
@@ -55,7 +55,7 @@ function AppNav() {
                 </Link>
 
                 {/* My Store */}
-                <div>
+                <div className="border-b border-gray-200 pb-3">
                   <h1 className="font-semibold flex items-center gap-2">
                     <FaStore /> My Store
                   </h1>
@@ -95,16 +95,15 @@ function AppNav() {
                     </Link>
                   </ul>
                 </div>
-
                 {/* Purchases */}
-                <div>
+                <div className="">
                   <h1 className="font-semibold flex items-center gap-2">
                     <FaShoppingCart /> Purchases
                   </h1>
-                  <ul className="flex flex-col ml-5 gap-3 mt-3">
+                  <ul className="flex flex-col  gap-3 mt-3 border-b border-gray-200 pb-3">
                     <Link
                       href="/app/purchases/orders"
-                      className={`hover:bg-gray-200 p-2 rounded-md flex items-center gap-2 ${
+                      className={`hover:bg-gray-200 ml-5 p-2 rounded-md flex items-center gap-2 ${
                         pathname === "/app/purchases/orders"
                           ? "bg-gray-200"
                           : ""
@@ -116,7 +115,7 @@ function AppNav() {
 
                     <Link
                       href="/app/purchases/cart"
-                      className={`hover:bg-gray-200 p-2 rounded-md flex items-center gap-2 ${
+                      className={`hover:bg-gray-200 ml-5 p-2 rounded-md flex items-center gap-2 ${
                         pathname === "/app/purchases/cart" ? "bg-gray-200" : ""
                       }`}
                       onClick={() => setMenuOpen(false)}
