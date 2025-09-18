@@ -28,7 +28,7 @@ export async function getUser(){
         },
     });
     const resJson = await res.json();
-    return resJson.user;
+    return {_id:resJson.user._id,email:resJson.user.email,username:resJson.user.username,cartItems:resJson.cartItems};
    }catch(err){
     return {};
     console.log(err);

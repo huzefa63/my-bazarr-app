@@ -1,7 +1,7 @@
 import formatCurrency from "@/helpers/formatCurrency";
 import Link from "next/link";
 import { BsCart2 } from "react-icons/bs";
-function ProductCard({ image,description,name,id,rating,price }) {
+function ProductCard({ image,description,name,id,rating,price,inCart=false }) {
   return (
     <div
       data-id={id}
@@ -25,12 +25,18 @@ function ProductCard({ image,description,name,id,rating,price }) {
         <p className="text-xs text-gray-800">⭐{rating.toFixed(1)}</p>
         <p className="text-sm text-gray-500 line-clamp-2">{description}</p>
       </Link>
-      <button
+      {!inCart && <button
       type="button"
         className="add mt-7 flex w-full items-center justify-center gap-1 hover:bg-yellow-500 hover:cursor-pointer transition-all duration-300 ease-in-out bg-yellow-400 text-[var(--text)] px-3 py-2 rounded-full"
       >
         <BsCart2 className="add" /> add to cart
-      </button>
+      </button>}
+      {inCart && <button
+      type="button"
+        className="mt-7 flex w-full items-center justify-center gap-1 transition-all duration-300 ease-in-out bg-orange-400 text-gray-800 px-3 py-2 rounded-full"
+      >
+        <BsCart2 className="add" /> already in cart
+      </button>}
       <input type="text" hidden value={id} name="id" readOnly />
     </div>
   );

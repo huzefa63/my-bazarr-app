@@ -19,6 +19,8 @@ import RatingComponent from "../RatingComponent";
 import RatingStars from "../UI/RatingStars";
 import toast from "react-hot-toast";
 import TextExpander from "../TextExpander";
+import { useUserContext } from "../user/UserProvider";
+import Link from "next/link";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 function ProductDetailSection({
   id,
@@ -37,7 +39,7 @@ function ProductDetailSection({
   const queryClient = useQueryClient();
   const [isCheckouting, setIsCheckouting] = useState(false);
   const [value,setValue] = useState(1); 
-  const [delivery,setDelivery] = useState(0); 
+  const {cartItems,setCartItems} = useUserContext();
   const discountedAmount = price - (price * 0.1);
   async function handleAddToCart() {
     try {
@@ -83,16 +85,33 @@ function ProductDetailSection({
     <div className=" lg:w-3/4 lg:pl-10 flex flex-col gap-3 lg:h-full lg:overflow-auto mt-5 lg:mt-0">
       <div className="flex justify-between items-center">
         <p className="font-bold lg:text-3xl text-xl">{name}</p>
-        <button onClick={share} className="bg-gray-200 lg:bg-transparent p-2 rounded-md hover:bg-gray-300 smooth-transition pointer">
+        <button
+          onClick={share}
+          className="bg-gray-200 lg:bg-transparent p-2 rounded-md hover:bg-gray-300 smooth-transition pointer"
+        >
           <IoIosShareAlt className="lg:text-4xl text-2xl" />
         </button>
       </div>
       <div className="flex items-center lg:text-2xl text-yellow-400">
-        <span className="text-gray-800 lg:text-lg mt-1 mr-1">{avgRating[0]?.ratingsAvg?.toFixed(1)}</span>
-        {!avgRating[0]?.ratingsAvg && <span className="text-gray-700 text-sm mr-1">0</span>}
-        {!avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="lg:text-2xl" length={0}/>}
-        {avgRating[0]?.ratingsAvg && <RatingStars gap={0} size="lg:text-2xl" length={Math.floor(avgRating[0].ratingsAvg)}/>}
-        <span className="text-sm text-gray-700 ml-2 mt-1">({commentsCount} reviews)</span>
+        <span className="text-gray-800 lg:text-lg mt-1 mr-1">
+          {avgRating[0]?.ratingsAvg?.toFixed(1)}
+        </span>
+        {!avgRating[0]?.ratingsAvg && (
+          <span className="text-gray-700 text-sm mr-1">0</span>
+        )}
+        {!avgRating[0]?.ratingsAvg && (
+          <RatingStars gap={0} size="lg:text-2xl" length={0} />
+        )}
+        {avgRating[0]?.ratingsAvg && (
+          <RatingStars
+            gap={0}
+            size="lg:text-2xl"
+            length={Math.floor(avgRating[0].ratingsAvg)}
+          />
+        )}
+        <span className="text-sm text-gray-700 ml-2 mt-1">
+          ({commentsCount} reviews)
+        </span>
       </div>
       <p className="lg:w-3/4">{description}</p>
       <hr className="lg:w-3/4 text-gray-300" />
@@ -105,19 +124,30 @@ function ProductDetailSection({
       </p>
       <p className="text-sm">inclusive all taxes</p>
       <div className="lg:w-3/4 space-y-3">
+        {!cartItems?.includes(id) && (
+          <button
+            onClick={handleAddToCart}
+            className="smooth-transition hover:bg-blue-700 pointer py-2 bg-blue-600 text-white w-full"
+          >
+            Add to Cart
+          </button>
+        )}
+        {cartItems?.includes(id) && (
+          <Link href='/app/purchases/cart'>
+            <button
+              className="smooth-transition mb-3 hover:bg-orange-700 pointer py-2 bg-orange-600 text-white w-full"
+            >
+              already in cart
+            </button>
+          </Link>
+        )}
         <button
-          onClick={handleAddToCart}
-          className="smooth-transition hover:bg-blue-700 pointer py-2 bg-blue-600 text-white w-full"
-        >
-          Add to Cart
-        </button>
-        <button
-        disabled={isCheckouting}
+          disabled={isCheckouting}
           onClick={handlePurchase}
           className="relative disabled:cursor-not-allowed smooth-transition hover:bg-gray-300 pointer py-2 border-gray-400 border w-full"
         >
           {isCheckouting && <Spinner />}
-          <span className={`${isCheckouting && 'opacity-0'}`}>Buy Now</span>
+          <span className={`${isCheckouting && "opacity-0"}`}>Buy Now</span>
         </button>
       </div>
       <div className="flex items-center gap-2">
@@ -166,12 +196,12 @@ function ProductDetailSection({
           <p className="text-center text-sm">free delivery</p>
         </div>
       </div>
-      <hr className="text-gray-300 mt-5"/>
+      <hr className="text-gray-300 mt-5" />
       <div>
         <h1 className="text-3xl font-bold">About The Product</h1>
         {/* <p>{about}</p> */}
-        <TextExpander text={about}/>
-        <hr className="text-gray-200 my-3 lg:hidden"/>
+        <TextExpander text={about} />
+        <hr className="text-gray-200 my-3 lg:hidden" />
       </div>
     </div>
   );

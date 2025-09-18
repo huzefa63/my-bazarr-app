@@ -7,6 +7,7 @@ import { useEffect, useOptimistic, useTransition } from "react";
 import { deleteCartItem, getCartItems } from "@/actions/cart";
 import Spinner from "../Spinner";
 import Link from "next/link";
+import { useUserContext } from "../user/UserProvider";
 
 function CartContainer() {
     const {data:cartData,refetch,isFetching} = useQuery({
@@ -17,6 +18,7 @@ function CartContainer() {
     })
     const [optimisticCartItems,setOptimisticCartItems] = useOptimistic(cartData?.cartItems,(items,id) => items.filter(el=>el._id !== id));
     const {setItems,setIsDeletingId,isDeletingId} = useCartContext();
+    const {setCartItems} = useUserContext();
      const [isPending, startTransition] = useTransition();
     async function handleDeleteCartItem(e){
         console.log(e.target.classList.contains('delete'))
@@ -28,6 +30,7 @@ function CartContainer() {
         try { 
             const res = await deleteCartItem(id);
             console.log(res)
+            setCartItems(el => el.filter(el => el !== id));
             startTransition(() => {
                 setOptimisticCartItems(id);
             })

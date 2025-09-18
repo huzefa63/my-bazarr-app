@@ -6,12 +6,14 @@ import { addToCart } from "@/actions/cart";
 import { useSearchParams } from "next/navigation";
 import Spinner from "./Spinner";
 import toast from "react-hot-toast";
+import { useUserContext } from "./user/UserProvider";
 
 function BrowserResultContainer({products}) {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
   const category = searchParams.get('category');
+  const {cartItems,setCartItems} = useUserContext(); 
   const {data,isFetching} = useQuery({
     queryKey:['browse',search,category],
     queryFn:handleBrowse,
@@ -49,9 +51,9 @@ function BrowserResultContainer({products}) {
         const parent = e.target.closest('.parent');
         const {id} = parent.dataset;
         try {
-            await addToCart({id});
+          setCartItems(el => [...el,id]);  
+          await addToCart({id});
             queryClient.refetchQueries({queryKey:['cart'],exact:true});
-            toast.success('added to cart!',{duration:1000,position:'top-center'});
           } catch (err) {
             console.log(err);
           }
@@ -65,6 +67,7 @@ function BrowserResultContainer({products}) {
           data?.length > 0 &&
           data?.map((el) => (
             <ProductCard
+            inCart={cartItems?.includes(el._id)}
               key={el._id}
               price={el.price}
               rating={el.ratingsAvg}

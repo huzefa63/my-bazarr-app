@@ -19,7 +19,6 @@ function SellerOrderController({ status, seller, orderId, customer, customerEmai
   const { user } = useUserContext();
   const queryClient = useQueryClient();
   const [showForm,setShowForm] = useState(false);
-
   if (status === "delivered") return null;
   if (status === "cancelled") return null;
   if (user?._id !== seller._id) return null;

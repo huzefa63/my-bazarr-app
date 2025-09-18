@@ -12,8 +12,12 @@ function UserProvider({children}) {
         queryFn:getUser,
         refetchOnWindowFocus:false
     })
+    const [cartItems,setCartItems] = useState([]);
+    useEffect(() => {
+        setCartItems(user?.cartItems);
+    },[user])
     return (
-        <Context.Provider value={{user}}>
+        <Context.Provider value={{user,cartItems,setCartItems}}>
             {children}
         </Context.Provider>
     )
