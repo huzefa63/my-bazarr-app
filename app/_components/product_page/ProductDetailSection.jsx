@@ -95,7 +95,7 @@ function ProductDetailSection({
         <span className="text-sm text-gray-700 ml-2 mt-1">({commentsCount} reviews)</span>
       </div>
       <p className="lg:w-3/4">{description}</p>
-      <hr className="lg:w-3/4 text-gray-400" />
+      <hr className="lg:w-3/4 text-gray-300" />
       <p className="text-gray-800 font-semibold text-2xl">
         {formatCurrency(discountedAmount * value)}{" "}
         <span className="text-xs line-through text-green-500">
@@ -166,8 +166,9 @@ function ProductDetailSection({
           <p className="text-center text-sm">free delivery</p>
         </div>
       </div>
+      <hr className="text-gray-300 mt-5"/>
       <div>
-        <h1 className="text-3xl font-bold mt-5">About The Product</h1>
+        <h1 className="text-3xl font-bold">About The Product</h1>
         {/* <p>{about}</p> */}
         <TextExpander text={about}/>
         <hr className="text-gray-200 my-3 lg:hidden"/>

@@ -34,7 +34,7 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
       >
         <img src={image} alt="" className="w-full h-full object-cover" />
       </Link>
-      <Link href={`/app/product/${id}`} className="space-y-2 w-full">
+      <Link href={`/app/product/${id}`} className="space-y-2 lg:min-w-3/4 lg:max-w-full min-w-[55%] max-w-[55%]">
         <h1 className="lg:text-xl font-bold text-gray-800 text-sm line-clamp-1">{name}</h1>
         <p className="lg:text-sm text-xs text-gray-900">{formatCurrency(price)} rs</p>
         <p className="line-clamp-1 text-gray-600 lg:text-sm text-xs">
@@ -43,7 +43,7 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
         <p className="text-red-700 text-xs lg:text-sm ">#{id}</p>
       </Link>
       <div
-        className="lg:relative absolute right-3 top-1/2 -translate-y-1/2"
+        className="lg:relative lg:top-0 lg:-translate-y-0 lg:right-0 absolute right-3 top-1/2 -translate-y-1/2"
         onMouseEnter={() => setIsHover(false)}
         onMouseLeave={() => setIsHover(true)}
       >
