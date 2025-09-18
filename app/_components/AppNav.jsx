@@ -19,7 +19,7 @@ import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 
 function AppNav() {
-  const [menuOpen,setMenuOpen] = useState(true);
+  const [menuOpen,setMenuOpen] = useState(false);
   const pathname = usePathname();
     return (
       <>
