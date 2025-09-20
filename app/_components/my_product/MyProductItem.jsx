@@ -29,12 +29,12 @@ function MyProductItem({image,name,price,description,id,createdAt}) {
       } py-3 rounded-md overflow-hidden relative smooth-transition px-5 border border-gray-200 w-full h-[25%] pb-5 flex items-center gap-5 pr-3`}
     >
       <Link
-        href={`/app/product/${id}`}
+        href={`/app/my-store/itemDetails/${id}?name=${name}`}
         className="lg:h-30 h-25 min-w-25 max-w-25 lg:min-w-40 lg:max-w-40 overflow-hidden rounded-md"
       >
         <img src={image} alt="" className="w-full h-full object-cover" />
       </Link>
-      <Link href={`/app/product/${id}`} className="space-y-2 lg:min-w-3/4 lg:max-w-full min-w-[55%] max-w-[55%]">
+      <Link href={`/app/my-store/itemDetails/${id}?name=${name}`} className="space-y-2 lg:min-w-3/4 lg:max-w-full min-w-[55%] max-w-[55%]">
         <h1 className="lg:text-xl font-bold text-gray-800 text-sm line-clamp-1">{name}</h1>
         <p className="lg:text-sm text-xs text-gray-900">{formatCurrency(price)} rs</p>
         <p className="line-clamp-1 text-gray-600 lg:text-sm text-xs">
