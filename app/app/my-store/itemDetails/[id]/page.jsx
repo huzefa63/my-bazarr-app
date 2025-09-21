@@ -7,7 +7,10 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 async function Page({params,searchParams}) {
-const s = {name:'product here'}
+    const param = await params;
+    const s = await searchParams;
+    const productId = param.id;
+
     return (
       <div className="h-full w-full overflow-auto bg-gray-50 p-4 space-y-6 flex flex-col">
         {/* Top Bar */}
@@ -31,7 +34,7 @@ const s = {name:'product here'}
         {/* Metrics */}
         <div className=" lg:h-22 h-46 relative">
           <Suspense fallback={<Spinner />}>
-            <MetricCardContainer params={params}/>
+            <MetricCardContainer productId={productId}/>
           </Suspense>
         </div>
 
@@ -39,8 +42,8 @@ const s = {name:'product here'}
         <div className="bg-white rounded-2xl shadow p-4 space-y-4 relative flex-1">
           <h2 className="text-lg font-semibold">Orders</h2>
           <FilterOptions />
-          <Suspense fallback={<Spinner />}>
-            <ItemOrders params={params} searchParams={searchParams}/>
+          <Suspense fallback={<Spinner />} key={s}>
+            <ItemOrders productId={productId} filter={s}/>
           </Suspense>
         </div>
       </div>

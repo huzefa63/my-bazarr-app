@@ -1,8 +1,7 @@
 import formatCurrency from "@/helpers/formatCurrency";
 import { cookies } from "next/headers";
 
-async function MetricCardContainer({params}) {
-  const param = await params;
+async function MetricCardContainer({productId}) {
     const cookie = await cookies();
     const token = cookie.get('token')?.value;
     let totalRevenue;
@@ -10,7 +9,7 @@ async function MetricCardContainer({params}) {
     let ordersPending;
     let ordersCancelled;
     try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductMetricDetails/${param?.id}`,{headers:{Cookie:`token=${token}`}});
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductMetricDetails/${productId}`,{headers:{Cookie:`token=${token}`}});
         const resJson = await res.json();
         totalRevenue = resJson.productDetails.totalRevenue;
         totalSold = resJson.productDetails.sold;

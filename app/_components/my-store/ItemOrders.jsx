@@ -3,18 +3,16 @@ import { format } from "date-fns";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-async function ItemOrders({params,searchParams}) {
-  const param = await params;
-  const s = await searchParams;
+async function ItemOrders({productId,filter}) {
       const cookie = await cookies();
          const token = cookie.get('token')?.value;
-         const statusFilter = s?.filter;
-         const startDate = s?.startDate;
-         const endDate = s?.endDate;
+         const statusFilter = filter?.filter;
+         const startDate = filter?.startDate;
+         const endDate = filter?.endDate;
          let orders;
          // let totalRevenue;
          try{
-             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${param.id}?filter=${statusFilter || 'all'}&startDate=${startDate || ''}&endDate=${endDate || ''}`,{headers:{Cookie:`token=${token}`}});
+             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${productId}?filter=${statusFilter || 'all'}&startDate=${startDate || ''}&endDate=${endDate || ''}`,{headers:{Cookie:`token=${token}`}});
              const resJson = await res.json();
              orders = resJson.orders;
          }catch(err){
