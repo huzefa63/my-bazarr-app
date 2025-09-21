@@ -30,11 +30,11 @@ async function MetricCardContainer({productId}) {
 
 export default MetricCardContainer
 
-function MetricCard({ label, value }) {
+export function MetricCard({ label, value, skeleton=false }) {
   return (
-    <div className="bg-white rounded-xl shadow p-4 flex flex-col gap-1">
-      <span className="text-sm text-gray-500">{label}</span>
-      <span className="text-xl font-bold">{value}</span>
+    <div className={`${skeleton ? 'bg-gray-200' : 'bg-white'}  rounded-xl shadow p-4 flex flex-col gap-1 ${skeleton && 'animate-pulse'}`}>
+      <span className={`text-sm  text-gray-500 ${skeleton && 'opacity-0'}`}>{label}</span>
+      <span className={`text-xl font-bold ${skeleton && 'opacity-0'}`}>{value}</span>
     </div>
   );
 }
