@@ -42,7 +42,7 @@ async function Page({params,searchParams}) {
         <div className="bg-white rounded-2xl shadow p-4 space-y-4 relative flex-1">
           <h2 className="text-lg font-semibold">Orders</h2>
           <FilterOptions />
-          <Suspense fallback={<Spinner />} key={s}>
+          <Suspense fallback={<Spinner />} key={s?.filter}>
             <ItemOrders productId={productId} filter={s}/>
           </Suspense>
         </div>
