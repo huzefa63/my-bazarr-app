@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 async function Page({params,searchParams}) {
-
+const s = {name:'product here'}
     return (
       <div className="h-full w-full overflow-auto bg-gray-50 p-4 space-y-6 flex flex-col">
         {/* Top Bar */}
