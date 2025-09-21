@@ -10,7 +10,7 @@ async function MetricCardContainer({params}) {
     let ordersPending;
     let ordersCancelled;
     try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductMetricDetails/${params?.id}`,{headers:{Cookie:`token=${token}`}});
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductMetricDetails/${param?.id}`,{headers:{Cookie:`token=${token}`}});
         const resJson = await res.json();
         totalRevenue = resJson.productDetails.totalRevenue;
         totalSold = resJson.productDetails.sold;
