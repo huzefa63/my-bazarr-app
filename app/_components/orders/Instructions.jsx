@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { MdIntegrationInstructions } from "react-icons/md";
 
 
-function Instructions({instructions,orderId,customerId,status}) {
+function Instructions({skeleton=false, instructions,orderId,customerId,status}) {
   const [instruction,setInstruction] = useState(instructions);
   const {user} = useUserContext();
   console.log('customerId: ',customerId);
@@ -23,8 +23,8 @@ function Instructions({instructions,orderId,customerId,status}) {
     }
     if(user?._id === customerId && status !== 'cancelled' && status !== 'delivered') return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
-        <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
-          <MdIntegrationInstructions className="text-blue-500"/> Instructions
+        <header className={`flex items-center gap-2 text-xl font-bold text-gray-700 ${skeleton && 'text-gray-100 bg-gray-100 animate-pulse'}`}>
+          <MdIntegrationInstructions className={`text-blue-500 ${skeleton && 'hidden'}`}/> Instructions
         </header>
         <textarea spellCheck={false} value={instruction} onChange={(e)=>setInstruction(e.target.value)} placeholder="provide instructions here" className="w-full resize-none p-3 focus:mt-4 smooth-transition hover:cursor-default focus:outline-none focus:border border-gray-300 text-sm text-gray-700">
           
@@ -32,15 +32,37 @@ function Instructions({instructions,orderId,customerId,status}) {
         {instructions !== instruction && <LoadingButton onClick={update} className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white">save</LoadingButton>}
       </div>
     );
-    if(user?._id !== customerId || status === 'delivered') return (
+    if(user?._id !== customerId || status === 'delivered' && !skeleton) return (
       <div className="w-full bg-white  border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
-        <header className="flex items-center gap-2 text-xl font-bold text-gray-700 ">
-          <MdIntegrationInstructions className="text-blue-500"/> Instructions
+        <header
+          className={`flex items-center gap-2 text-xl font-bold  ${
+            skeleton
+              ? "text-gray-100 bg-gray-100 animate-pulse w-3/4"
+              : "text-gray-700"
+          }`}
+        >
+          <MdIntegrationInstructions
+            className={`text-blue-500 ${skeleton && "opacity-0"}`}
+          />{" "}
+          Instructions
         </header>
-        <p className=" mt-2 text-gray-700">
-            {instructions || 'no instructions provided'}
+        <p
+          className={`${
+            skeleton
+              ? "bg-gray-100 w-1/2 text-gray-100 animate-pulse"
+              : "text-gray-700"
+          } mt-2 `}
+        >
+          {instructions || "no instructions provided"}
         </p>
-        {instructions !== instruction && <LoadingButton onClick={update} className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white">save</LoadingButton>}
+        {instructions !== instruction && (
+          <LoadingButton
+            onClick={update}
+            className="py-1 hover:bg-blue-500 px-3 text-white rounded-md bg-blue-400 smooth-transition tex-white"
+          >
+            save
+          </LoadingButton>
+        )}
       </div>
     );
 }

@@ -13,6 +13,7 @@ import Instructions from "@/app/_components/orders/Instructions";
 import { BiSolidContact } from "react-icons/bi";
 import { ImLocation2 } from "react-icons/im";
 async function Page({params}) {
+
     const param = await params;
     const cookie = await cookies();
     const {id} = param;
