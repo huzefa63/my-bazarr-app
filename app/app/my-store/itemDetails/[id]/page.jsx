@@ -1,3 +1,4 @@
+import FilterOptions from "@/app/_components/FilterOptions";
 import ItemDetails from "@/app/_components/my-store/itemDetails"
 import ItemOrders from "@/app/_components/my-store/ItemOrders";
 import MetricCardContainer from "@/app/_components/my-store/MetricCardContainer";
@@ -21,7 +22,7 @@ async function Page({params,searchParams}) {
             </Link>
             <div>
               <h1 className="text-xl font-bold">Product Details</h1>
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm line-clamp-2">
                 {s.name}
               </p>
             </div>
@@ -41,8 +42,9 @@ async function Page({params,searchParams}) {
         {/* Orders List */}
         <div className="bg-white rounded-2xl shadow p-4 space-y-4 relative flex-1">
           <h2 className="text-lg font-semibold">Orders</h2>
-          <Suspense fallback={<Spinner />}>
-            <ItemOrders productId={productId}/>
+          <FilterOptions />
+          <Suspense fallback={<Spinner />} key={s}>
+            <ItemOrders productId={productId} filter={s}/>
           </Suspense>
         </div>
       </div>

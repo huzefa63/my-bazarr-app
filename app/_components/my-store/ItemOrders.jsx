@@ -3,13 +3,16 @@ import { format } from "date-fns";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-async function ItemOrders({productId}) {
+async function ItemOrders({productId,filter}) {
       const cookie = await cookies();
          const token = cookie.get('token')?.value;
+         const statusFilter = filter?.filter;
+         const startDate = filter?.startDate;
+         const endDate = filter?.endDate;
          let orders;
          // let totalRevenue;
          try{
-             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${productId}`,{headers:{Cookie:`token=${token}`}});
+             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${productId}?filter=${statusFilter || 'all'}&startDate=${startDate || ''}&endDate=${endDate || ''}`,{headers:{Cookie:`token=${token}`}});
              const resJson = await res.json();
              orders = resJson.orders;
          }catch(err){
@@ -27,7 +30,6 @@ async function ItemOrders({productId}) {
             amount={formatCurrency(el.totalAmount)}
             items="1"
             coverImage={el.coverImage}
-            badgeColor="bg-emerald-50 text-emerald-700"
           />
         ))}
       </div>
@@ -36,7 +38,11 @@ async function ItemOrders({productId}) {
 
 export default ItemOrders
 
-function OrderCard({ id, date, status, amount, items, badgeColor,coverImage }) {
+function OrderCard({ id, date, status, amount, items,coverImage }) {
+  let badgeColor;
+  if(status === 'processing') badgeColor = "bg-orange-100 text-orange-500";
+  if(status === 'delivered') badgeColor = 'bg-green-100 text-green-500';
+  if(status === 'shipped') badgeColor = 'bg-blue-100 text-blue-500';
   return (
     <Link href={`/app/order/${id}`} className="flex smooth-transition hover:bg-gray-100 items-center justify-between bg-white p-3 rounded-xl shadow-sm border border-gray-100">
       <div className="flex items-center gap-3">
@@ -45,7 +51,7 @@ function OrderCard({ id, date, status, amount, items, badgeColor,coverImage }) {
           <p className="font-semibold">{id}</p>
           <p className="text-sm text-gray-500">{date}</p>
           <span
-            className={`inline-block mt-1 px-2 py-1 text-xs font-semibold rounded ${badgeColor}`}
+            className={`inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full ${badgeColor}`}
           >
             {status}
           </span>

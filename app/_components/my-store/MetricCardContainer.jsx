@@ -7,13 +7,14 @@ async function MetricCardContainer({productId}) {
     let totalRevenue;
     let totalSold;
     let ordersPending;
-    // let totalRevenue;
+    let ordersCancelled;
     try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/product/getProductMetricDetails/${productId}`,{headers:{Cookie:`token=${token}`}});
         const resJson = await res.json();
         totalRevenue = resJson.productDetails.totalRevenue;
         totalSold = resJson.productDetails.sold;
         ordersPending = resJson.productDetails.ordersPending;
+        ordersCancelled = resJson.productDetails.totalOrdersCancelled;
     }catch(err){
         console.log(err);
     }
@@ -21,8 +22,8 @@ async function MetricCardContainer({productId}) {
       <div className="h-full grid grid-cols-2 md:grid-cols-4 gap-3 relative">
         <MetricCard label="Total Sold" value={totalSold} />
         <MetricCard label="Total Revenue" value={formatCurrency(totalRevenue)} />
-        <MetricCard label="Orders" value="56" />
-        <MetricCard label="Pending" value={ordersPending} />
+        <MetricCard label="not shipped" value={ordersPending} />
+        <MetricCard label="Orders cancelled" value={ordersCancelled} />
       </div>
     );
 }

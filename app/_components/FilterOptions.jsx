@@ -53,7 +53,7 @@ function FilterOptions({allFilters=true}) {
     return (
       <div className="flex lg:justify-between overflow-x-auto pb-3">
         {allFilters && (
-          <ul className="flex items-center gap-4 lg:text-lg text-sm">
+          <ul className="flex items-center gap-4 lg:text-xs text-sm">
             <button
               onClick={() => handleChangeQuery("all")}
               className={`smooth-transition border ${
