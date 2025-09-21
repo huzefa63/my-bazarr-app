@@ -14,7 +14,7 @@ async function ItemOrders({params,searchParams}) {
          let orders;
          // let totalRevenue;
          try{
-             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${params.id}?filter=${statusFilter || 'all'}&startDate=${startDate || ''}&endDate=${endDate || ''}`,{headers:{Cookie:`token=${token}`}});
+             const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/order/getAllItemOrders/${param.id}?filter=${statusFilter || 'all'}&startDate=${startDate || ''}&endDate=${endDate || ''}`,{headers:{Cookie:`token=${token}`}});
              const resJson = await res.json();
              orders = resJson.orders;
          }catch(err){
