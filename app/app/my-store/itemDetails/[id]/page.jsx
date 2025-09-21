@@ -7,10 +7,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 async function Page({params,searchParams}) {
-    const param = await params;
-    const s = await searchParams;
-    console.log(s)
-    const productId = param.id;
 
     return (
       <div className="h-full w-full overflow-auto bg-gray-50 p-4 space-y-6 flex flex-col">
@@ -35,7 +31,7 @@ async function Page({params,searchParams}) {
         {/* Metrics */}
         <div className=" lg:h-22 h-46 relative">
           <Suspense fallback={<Spinner />}>
-            <MetricCardContainer productId={productId}/>
+            <MetricCardContainer params={params}/>
           </Suspense>
         </div>
 
@@ -43,8 +39,8 @@ async function Page({params,searchParams}) {
         <div className="bg-white rounded-2xl shadow p-4 space-y-4 relative flex-1">
           <h2 className="text-lg font-semibold">Orders</h2>
           <FilterOptions />
-          <Suspense fallback={<Spinner />} key={s}>
-            <ItemOrders productId={productId} filter={s}/>
+          <Suspense fallback={<Spinner />}>
+            <ItemOrders params={params} searchParams={searchParams}/>
           </Suspense>
         </div>
       </div>
