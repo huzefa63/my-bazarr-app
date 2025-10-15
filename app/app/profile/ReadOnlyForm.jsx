@@ -13,12 +13,19 @@ function ReadOnlyForm() {
           </label>
           <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-gray-50">
             <FiUser className="text-gray-500 mr-2" />
+            {/* ------------------------------------------------------------ */}
             <input
+              type="text"
+              value={'john doe'}
+              readOnly
+              className="bg-transparent w-full outline-none text-gray-700"
+            />
+            {/* <input
               type="text"
               value={user?.username || 'getting username...'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
-            />
+            /> */}
           </div>
         </div>
 
@@ -31,7 +38,7 @@ function ReadOnlyForm() {
             <FiMail className="text-gray-500 mr-2" />
             <input
               type="email"
-              value={user?.email || 'get email...'}
+              value={'john@gmail.com'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
             />

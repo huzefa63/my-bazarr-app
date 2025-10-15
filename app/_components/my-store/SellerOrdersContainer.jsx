@@ -76,8 +76,11 @@ function SellerOrdersContainer() {
                 id={el._id}
                 coverImage={el.coverImage}
                 createdAt={el.createdAt}
-                customerName={el.customerName}
-                address={el.address}
+                // -----------------------------------------------------------------------------------------------------
+                customerName={"mark finn"}
+                address={"ML 142 GK TOWER, GJ"}
+                // customerName={el.customerName}
+                // address={el.address}
               />
             ))
           : orders?.map((el) => (
@@ -89,8 +92,11 @@ function SellerOrdersContainer() {
                 id={el._id}
                 coverImage={el.coverImage}
                 createdAt={el.createdAt}
-                customerName={el.customerName}
-                address={el.address}
+                // -----------------------------------------------------------------------------
+                // customerName={el.customerName}
+                // address={el.address}
+                customerName={"mark finn"}
+                address={"ML 142 GK TOWER, GJ"}
               />
             ))}
       </div>

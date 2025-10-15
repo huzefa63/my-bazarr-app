@@ -74,21 +74,29 @@ async function Page({params}) {
                 <BiSolidContact className="text-amber-950"/> Contact Information
               </header>
               <div className="space-y-1">
-                <p className="text-sm text-gray-700">{order.email}</p>
-                <p className="text-sm text-gray-700">{order.phoneNumber}</p>
+                {/* ---------------------------------------------------------------------------------------------------- */}
+                <p className="text-sm text-gray-700">test@gmail.com</p>
+                <p className="text-sm text-gray-700">+91 11111111111</p>
+                {/* <p className="text-sm text-gray-700">{order.email}</p>
+                <p className="text-sm text-gray-700">{order.phoneNumber}</p> */}
               </div>
             </div>
 
             <div className="w-full bg-white space-y-4 border border-gray-300 shadow-sm min-h-[20%] p-3 rounded-md">
               <header className="flex items-center gap-2 text-xl font-bold text-gray-700">
                 <ImLocation2 /> Shipping address
-              </header>
+              </header> 
+              {/*  ---------------------------------------------------------------------------------------------------- */}
               <div className="space-y-1">
-                <p className="text-sm text-gray-700">{order.customerName}</p>
+                <p className="text-sm text-gray-700">john doe</p>
+                <p className="text-sm text-gray-700">MK MJE tower, 211</p>
+                <p className="text-sm text-gray-700">near MK medical institute</p>
+                {/* <p className="text-sm text-gray-700">{order.customerName}</p>
                 <p className="text-sm text-gray-700">{order.address.line1}</p>
-                <p className="text-sm text-gray-700">{order.address.line2}</p>
+                <p className="text-sm text-gray-700">{order.address.line2}</p> */}
                 <p className="text-sm text-gray-700">
-                  {order.address.state}, {order.address.pincode}
+                  gujarat, 121438
+                  {/* {order.address.state}, {order.address.pincode} */}
                 </p>
                 <p className="text-sm text-gray-700">india</p>
               </div>

@@ -38,7 +38,9 @@ async function Page({params}) {
             product={product}
             id={searchParams.id}
             name={product?.name}
-            email={product.seller?.email}
+            // ----------------------------------------------------------------------------------------------------------------
+            // email={product.seller?.email}
+            email={'test@gmail.com'}
             ratingsAvg={product?.ratingsAvg}
             description={product?.description}
             price={product?.price}
