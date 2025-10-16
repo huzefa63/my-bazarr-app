@@ -40,7 +40,9 @@ function SellerOrdersCard({status,createdAt,coverImage,productName,id,totalAmoun
               Customer:<span className="font-semibold ml-1">{customerName}</span>
             </p>
             <p className="text-gray-600 text-xs line-clamp-1 lg:block hidden">
-              address:  {address.line1} {address.line2}, {address.state}
+              {/* ------------------------------------------------------------ */}
+              address:  {address}
+              {/* address:  {address.line1} {address.line2}, {address.state} */}
             </p>
           </div>
 
