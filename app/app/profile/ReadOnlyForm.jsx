@@ -16,7 +16,7 @@ function ReadOnlyForm() {
             {/* ------------------------------------------------------------ */}
             <input
               type="text"
-              value={'john doe'}
+              value={'test user'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
             />
@@ -38,7 +38,7 @@ function ReadOnlyForm() {
             <FiMail className="text-gray-500 mr-2" />
             <input
               type="email"
-              value={'john@gmail.com'}
+              value={'test@gmail.com'}
               readOnly
               className="bg-transparent w-full outline-none text-gray-700"
             />
